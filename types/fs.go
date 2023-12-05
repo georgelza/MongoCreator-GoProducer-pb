@@ -35,7 +35,7 @@ type TKafka struct {
 }
 
 type Tp_BasketItem struct {
-	Id       string  `json:"productid,omitempty"`
+	Id       string  `json:"id,omitempty"`
 	Name     string  `json:"name,omitempty"`
 	Brand    string  `json:"brand,omitempty"`
 	Category string  `json:"category,omitempty"`
@@ -44,22 +44,22 @@ type Tp_BasketItem struct {
 }
 
 type Tp_basket struct {
-	InvoiceNumber string
-	SaleDateTime  string
-	Store         TStoreStruct
-	Clerk         TPClerkStruct
-	TerminalPoint string
-	BasketItems   []Tp_BasketItem
-	Net           float64
-	VAT           float64
-	Total         float64
+	InvoiceNumber string          `json:"invoiceNumber,omitempty"`
+	SaleDateTime  string          `json:"saleDateTime,omitempty"`
+	Store         TStoreStruct    `json:"store,omitempty"`
+	Clerk         TPClerkStruct   `json:"clerk,omitempty"`
+	TerminalPoint string          `json:"terminalPoint,omitempty"`
+	BasketItems   []Tp_BasketItem `json:"basketItems,omitempty"`
+	Nett          float64         `json:"nett,omitempty"`
+	VAT           float64         `json:"vat,omitempty"`
+	Total         float64         `json:"total,omitempty"`
 }
 
 type Tp_payment struct {
-	InvoiceNumber    string
-	PayDateTime      string
-	Paid             float64
-	FinTransactionID string
+	InvoiceNumber    string  `json:"invoiceNumber,omitempty"`
+	PayDateTime      string  `json:"payDateTime,omitempty"`
+	Paid             float64 `json:"paid,omitempty"`
+	FinTransactionID string  `json:"finTransactionId,omitempty"`
 }
 
 type TPClerkStruct struct {

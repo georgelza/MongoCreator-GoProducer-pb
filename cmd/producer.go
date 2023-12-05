@@ -35,6 +35,7 @@ import (
 	"math/rand"
 	"os"
 	"runtime"
+	"strconv"
 	"time"
 
 	"github.com/brianvoe/gofakeit"
@@ -402,7 +403,7 @@ func toFixed(num float64, precision int) float64 {
 	return float64(round(num*output)) / output
 }
 
-func constructFakeBasket() (t_Basket map[string]interface{}, t_Payment map[string]interface{}, err error) {
+func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment, storeName string, err error) {
 
 	// Fake Data etc, not used much here though
 	// https://github.com/brianvoe/gofakeit
@@ -464,28 +465,29 @@ func constructFakeBasket() (t_Basket map[string]interface{}, t_Payment map[strin
 
 	vat_amount := toFixed(nett_amount*vGeneral.Vatrate, 2)
 	total_amount := toFixed(nett_amount+vat_amount, 2)
+	terminalPoint := gofakeit.Number(0, 20)
 
-	t_Basket = map[string]interface{}{
-		"InvoiceNumber": txnId,
-		"SaleDateTime":  eventTime,
-		"Store":         store,
-		"Clerk":         clerk,
-		"TerminalPoint": gofakeit.Number(0, 20),
-		"BasketItems":   arBasketItems,
-		"Net":           nett_amount,
-		"VAT":           vat_amount,
-		"Total":         total_amount,
+	t_Basket = types.Tp_basket{
+		InvoiceNumber: txnId,
+		SaleDateTime:  eventTime,
+		Store:         store,
+		Clerk:         clerk,
+		TerminalPoint: strconv.Itoa(terminalPoint),
+		BasketItems:   arBasketItems,
+		Nett:          nett_amount,
+		VAT:           vat_amount,
+		Total:         total_amount,
 	}
 
 	payTime := time.Now().AddDate(0, gofakeit.Number(0, 5), gofakeit.Number(0, 59)).Format("2006-01-02T15:04:05") + "+02:00"
-	t_Payment = map[string]interface{}{
-		"InvoiceNumber":    txnId,
-		"PayDateTime":      payTime,
-		"Paid":             total_amount,
-		"FinTransactionID": uuid.New().String(),
+	t_Payment = types.Tp_payment{
+		InvoiceNumber:    txnId,
+		PayDateTime:      payTime,
+		Paid:             total_amount,
+		FinTransactionID: uuid.New().String(),
 	}
 
-	return t_Basket, t_Payment, nil
+	return t_Basket, t_Payment, store.Name, nil
 }
 
 // Big worker... This si where everything happens.
@@ -623,7 +625,7 @@ func runLoader(arg string) {
 		txnStart := time.Now()
 
 		// Build an sales basket and get the payment document
-		t_SalesBasket, t_Payment, err := constructFakeBasket()
+		t_SalesBasket, t_Payment, storeName, err := constructFakeBasket()
 		if err != nil {
 			os.Exit(1)
 
@@ -667,8 +669,8 @@ func runLoader(arg string) {
 					Topic:     &vKafka.BasketTopicname,
 					Partition: kafka.PartitionAny,
 				},
-				Value: valueBytes,     // This is the payload/body thats being posted
-				Key:   []byte("1001"), // We us this to group the same transactions together in order, IE submitting/Debtor Bank.
+				Value: valueBytes,        // This is the payload/body thats being posted
+				Key:   []byte(storeName), // We us this to group the same transactions together in order, IE submitting/Debtor Bank.
 			}
 
 			// This is where we publish message onto the topic... on the Confluent cluster for now,
