@@ -1,10 +1,14 @@
 {
  	"InvoiceNumber": "1341243123341232",
 	"SaleDateTime": "2023-12-12-T13:22:37+02:00",
-	"StoreId": "2143412",
-	"StoreName": "sdfgsjdjndnjdfgs",
-	"ClerkId": "231",
-	"ClerkNameSurename": "grfvnowifgbvuwe",
+	"Store" : {
+		"Id": "2143412",
+		"Name": "sdfgsjdjndnjdfgs"
+		},
+	"Clerk": {
+		"Id": "231",
+		"Name": "grfvnowifgbvuwe"
+		},
 	"TerminalPoint": "124",
 	"BasketItems":[
 		{
