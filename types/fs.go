@@ -2,19 +2,37 @@ package types
 
 // Structs - the values we bring in from *app.json configuration file
 type Tp_general struct {
-	EchoConfig      int
-	Hostname        string
-	Debuglevel      int
-	Testsize        int     // Used to limit number of records posted, over rided when reading test cases from input_source,
-	Sleep           int     // sleep time between Basket Create and Payment post
-	SeedFile        string  // Which seed file to read in
-	EchoSeed        int     // 0/1 Echo the seed data to terminal
-	CurrentPath     string  // current
-	OSName          string  // OS name
-	Vatrate         float64 // Amount
-	Store           int     // if <> 0 then store at that position in array is selected.
-	KafkaEnabled    int
-	SaveSalesToFile int
+	EchoGeneralConfig int
+	EchoKafkaConfig   int
+	Hostname          string
+	Debuglevel        int
+	Testsize          int     // Used to limit number of records posted, over rided when reading test cases from input_source,
+	Sleep             int     // sleep time between Basket Create and Payment post
+	SeedFile          string  // Which seed file to read in
+	EchoSeed          int     // 0/1 Echo the seed data to terminal
+	CurrentPath       string  // current
+	OSName            string  // OS name
+	Vatrate           float64 // Amount
+	Store             int     // if <> 0 then store at that position in array is selected.
+	KafkaEnabled      int
+	Json_to_file      int    // do we spool the created baskets and payments to a file/s
+	Output_path       string // if yes above then pipe json here. we will spool the baskets to one file and the payments to a second.
+}
+
+type TKafka struct {
+	EchoKafkaConfig   int
+	Bootstrapservers  string
+	BasketTopicname   string
+	PaymentTopicname  string
+	Numpartitions     int
+	Replicationfactor int
+	Retension         string
+	Parseduration     string
+	Security_protocol string
+	Sasl_mechanisms   string
+	Sasl_username     string
+	Sasl_password     string
+	Flush_interval    int
 }
 
 type Tp_BasketItem struct {
