@@ -1,0 +1,12 @@
+{
+    "echoConfig": 0,                                # echo this file to the terminal
+    "debuglevel": 2,                                # 0=no logging, up to 4 ull logging enabled
+    "testsize": 3,                                  # when we running in generate events from seed data (json_from_file: 1), how many events do we want to create
+    "sleep": 10,                                    # Milliseconds, aka 5000 => 5 seconds. this mean we will sleep between 0 and 5000 between record creates or record posts.
+    "vatrate": 0.14,                                # Sales tax
+    "SeedFile": "sit_seed.json",                    # File containing seed data.
+    "Store": 0,                                     # if <> 0 then this value is used to selected store at that position from file, otherwise it's random
+    "KafkaEnabled": 0,
+    "SaveSalesToFile": 0
+}
+

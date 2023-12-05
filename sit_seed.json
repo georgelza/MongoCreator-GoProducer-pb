@@ -1,0 +1,128 @@
+{
+    "Stores": [
+      {"name": "Rosebank", "id": "324213412"},
+      {"name": "Sandton",  "id": "324213412"},
+      {"name": "Milnerton", "id": "324213412"},
+      {"name": "Stellenbosch", "id": "324213415"},
+      {"name": "Rondebosch", "id": "324213442"},
+      {"name": "Wavecrest", "id": "324213412"},
+      {"name": "C-Place", "id": "354213412"},
+      {"name": "Fountains", "id": "324223412"},
+      {"name": "Durbanville", "id": "224213412"},
+      {"name": "Bellville", "id": "324213992"},
+      {"name": "PineTown", "id": "324213422"},
+      {"name": "Meyerton", "id": "324213442"},
+      {"name": "Randburg", "id": "324213411"},
+      {"name": "Milnerton", "id": "324213410"},
+      {"name": "Warmer", "id": "324213412"}
+    ],
+
+    "Clerks": [
+      {"id": "10001", "name": "Martin"},
+      {"id": "10002", "name": "Greg"},
+      {"id": "10003", "name": "Susan"},
+      {"id": "10004", "name": "Thabo"},
+      {"id": "10005", "name": "Tshepo"},
+      {"id": "10006", "name": "Lisa"},
+      {"id": "10007", "name": "Roger"},
+      {"id": "10008", "name": "Suanne"},
+      {"id": "10009", "name": "Susan"},
+      {"id": "10010", "name": "Claudia"},
+      {"id": "10011", "name": "Trevor"},
+      {"id": "10012", "name": "Michael"},
+      {"id": "10013", "name": "Mohammed"},
+      {"id": "10014", "name": "Winston"},
+      {"id": "10015", "name": "Warren"},
+      {"id": "10016", "name": "Wayne"},
+      {"id": "10017", "name": "Naseem"},
+      {"id": "10018", "name": "Max"},
+      {"id": "10019", "name": "Leeanne"},
+      {"id": "10020", "name": "Liezel"}
+    ],
+
+    "Products": [
+         {
+            "id": "324213412",
+            "name": "Soap",
+            "brand":"Dove",
+            "category": "Higene",
+            "price": 3.33
+         },
+         {
+            "id": "325213412",
+            "name": "Jacobs Gold",
+            "brand":"Jabobs",
+            "category": "Coffee",
+            "price": 2.33
+         },
+         {
+            "id": "325213412",
+            "name": "Nescafe Gold",
+            "brand":"Nescafe",
+            "category": "Coffee",
+            "price": 4.33
+         },
+         {
+            "id": "325213412",
+            "name": "Nespresso Black",
+            "brand":"Nesspresso",
+            "category": "Coffee",
+            "price": 1.33
+         },
+         {
+            "id": "324213412",
+            "name": "MintyFresh",
+            "brand":"Colgate",
+            "category": "Higene",
+            "price": 1.43
+         },
+
+         {
+            "id": "3242131011",
+            "name": "Milk",
+            "brand":"",
+            "category": "Food",
+            "price": 2.30
+         },
+
+         {
+            "id": "3242131014",
+            "name": "Sunlight Dishwashing Liquid",
+            "brand":"Sunlight",
+            "category": "Cleaning",
+            "price": 2.20
+         },
+
+         {
+            "id": "324213421",
+            "name": "Coka Coke",
+            "brand":"Coka Coke",
+            "category": "Cola",
+            "price": 3.49
+         },
+
+         {
+            "id": "234213412",
+            "name": "Pepsi Cola",
+            "brand":"Pepsi Cola",
+            "category": "Cola",
+            "price": 3.75
+         },
+
+         {
+            "id": "324254412",
+            "name": "KFC",
+            "brand":"KFC",
+            "category": "Food",
+            "price": 4.99
+         },
+
+         {
+            "id": "324212412",
+            "name": "McD",
+            "brand":"McD",
+            "category": "Food",
+            "price":5.49
+         }
+    ]
+}
