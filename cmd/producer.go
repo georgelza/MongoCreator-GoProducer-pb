@@ -119,7 +119,7 @@ func loadConfig(params ...string) types.Tp_general {
 		vGeneral.Output_path = fmt.Sprintf("%s%s%s", vGeneral.CurrentPath, pathSep, vGeneral.Output_path)
 	}
 
-	if vGeneral.EchoGeneralConfig == 1 {
+	if vGeneral.EchoConfig == 1 {
 		printConfig(vGeneral)
 	}
 
@@ -174,7 +174,7 @@ func loadKafka(params ...string) types.TKafka {
 
 	}
 
-	if vGeneral.EchoKafkaConfig == 1 {
+	if vGeneral.EchoConfig == 1 {
 		printKafkaConfig(vKafka)
 	}
 

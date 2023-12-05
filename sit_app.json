@@ -1,6 +1,5 @@
 {
-    "echoGeneralConfig": 1,                         # echo this file to the terminal
-    "echoKafkaConfig": 1,
+    "echoConfig": 1,                                # echo this file to the terminal
     "debuglevel": 2,                                # 0=no logging, up to 4 ull logging enabled
     "testsize": 2,                                  # when we running in generate events from seed data (json_from_file: 1), how many events do we want to create
     "sleep": 10,                                    # Milliseconds, aka 5000 => 5 seconds. this mean we will sleep between 0 and 5000 between record creates or record posts.

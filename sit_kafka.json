@@ -1,6 +1,6 @@
 
 {
-    "EchoKafkaConfig": 0,                                                        # Note EchoConfig from General setup must == 0  for this to be considered
+    "EchoConfig": 0,                                                        # Note EchoConfig from General setup must == 0  for this to be considered
     "Bootstrapservers":"pkc-xxxx.af-south-1.aws.confluent.cloud",
     "Bootstrap_port": 9092,
     "Security_protocol": "SASL_SSL",
