@@ -10,6 +10,12 @@
 *					: ... EXPAND ...
 *
 *	Modified		: 4 Dec 2023	- Start
+*					: Created the main fake document creator functions and framework, including the fake seed data to be used.
+*
+*					: 5 Dec 2023
+*					: Added code to output/save the created documents to the output_path directory specified
+*					: Added code to push the documents onto Confluent Kafka cluster hosted topics
+*					: Uploaded project to Git Repo
 *
 *	Git				: https://github.com/georgelza/MongoCreator-GoProducer
 *
