@@ -20,8 +20,10 @@ At this point I want to show a 2nd stream to it all, and do it via Python. was t
 maybe based on data sinked into the MongoDB store, do a trigger… with a do a source connector out of Mongo onto Kafka (some aggregating) and then consume that via the Python app and for simplistic just echo this to the console (implying it can be pushed somewhere further)
 
 
-# Not in the report is a file called .pwd
+# Note: Not included in the repo is a file called .pwd
 
 Example: 
 export Sasl_password=Vj8MASendaIs0j4r34rsdfe4Vc8LG6cZ1XWilAJjYS05bZIk7AaGx0Y49xb 
 export Sasl_username=3MZ4dfgsdfdfIUUA
+
+This files is executed via the runs_producer.sh file, reading the values into local environment, from where they are injested by a os.Getenv call, if this code is pushed into a docker container then these values can be pushed into a secret included in the environment.
