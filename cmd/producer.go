@@ -655,7 +655,7 @@ func runLoader(arg string) {
 				grpcLog.Info("Post to Confluent Kafka topics")
 			}
 
-			// Change/Marshal the t_engineResponse variable into an array of bytes required to be send
+			// SalesBasket
 			valueBytes, err := json.Marshal(t_SalesBasket)
 			if err != nil {
 				grpcLog.Error(fmt.Sprintf("Marchalling error: %s", err))
@@ -672,27 +672,37 @@ func runLoader(arg string) {
 			}
 
 			// This is where we publish message onto the topic... on the Confluent cluster for now,
-			// this will be replaced with a FS API post call
-
 			if err := p.Produce(&kafkaMsg, nil); err != nil {
 				grpcLog.Error(fmt.Sprintf("😢 Darn, there's an error producing the message! %s", err.Error()))
 
 			}
 
-			//Fush every flush_interval loops
-			if vFlush == vKafka.Flush_interval {
-				t := 10000
-				if r := p.Flush(t); r > 0 {
-					grpcLog.Error(fmt.Sprintf("Failed to flush all messages after %d milliseconds. %d message(s) remain", t, r))
+			// Payment
+			n := rand.Intn(vGeneral.Sleep) // if vGeneral.sleep = 1000, then n will be random value of 0 -> 1000  aka 0 and 1 second
+			time.Sleep(time.Duration(n) * time.Millisecond)
 
-				} else {
-					if vGeneral.Debuglevel >= 1 {
-						grpcLog.Info(fmt.Sprintf("%s/%s, Messages flushed from the queue", count, vFlush))
+			valueBytes, err = json.Marshal(t_Payment)
+			if err != nil {
+				grpcLog.Error(fmt.Sprintf("Marchalling error: %s", err))
 
-					}
-					vFlush = 0
-				}
 			}
+
+			kafkaMsg = kafka.Message{
+				TopicPartition: kafka.TopicPartition{
+					Topic:     &vKafka.BasketTopicname,
+					Partition: kafka.PartitionAny,
+				},
+				Value: valueBytes,     // This is the payload/body thats being posted
+				Key:   []byte("1001"), // We us this to group the same transactions together in order, IE submitting/Debtor Bank.
+			}
+
+			// This is where we publish message onto the topic... on the Confluent cluster for now,
+			if err := p.Produce(&kafkaMsg, nil); err != nil {
+				grpcLog.Error(fmt.Sprintf("😢 Darn, there's an error producing the message! %s", err.Error()))
+
+			}
+
+			vFlush++
 
 			// Fush every flush_interval loops
 			if vFlush == vKafka.Flush_interval {
@@ -708,8 +718,6 @@ func runLoader(arg string) {
 					vFlush = 0
 				}
 			}
-
-			vFlush++
 
 			// We will decide if we want to keep this bit!!! or simplify it.
 			//
@@ -809,13 +817,14 @@ func runLoader(arg string) {
 		if vGeneral.Debuglevel > 1 {
 			grpcLog.Infoln("Total Time                    :", time.Since(txnStart).Seconds(), "Sec")
 
-			n := rand.Intn(vGeneral.Sleep) // if vGeneral.sleep = 1000, then n will be random value of 0 -> 1000  aka 0 and 1 second
-			if vGeneral.Debuglevel >= 2 {
-				grpcLog.Infof("Going to sleep for            : %d Milliseconds\n", n)
-
-			}
-			time.Sleep(time.Duration(n) * time.Millisecond)
 		}
+
+		n := rand.Intn(vGeneral.Sleep) // if vGeneral.sleep = 1000, then n will be random value of 0 -> 1000  aka 0 and 1 second
+		if vGeneral.Debuglevel >= 2 {
+			grpcLog.Infof("Going to sleep for            : %d Milliseconds\n", n)
+
+		}
+		time.Sleep(time.Duration(n) * time.Millisecond)
 
 	}
 
