@@ -1,7 +1,7 @@
 {
     "echoConfig": 1,                                # echo this file to the terminal
-    "debuglevel": 2,                                # 0=no logging, up to 4 ull logging enabled
-    "testsize": 2,                                  # if 0 then we set it to very large value (10000000000000) to simply continue running,
+    "debuglevel": 1,                                # 0=no logging, up to 4 ull logging enabled
+    "testsize": 5,                                  # if 0 then we set it to very large value (10000000000000) to simply continue running,
     "sleep": 10,                                    # Milliseconds, aka 5000 => 5 seconds. this mean we will sleep between 0 and 5000 between record creates or record posts.
     "vatrate": 0.14,                                # Sales tax
     "SeedFile": "sit_seed.json",                    # File containing seed data.

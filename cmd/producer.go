@@ -17,6 +17,10 @@
 *					: Added code to push the documents onto Confluent Kafka cluster hosted topics
 *					: Uploaded project to Git Repo
 *
+*					: 6 Dec 2023
+*					: introduced some code that when testsize is set to 0 then it uses <LARGE> value to imply run continiously.
+*
+*
 *	Git				: https://github.com/georgelza/MongoCreator-GoProducer
 *
 *	By				: George Leonard (georgelza@gmail.com) aka georgelza on Discord and Mongo Community Forum
@@ -393,6 +397,22 @@ func prettyJSON(ms string) {
 
 }
 
+func xprettyJSON(ms string) string {
+
+	var obj map[string]interface{}
+
+	json.Unmarshal([]byte(ms), &obj)
+
+	// Make a custom formatter with indent set
+	f := colorjson.NewFormatter()
+	f.Indent = 4
+
+	// Marshall the Colorized JSON
+	result, _ := f.Marshal(obj)
+	//fmt.Println(string(result))
+	return string(result)
+}
+
 // Helper Functions
 // https://stackoverflow.com/questions/18390266/how-can-we-truncate-float64-type-to-a-particular-precision
 func round(num float64) int {
@@ -607,8 +627,41 @@ func runLoader(arg string) {
 	// this is to keep record of the total batch run time
 	vStart := time.Now()
 
+	var f_basket *os.File
+	var f_pmnt *os.File
 	if vGeneral.Json_to_file == 1 {
+
 		runId = uuid.New().String()
+
+		// Open file -> Baskets
+		loc_basket := fmt.Sprintf("%s%s%s_%s.json", vGeneral.Output_path, pathSep, runId, "basket")
+		if vGeneral.Debuglevel > 2 {
+			grpcLog.Infoln("Basket File          :", loc_basket)
+
+		}
+
+		f_basket, err = os.OpenFile(loc_basket, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		if err != nil {
+			grpcLog.Errorln("os.OpenFile error A", err)
+			panic(err)
+
+		}
+		defer f_basket.Close()
+
+		// Open file -> Payment
+		loc_pmnt := fmt.Sprintf("%s%s%s_%s.json", vGeneral.Output_path, pathSep, runId, "pmnt")
+		if vGeneral.Debuglevel > 2 {
+			grpcLog.Infoln("Payment File         :", loc_basket)
+
+		}
+
+		f_pmnt, err = os.OpenFile(loc_pmnt, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		if err != nil {
+			grpcLog.Errorln("os.OpenFile error A", err)
+			panic(err)
+
+		}
+		defer f_pmnt.Close()
 	}
 
 	// if set to 0 then we want it to simply just run and run and run. so lets give it a pretty big number
@@ -781,41 +834,28 @@ func runLoader(arg string) {
 				grpcLog.Info("JSON to File Flow")
 
 			}
+
 			// Basket
-			loc_basket := fmt.Sprintf("%s%s%s_%s_%s.json", vGeneral.Output_path, pathSep, runId, reccount, "basket")
-			if vGeneral.Debuglevel > 2 {
-				grpcLog.Infoln("Basket File          :", loc_basket)
-
-			}
-
-			fd_basket, err := json.MarshalIndent(t_SalesBasket, "", " ")
+			pretty_basket, err := json.MarshalIndent(t_SalesBasket, "", " ")
 			if err != nil {
 				grpcLog.Errorln("MarshalIndent error", err)
 
 			}
 
-			err = os.WriteFile(loc_basket, fd_basket, 0644)
-			if err != nil {
-				grpcLog.Errorln("os.WriteFile error A", err)
+			if _, err = f_basket.WriteString(string(pretty_basket) + ",\n"); err != nil {
+				grpcLog.Errorln("os.WriteString error ", err)
 
 			}
 
 			// Payment
-			loc_pmnt := fmt.Sprintf("%s%s%s_%s_%s.json", vGeneral.Output_path, pathSep, runId, reccount, "payment")
-			if vGeneral.Debuglevel > 2 {
-				grpcLog.Infoln("Payment File          :", loc_pmnt)
-
-			}
-
-			fd_pmnt, err := json.MarshalIndent(t_Payment, "", " ")
+			pretty_pmnt, err := json.MarshalIndent(t_Payment, "", " ")
 			if err != nil {
 				grpcLog.Errorln("MarshalIndent error", err)
 
 			}
 
-			err = os.WriteFile(loc_pmnt, fd_pmnt, 0644)
-			if err != nil {
-				grpcLog.Errorln("os.WriteFile error A", err)
+			if _, err = f_pmnt.WriteString(string(pretty_pmnt) + ",\n"); err != nil {
+				grpcLog.Errorln("os.WriteString error ", err)
 
 			}
 
