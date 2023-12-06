@@ -19,6 +19,10 @@
 *
 *					: 6 Dec 2023
 *					: introduced some code that when testsize is set to 0 then it uses <LARGE> value to imply run continiously.
+*					: Modified the save to file to save all basket docs to one file per run and all payments docs to a single file.
+*					: made the time off set a configuration file value (TimeOffset)
+*					: made the max items per basket a configuration file value ()
+*					: made the quantity per product a configuration file value ()
 *
 *
 *	Git				: https://github.com/georgelza/MongoCreator-GoProducer
@@ -456,7 +460,7 @@ func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment
 	// How many potential products do we have
 	productCount := len(varSeed.Products) - 1
 	// now pick from array a random products to add to basket, by using 1 as a start point we ensure we always have at least 1 item.
-	nBasketItems := gofakeit.Number(1, productCount)
+	nBasketItems := gofakeit.Number(1, vGeneral.Max_items_basket)
 
 	var arBasketItems []types.Tp_BasketItem
 	nett_amount := 0.0
@@ -465,7 +469,7 @@ func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment
 
 		productId := gofakeit.Number(0, productCount)
 
-		quantity := gofakeit.Number(1, 20)
+		quantity := gofakeit.Number(1, vGeneral.Max_quantity)
 		price := varSeed.Products[productId].Price
 
 		BasketItem := types.Tp_BasketItem{
@@ -482,6 +486,7 @@ func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment
 
 	}
 
+	nett_amount = toFixed(nett_amount, 2)
 	vat_amount := toFixed(nett_amount*vGeneral.Vatrate, 2) // sales tax
 	total_amount := toFixed(nett_amount+vat_amount, 2)
 	terminalPoint := gofakeit.Number(0, 20)

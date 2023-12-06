@@ -8,6 +8,9 @@
     "Store": 0,                                     # if <> 0 then this value is used to selected store at that position from file, otherwise it's random
     "KafkaEnabled": 0,                              # Are we going to post onto Kafka
     "Json_to_file": 1,                              # Do we want to store basket created to a file
-    "Output_path": "json_save"                      # if to file, to what sub directory of current working directory, please pre create.
+    "Output_path": "json_save",                     # if to file, to what sub directory of current working directory, please pre create.
+    "TimeOffset": "+02:00",                         # local time offset from GMT/Zulu
+    "Max_items_basket": 10,                         # max items in a basket
+    "Max_quantity": 5                               # max quantity of items in a basket per product
 }
 
