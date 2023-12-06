@@ -451,12 +451,12 @@ func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment
 	clerk := varSeed.Clerks[nClerkId]
 
 	txnId := uuid.New().String()
-	eventTime := time.Now().Format("2006-01-02T15:04:05") + "+02:00"
+	eventTime := time.Now().Format("2006-01-02T15:04:05") + vGeneral.TimeOffset
 
 	// How many potential products do we have
 	productCount := len(varSeed.Products) - 1
-	// now pick from array a random products to add to basket
-	nBasketItems := gofakeit.Number(0, productCount)
+	// now pick from array a random products to add to basket, by using 1 as a start point we ensure we always have at least 1 item.
+	nBasketItems := gofakeit.Number(1, productCount)
 
 	var arBasketItems []types.Tp_BasketItem
 	nett_amount := 0.0
@@ -465,7 +465,7 @@ func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment
 
 		productId := gofakeit.Number(0, productCount)
 
-		quantity := gofakeit.Number(0, 20)
+		quantity := gofakeit.Number(1, 20)
 		price := varSeed.Products[productId].Price
 
 		BasketItem := types.Tp_BasketItem{
@@ -476,14 +476,13 @@ func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment
 			Price:    varSeed.Products[productId].Price,
 			Quantity: quantity,
 		}
+		arBasketItems = append(arBasketItems, BasketItem)
 
 		nett_amount = nett_amount + price*float64(quantity)
 
-		arBasketItems = append(arBasketItems, BasketItem)
-
 	}
 
-	vat_amount := toFixed(nett_amount*vGeneral.Vatrate, 2)
+	vat_amount := toFixed(nett_amount*vGeneral.Vatrate, 2) // sales tax
 	total_amount := toFixed(nett_amount+vat_amount, 2)
 	terminalPoint := gofakeit.Number(0, 20)
 
@@ -499,7 +498,8 @@ func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment
 		Total:         total_amount,
 	}
 
-	payTime := time.Now().AddDate(0, gofakeit.Number(0, 5), gofakeit.Number(0, 59)).Format("2006-01-02T15:04:05") + "+02:00"
+	// We're saying payment can be now up to 5min and 59 seconds later
+	payTime := time.Now().AddDate(0, gofakeit.Number(0, 5), gofakeit.Number(0, 59)).Format("2006-01-02T15:04:05") + vGeneral.TimeOffset
 	t_Payment = types.Tp_payment{
 		InvoiceNumber:    txnId,
 		PayDateTime:      payTime,
@@ -515,10 +515,17 @@ func runLoader(arg string) {
 
 	var p *kafka.Producer
 	var err error
+	var f_basket *os.File
+	var f_pmnt *os.File
 
-	// Initialize the vGeneral and vKafka struct variable - This holds our configuration settings.
+	// Initialize the vGeneral struct variable - This holds our configuration settings.
 	vGeneral = loadConfig(arg)
 
+	// Lets get Seed Data from the specified seed file
+	varSeed = loadSeed(vGeneral.SeedFile)
+
+	// Initiale the vKafka struct variable - This holds our Confluent Kafka configuration settings.
+	// if Kafka is enabled then create the confluent kafka connection session/objects
 	if vGeneral.KafkaEnabled == 1 {
 		vKafka = loadKafka(arg)
 
@@ -596,41 +603,20 @@ func runLoader(arg string) {
 
 	}
 
-	///////////////////////////////////////////////////////
-	//
-	// Successful connection established with Kafka Cluster
-	//
-	///////////////////////////////////////////////////////
-
 	//
 	// For signalling termination from main to go-routine
 	termChan := make(chan bool, 1)
 	// For signalling that termination is done from go-routine to main
 	doneChan := make(chan bool)
 
+	// We will use this to remember when we last flushed the kafka queues.
 	vFlush := 0
 
-	// Lets get Seed Data from the specified seed file
-	varSeed = loadSeed(vGeneral.SeedFile)
-
-	if vGeneral.Debuglevel > 0 {
-		grpcLog.Info("**** LETS GO Processing ****")
-		grpcLog.Infoln("")
-
-	}
-
-	if vGeneral.Debuglevel > 1 {
-		grpcLog.Infoln("Number of records to Process", vGeneral.Testsize) // just doing this to prefer a unused error
-
-	}
-
-	// this is to keep record of the total batch run time
-	vStart := time.Now()
-
-	var f_basket *os.File
-	var f_pmnt *os.File
+	//We've said we want to safe records to file so lets initiale the file handles etc.
 	if vGeneral.Json_to_file == 1 {
 
+		// each time we run, and say we want to store the data created to disk, we create a pair of files for that run.
+		// this runId is used as the file name, prepended to either _basket.json or _pmnt.json
 		runId = uuid.New().String()
 
 		// Open file -> Baskets
@@ -669,6 +655,14 @@ func runLoader(arg string) {
 		vGeneral.Testsize = 10000000000000
 	}
 
+	if vGeneral.Debuglevel > 0 {
+		grpcLog.Info("**** LETS GO Processing ****")
+		grpcLog.Infoln("")
+
+	}
+
+	// this is to keep record of the total batch run time
+	vStart := time.Now()
 	for count := 0; count < vGeneral.Testsize; count++ {
 
 		reccount := fmt.Sprintf("%v", count+1)
@@ -682,7 +676,7 @@ func runLoader(arg string) {
 		// We're going to time every record and push that to prometheus
 		txnStart := time.Now()
 
-		// Build an sales basket and get the payment document
+		// Build an sales basket and get the associated payment document
 		t_SalesBasket, t_Payment, storeName, err := constructFakeBasket()
 		if err != nil {
 			os.Exit(1)
@@ -826,7 +820,7 @@ func runLoader(arg string) {
 
 		}
 
-		// Consider outputting transactions to local files
+		// Save multiple Basket docs and Payment docs to a single basket file and single payment file for the run
 		if vGeneral.Json_to_file == 1 {
 
 			if vGeneral.Debuglevel >= 2 {
@@ -866,6 +860,7 @@ func runLoader(arg string) {
 
 		}
 
+		// used to slow the data production/posting to kafka and safe to file system down.
 		n := rand.Intn(vGeneral.Sleep) // if vGeneral.sleep = 1000, then n will be random value of 0 -> 1000  aka 0 and 1 second
 		if vGeneral.Debuglevel >= 2 {
 			grpcLog.Infof("Going to sleep for            : %d Milliseconds\n", n)

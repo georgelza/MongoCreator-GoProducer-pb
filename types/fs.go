@@ -16,6 +16,7 @@ type Tp_general struct {
 	KafkaEnabled int
 	Json_to_file int    // do we spool the created baskets and payments to a file/s
 	Output_path  string // if yes above then pipe json here. we will spool the baskets to one file and the payments to a second.
+	TimeOffset   string // what offset do we run with, from GMT / Zulu time
 }
 
 type TKafka struct {

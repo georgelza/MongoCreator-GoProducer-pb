@@ -19,6 +19,14 @@ Golang app that generate fake sales (maybe split as a basket onto one kafka topi
 At this point I want to show a 2nd stream to it all, and do it via Python. was thinking…
 maybe based on data sinked into the MongoDB store, do a trigger… with a do a source connector out of Mongo onto Kafka (some aggregating) and then consume that via the Python app and for simplistic just echo this to the console (implying it can be pushed somewhere further)
 
+# Using the app.
+
+This application generates fake data (sales baskets), how that is done is controlled by the *_app.json configuration file that configures the run environment. The *_seed.json in which seed data is provided is used to generate the fake basket + basket items and the associated payment document.
+
+the *_app.json contains comments to explain the impact of the value.
+
+on the Mac (and Linux) platform you can run the program by executing run_producer.sh
+a similar bat file can be configured on Windows
 
 # Note: Not included in the repo is a file called .pwd
 
