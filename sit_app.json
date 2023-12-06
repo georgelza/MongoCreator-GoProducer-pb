@@ -1,13 +1,13 @@
 {
     "echoConfig": 1,                                # echo this file to the terminal
     "debuglevel": 2,                                # 0=no logging, up to 4 ull logging enabled
-    "testsize": 2,                                  # when we running in generate events from seed data (json_from_file: 1), how many events do we want to create
+    "testsize": 2,                                  # if 0 then we set it to very large value (10000000000000) to simply continue running,
     "sleep": 10,                                    # Milliseconds, aka 5000 => 5 seconds. this mean we will sleep between 0 and 5000 between record creates or record posts.
     "vatrate": 0.14,                                # Sales tax
     "SeedFile": "sit_seed.json",                    # File containing seed data.
     "Store": 0,                                     # if <> 0 then this value is used to selected store at that position from file, otherwise it's random
-    "KafkaEnabled": 0,
-    "Json_to_file": 1,
-    "Output_path": "json_save"
+    "KafkaEnabled": 0,                              # Are we going to post onto Kafka
+    "Json_to_file": 1,                              # Do we want to store basket created to a file
+    "Output_path": "json_save"                      # if to file, to what sub directory of current working directory, please pre create.
 }
 

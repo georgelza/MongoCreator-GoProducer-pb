@@ -611,6 +611,11 @@ func runLoader(arg string) {
 		runId = uuid.New().String()
 	}
 
+	// if set to 0 then we want it to simply just run and run and run. so lets give it a pretty big number
+	if vGeneral.Testsize == 0 {
+		vGeneral.Testsize = 10000000000000
+	}
+
 	for count := 0; count < vGeneral.Testsize; count++ {
 
 		reccount := fmt.Sprintf("%v", count+1)
