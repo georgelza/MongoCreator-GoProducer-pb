@@ -1,0 +1,131 @@
+{
+ "invoiceNumber": "be5ea024-b6ea-4f96-9a14-ee9136b817bd",
+ "saleDateTime": "2024-05-20T16:57:43+02:00",
+ "store": {
+  "id": "324213992",
+  "name": "Bellville"
+ },
+ "clerk": {
+  "id": "10015",
+  "name": "Warren"
+ },
+ "terminalPoint": "7",
+ "basketItems": [
+  {
+   "id": "000000026",
+   "name": "Domestos Whitening Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000009",
+   "name": "Nescafe Salted Caramel 180g 10 Sachets",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 74,
+   "quantity": 1
+  },
+  {
+   "id": "000000012",
+   "name": "Milk",
+   "category": "Food Cupboard",
+   "price": 2.3,
+   "quantity": 2
+  },
+  {
+   "id": "000000021",
+   "name": "Stork Country 40% Fat Spread 1kg",
+   "brand": "Stork",
+   "category": "Food Cupboard",
+   "price": 46.99,
+   "quantity": 4
+  }
+ ],
+ "nett": 371.53,
+ "vat": 52.01,
+ "total": 423.54
+},
+{
+ "invoiceNumber": "9403b6ce-7e08-4f41-a5fd-d53996703836",
+ "saleDateTime": "2024-05-20T16:57:43+02:00",
+ "store": {
+  "id": "354213412",
+  "name": "C-Place"
+ },
+ "clerk": {
+  "id": "10005",
+  "name": "Tshepo"
+ },
+ "terminalPoint": "17",
+ "basketItems": [
+  {
+   "id": "000000038",
+   "name": "PnP Full Cream Fresh Milk 2L",
+   "brand": "PnP",
+   "category": "Food Cupboard",
+   "price": 34.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000038",
+   "name": "PnP Full Cream Fresh Milk 2L",
+   "brand": "PnP",
+   "category": "Food Cupboard",
+   "price": 34.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000024",
+   "name": "Kellogg's All Bran Flakes 750g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 69.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000042",
+   "name": "Nola Tangy Mayonnaise 750g",
+   "brand": "Nola",
+   "category": "Food Cupboard",
+   "price": 39.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000023",
+   "name": "Brookes Oros 2L",
+   "brand": "Brooks",
+   "category": "Beverage",
+   "price": 44.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000039",
+   "name": "Robertsons Chicken Spice Refill 84g",
+   "brand": "Robertsons",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000046",
+   "name": "HTH Granular Mineral Soft 8kg",
+   "brand": "HTH",
+   "category": "Pool Care",
+   "price": 439.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000029",
+   "name": "Colgate Maximum Cavity Protection Regular Toothpaste 100ml",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 28.99,
+   "quantity": 5
+  }
+ ],
+ "nett": 2049.77,
+ "vat": 286.97,
+ "total": 2336.74
+},

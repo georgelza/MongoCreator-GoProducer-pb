@@ -1,0 +1,58 @@
+-- local sink
+curl -X POST \
+     -H "Content-Type: application/json" \
+     --data '
+     {"name": "mongo-sink",
+      "config": {
+         "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
+         "connection.uri":"mongodb://mongolocal:27017/?directConnection=true",
+         "database":"quickstart",
+         "collection":"topicData",
+         "topics":"quickstart.sampleData",
+         "change.data.capture.handler": "com.mongodb.kafka.connect.sink.cdc.mongodb.ChangeStreamHandler"
+         }
+     }
+     ' \
+     http://127.0.0.1:8083/connectors -w "\n"
+     
+     
+     
+curl -X GET http://localhost:8083/connectors
+
+
+mongosh mongodb://localhost:27017/?directConnection=true
+
+use quickstart
+
+db.topicData.insertOne({"hello":"world"})
+
+
+-- local Source
+curl -X POST \
+     -H "Content-Type: application/json" \
+     --data '
+     {"name": "mongo-source",
+      "config": {
+         "connector.class":"com.mongodb.kafka.connect.MongoSourceConnector",
+         "connection.uri":"mongodb://mongolocal:27017/?directConnection=true",
+         "database":"quickstart",
+         "collection":"InputData",
+         "pipeline":"[{\"$match\": {\"operationType\": \"insert\"}}, {$addFields : {\"fullDocument.travel\":\"MongoDB Kafka Connector\"}}]"
+         }
+     }
+     ' \
+     http://127.0.0.1:8083/connectors -w "\n"
+
+
+-- shell:
+mongosh "mongodb+srv://cluster0.gqtneeXX.mongodb.net/" --apiVersion 1 --username adminuser
+
+Confluent Connector logging Levels
+https://docs.confluent.io/platform/current/connect/logging.html
+
+
+kcat -b localhost:9092 -t quickstart.sampleData
+
+
+-- Installing Mongo connector plugin into containerised CP Kafka
+https://www.youtube.com/watch?v=18gDPSOH3wU

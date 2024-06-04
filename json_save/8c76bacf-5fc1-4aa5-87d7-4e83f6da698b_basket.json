@@ -1,0 +1,124 @@
+{
+ "invoiceNumber": "595e06af-0a88-4db8-a5f5-4d712481fd82",
+ "saleDateTime": "2024-05-20T16:59:21+02:00",
+ "store": {
+  "id": "324213442",
+  "name": "Meyerton"
+ },
+ "clerk": {
+  "id": "10018",
+  "name": "Max"
+ },
+ "terminalPoint": "0",
+ "basketItems": [
+  {
+   "id": "000000002",
+   "name": "Dove Soap Fresh Touch 90g",
+   "brand": "Dove",
+   "category": "Personal Health Care",
+   "price": 24.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000020",
+   "name": "Koo Baked Beans in Tomato Sauce 410g",
+   "brand": "Koo",
+   "category": "Food Cupboard",
+   "price": 16.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000019",
+   "name": "Domestos Lemon Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.59,
+   "quantity": 4
+  },
+  {
+   "id": "000000041",
+   "name": "Castle Lite NRB 24 x 330ml",
+   "brand": "Castle",
+   "category": "Beverage",
+   "price": 269.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000033",
+   "name": "PnP 2 Ply White Toilet Paper 18 Pack",
+   "brand": "PnP",
+   "category": "Cleaning",
+   "price": 134.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000045",
+   "name": "HTH Floater + 1.6kg",
+   "brand": "HTH",
+   "category": "Pool Care",
+   "price": 179.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000036",
+   "name": "Rama 70% Fat Spread Original 500g",
+   "brand": "Rama",
+   "category": "Food Cupboard",
+   "price": 43.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000005",
+   "name": "Jacobs Kronung Instant",
+   "brand": "Jabobs",
+   "category": "Food Cupboard",
+   "price": 94,
+   "quantity": 5
+  },
+  {
+   "id": "000000002",
+   "name": "Dove Soap Fresh Touch 90g",
+   "brand": "Dove",
+   "category": "Personal Health Care",
+   "price": 24.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000009",
+   "name": "Nescafe Salted Caramel 180g 10 Sachets",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 74,
+   "quantity": 4
+  }
+ ],
+ "nett": 3065.16,
+ "vat": 429.12,
+ "total": 3494.28
+},
+{
+ "invoiceNumber": "4cda7bfc-efbc-4e6d-97ad-0622159798bc",
+ "saleDateTime": "2024-05-20T16:59:21+02:00",
+ "store": {
+  "id": "324213412",
+  "name": "Warmer"
+ },
+ "clerk": {
+  "id": "10012",
+  "name": "Michael"
+ },
+ "terminalPoint": "10",
+ "basketItems": [
+  {
+   "id": "000000027",
+   "name": "Knorr Spaghetti Bolognaise Dry Cook In Sauce 48g",
+   "brand": "Knorr",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 1
+  }
+ ],
+ "nett": 19.99,
+ "vat": 2.8,
+ "total": 22.79
+},

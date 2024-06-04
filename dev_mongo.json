@@ -1,0 +1,9 @@
+{
+"Url":  "mongocom/?retryWrites=true",
+"Root": "mongodb",
+"Port"    : "27017",   
+"Datastore": "MongoCom0",         
+"Basketcollection": "creator_salesbasket",
+"Paymentcollection": "creator_salespayments",
+"Batch_size": 5
+}        

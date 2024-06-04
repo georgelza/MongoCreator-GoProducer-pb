@@ -1,0 +1,635 @@
+{
+ "invoiceNumber": "aec1e482-6e98-4042-a1c3-885594a38e3b",
+ "saleDateTime": "2024-05-28T08:00:56+02:00",
+ "store": {
+  "id": "354213412",
+  "name": "C-Place"
+ },
+ "clerk": {
+  "id": "10001",
+  "name": "Martin"
+ },
+ "terminalPoint": "3",
+ "basketItems": [
+  {
+   "id": "000000024",
+   "name": "Kellogg's All Bran Flakes 750g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 69.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000031",
+   "name": "Kellogg's Coco Pops Original 350g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 55.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000001",
+   "name": "Dove Soap Gentle 90g",
+   "brand": "Dove",
+   "category": "Personal Health Care",
+   "price": 24.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000020",
+   "name": "Koo Baked Beans in Tomato Sauce 410g",
+   "brand": "Koo",
+   "category": "Food Cupboard",
+   "price": 16.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000007",
+   "name": "Nescafe Classic Gold 200g",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 104,
+   "quantity": 1
+  }
+ ],
+ "nett": 313.94,
+ "vat": 43.95,
+ "total": 357.89
+},
+{
+ "invoiceNumber": "b350b31d-ae25-40d9-bc5f-15f1e5de73f3",
+ "saleDateTime": "2024-05-28T08:00:56+02:00",
+ "store": {
+  "id": "324213412",
+  "name": "Milnerton"
+ },
+ "clerk": {
+  "id": "10002",
+  "name": "Greg"
+ },
+ "terminalPoint": "3",
+ "basketItems": [
+  {
+   "id": "000000049",
+   "name": "Appletiser 100% Sparkling Apple 1.25L",
+   "brand": "Appletiser",
+   "category": "Beverage",
+   "price": 39.99,
+   "quantity": 3
+  }
+ ],
+ "nett": 119.97,
+ "vat": 16.8,
+ "total": 136.77
+},
+{
+ "invoiceNumber": "e8bb70a1-cad4-47a1-9e59-eff2f0fb8b57",
+ "saleDateTime": "2024-05-28T08:00:56+02:00",
+ "store": {
+  "id": "324213415",
+  "name": "Stellenbosch"
+ },
+ "clerk": {
+  "id": "10020",
+  "name": "Liezel"
+ },
+ "terminalPoint": "9",
+ "basketItems": [
+  {
+   "id": "000000019",
+   "name": "Domestos Lemon Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.59,
+   "quantity": 5
+  },
+  {
+   "id": "000000008",
+   "name": "Nescafe Espresso Jar 200g",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 174,
+   "quantity": 5
+  },
+  {
+   "id": "000000050",
+   "name": "Clover Vanilla Custard 1l",
+   "brand": "Clover",
+   "category": "Beverage",
+   "price": 27.99,
+   "quantity": 1
+  }
+ ],
+ "nett": 1070.94,
+ "vat": 149.93,
+ "total": 1220.87
+},
+{
+ "invoiceNumber": "9e623347-e32a-4222-add9-abc900e749c7",
+ "saleDateTime": "2024-05-28T08:00:56+02:00",
+ "store": {
+  "id": "324213442",
+  "name": "Meyerton"
+ },
+ "clerk": {
+  "id": "10015",
+  "name": "Warren"
+ },
+ "terminalPoint": "5",
+ "basketItems": [
+  {
+   "id": "000000031",
+   "name": "Kellogg's Coco Pops Original 350g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 55.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000044",
+   "name": "Dettol Soap Active 175g",
+   "brand": "Dettol",
+   "category": "Personal Health Care",
+   "price": 17.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000025",
+   "name": "Fatti's \u0026 Moni's Spaghetti 500g",
+   "brand": "Fatti's \u0026 Moni's",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000053",
+   "name": "Mooi River Salted Butter 500g",
+   "brand": "MooiRiver",
+   "category": "Food Cupboard",
+   "price": 84.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000052",
+   "name": "Simba Potato Chips Creamy Cheddar 120g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 4
+  }
+ ],
+ "nett": 842.81,
+ "vat": 117.99,
+ "total": 960.8
+},
+{
+ "invoiceNumber": "91ddf4ec-91d6-4e96-a1b3-9a9e142c3dac",
+ "saleDateTime": "2024-05-28T08:00:56+02:00",
+ "store": {
+  "id": "224213412",
+  "name": "Durbanville"
+ },
+ "clerk": {
+  "id": "10008",
+  "name": "Suanne"
+ },
+ "terminalPoint": "20",
+ "basketItems": [
+  {
+   "id": "000000049",
+   "name": "Appletiser 100% Sparkling Apple 1.25L",
+   "brand": "Appletiser",
+   "category": "Beverage",
+   "price": 39.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000044",
+   "name": "Dettol Soap Active 175g",
+   "brand": "Dettol",
+   "category": "Personal Health Care",
+   "price": 17.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000037",
+   "name": "Wellington's New Recipe Tomato Sauce 700ml",
+   "brand": "Wellington's",
+   "category": "Food Cupboard",
+   "price": 34.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000019",
+   "name": "Domestos Lemon Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.59,
+   "quantity": 2
+  },
+  {
+   "id": "000000014",
+   "name": "Coca-Cola Soft Drink 1.5L",
+   "brand": "Coka Coke",
+   "category": "Beverage",
+   "price": 18.49,
+   "quantity": 5
+  }
+ ],
+ "nett": 626.48,
+ "vat": 87.71,
+ "total": 714.19
+},
+{
+ "invoiceNumber": "cabd42ea-0b9e-4db7-b4d2-5177b5153cc4",
+ "saleDateTime": "2024-05-28T08:00:56+02:00",
+ "store": {
+  "id": "324213422",
+  "name": "PineTown"
+ },
+ "clerk": {
+  "id": "10017",
+  "name": "Naseem"
+ },
+ "terminalPoint": "14",
+ "basketItems": [
+  {
+   "id": "000000052",
+   "name": "Simba Nik Naks Cheese Flavour 135g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 14.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000027",
+   "name": "Knorr Spaghetti Bolognaise Dry Cook In Sauce 48g",
+   "brand": "Knorr",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000034",
+   "name": "Kellogg's Coco Pops Original 350g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 55.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000039",
+   "name": "Robertsons Chicken Spice Refill 84g",
+   "brand": "Robertsons",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000026",
+   "name": "Domestos Whitening Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000012",
+   "name": "Milk",
+   "category": "Food Cupboard",
+   "price": 2.3,
+   "quantity": 3
+  },
+  {
+   "id": "000000019",
+   "name": "Domestos Lemon Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.59,
+   "quantity": 4
+  }
+ ],
+ "nett": 755.05,
+ "vat": 105.71,
+ "total": 860.76
+},
+{
+ "invoiceNumber": "daab34e3-de1c-48b1-8fc0-85e412fee6af",
+ "saleDateTime": "2024-05-28T08:00:56+02:00",
+ "store": {
+  "id": "324213442",
+  "name": "Meyerton"
+ },
+ "clerk": {
+  "id": "10006",
+  "name": "Lisa"
+ },
+ "terminalPoint": "15",
+ "basketItems": [
+  {
+   "id": "000000039",
+   "name": "Robertsons Chicken Spice Refill 84g",
+   "brand": "Robertsons",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000028",
+   "name": "PnP Sunflower Oil 2L",
+   "brand": "PnP",
+   "category": "Food Cupboard",
+   "price": 79.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000011",
+   "name": "MintyFresh",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 1.43,
+   "quantity": 4
+  },
+  {
+   "id": "000000001",
+   "name": "Dove Soap Gentle 90g",
+   "brand": "Dove",
+   "category": "Personal Health Care",
+   "price": 24.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000029",
+   "name": "Colgate Maximum Cavity Protection Regular Toothpaste 100ml",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 28.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000018",
+   "name": "McD Big Mac",
+   "brand": "McD",
+   "category": "Food Cupboard",
+   "price": 5.49,
+   "quantity": 5
+  },
+  {
+   "id": "000000052",
+   "name": "Simba Potato Chips Creamy Cheddar 120g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000039",
+   "name": "Robertsons Chicken Spice Refill 84g",
+   "brand": "Robertsons",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000007",
+   "name": "Nescafe Classic Gold 200g",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 104,
+   "quantity": 5
+  }
+ ],
+ "nett": 812.08,
+ "vat": 113.69,
+ "total": 925.77
+},
+{
+ "invoiceNumber": "f4f926fb-5c0a-4475-8d37-e9dd11e7941a",
+ "saleDateTime": "2024-05-28T08:00:56+02:00",
+ "store": {
+  "id": "324213442",
+  "name": "Meyerton"
+ },
+ "clerk": {
+  "id": "10017",
+  "name": "Naseem"
+ },
+ "terminalPoint": "17",
+ "basketItems": [
+  {
+   "id": "000000010",
+   "name": "Nespresso Black",
+   "brand": "Nesspresso",
+   "category": "Coffee",
+   "price": 1.33,
+   "quantity": 3
+  },
+  {
+   "id": "000000026",
+   "name": "Domestos Whitening Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000019",
+   "name": "Domestos Lemon Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.59,
+   "quantity": 1
+  }
+ ],
+ "nett": 178.54,
+ "vat": 25,
+ "total": 203.54
+},
+{
+ "invoiceNumber": "a7df7e8d-28d6-48dd-a263-116bd7690830",
+ "saleDateTime": "2024-05-28T08:00:56+02:00",
+ "store": {
+  "id": "324213422",
+  "name": "PineTown"
+ },
+ "clerk": {
+  "id": "10004",
+  "name": "Thabo"
+ },
+ "terminalPoint": "18",
+ "basketItems": [
+  {
+   "id": "000000002",
+   "name": "Dove Soap Fresh Touch 90g",
+   "brand": "Dove",
+   "category": "Personal Health Care",
+   "price": 24.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000052",
+   "name": "Knorr Aromat Original All Purpose Seasoning Spice Trio Refill 200g",
+   "brand": "Knorr",
+   "category": "Food Cupboard",
+   "price": 36.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000043",
+   "name": "Hulett Sunsweet Brown Sugar 2kg",
+   "brand": "Hulett",
+   "category": "Food Cupboard",
+   "price": 49.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000029",
+   "name": "Colgate Maximum Cavity Protection Regular Toothpaste 100ml",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 28.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000041",
+   "name": "Castle Lite NRB 24 x 330ml",
+   "brand": "Castle",
+   "category": "Beverage",
+   "price": 269.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000052",
+   "name": "Simba Nik Naks Cheese Flavour 135g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 14.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000045",
+   "name": "HTH Floater + 1.6kg",
+   "brand": "HTH",
+   "category": "Pool Care",
+   "price": 179.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000050",
+   "name": "Clover Vanilla Custard 1l",
+   "brand": "Clover",
+   "category": "Beverage",
+   "price": 27.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000006",
+   "name": "Jacobs Kronung Decaf Instant 100g",
+   "brand": "Jabobs",
+   "category": "Food Cupboard",
+   "price": 124,
+   "quantity": 3
+  },
+  {
+   "id": "000000002",
+   "name": "Dove Soap Fresh Touch 90g",
+   "brand": "Dove",
+   "category": "Personal Health Care",
+   "price": 24.99,
+   "quantity": 4
+  }
+ ],
+ "nett": 2654.68,
+ "vat": 371.66,
+ "total": 3026.34
+},
+{
+ "invoiceNumber": "1a95631e-e75b-4888-b54e-75952cc39b25",
+ "saleDateTime": "2024-05-28T08:00:56+02:00",
+ "store": {
+  "id": "354213412",
+  "name": "C-Place"
+ },
+ "clerk": {
+  "id": "10007",
+  "name": "Roger"
+ },
+ "terminalPoint": "1",
+ "basketItems": [
+  {
+   "id": "000000030",
+   "name": "Kellogg's Corn Flakes 750g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 28.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000004",
+   "name": "Jacobs Kronung Gold Instant",
+   "brand": "Jabobs",
+   "category": "Food Cupboard",
+   "price": 159,
+   "quantity": 4
+  },
+  {
+   "id": "000000018",
+   "name": "McD Big Mac",
+   "brand": "McD",
+   "category": "Food Cupboard",
+   "price": 5.49,
+   "quantity": 1
+  },
+  {
+   "id": "000000007",
+   "name": "Nescafe Classic Gold 200g",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 104,
+   "quantity": 1
+  },
+  {
+   "id": "000000006",
+   "name": "Jacobs Kronung Decaf Instant 100g",
+   "brand": "Jabobs",
+   "category": "Food Cupboard",
+   "price": 124,
+   "quantity": 4
+  },
+  {
+   "id": "000000007",
+   "name": "Nescafe Classic Gold 200g",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 104,
+   "quantity": 3
+  },
+  {
+   "id": "000000052",
+   "name": "Simba Potato Chips Creamy Cheddar 120g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000051",
+   "name": "PnP A4 Multi Purpose White Office Paper 500 Sheets x 5",
+   "brand": "PnP",
+   "category": "Stationary",
+   "price": 389.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000030",
+   "name": "Kellogg's Corn Flakes 750g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 28.99,
+   "quantity": 2
+  }
+ ],
+ "nett": 2246.36,
+ "vat": 314.49,
+ "total": 2560.85
+},

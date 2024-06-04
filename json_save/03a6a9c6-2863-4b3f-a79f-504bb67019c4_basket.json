@@ -1,0 +1,564 @@
+{
+ "invoiceNumber": "4be3a73a-643b-4c87-8334-eac46168cbea",
+ "saleDateTime": "2024-05-21T09:13:58+02:00",
+ "store": {
+  "id": "324213415",
+  "name": "Stellenbosch"
+ },
+ "clerk": {
+  "id": "10009",
+  "name": "Susan"
+ },
+ "terminalPoint": "9",
+ "basketItems": [
+  {
+   "id": "000000034",
+   "name": "Kellogg's Coco Pops Original 350g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 55.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000037",
+   "name": "Wellington's New Recipe Tomato Sauce 700ml",
+   "brand": "Wellington's",
+   "category": "Food Cupboard",
+   "price": 34.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000020",
+   "name": "Koo Baked Beans in Tomato Sauce 410g",
+   "brand": "Koo",
+   "category": "Food Cupboard",
+   "price": 16.99,
+   "quantity": 3
+  }
+ ],
+ "nett": 302.91,
+ "vat": 42.41,
+ "total": 345.32
+},
+{
+ "invoiceNumber": "907deff9-ba62-4d08-8db2-a9bac37c0a16",
+ "saleDateTime": "2024-05-21T09:13:58+02:00",
+ "store": {
+  "id": "324213412",
+  "name": "Wavecrest"
+ },
+ "clerk": {
+  "id": "10013",
+  "name": "Mohammed"
+ },
+ "terminalPoint": "13",
+ "basketItems": [
+  {
+   "id": "000000024",
+   "name": "Kellogg's All Bran Flakes 750g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 69.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000039",
+   "name": "Robertsons Chicken Spice Refill 84g",
+   "brand": "Robertsons",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000010",
+   "name": "Nespresso Black",
+   "brand": "Nesspresso",
+   "category": "Coffee",
+   "price": 1.33,
+   "quantity": 1
+  }
+ ],
+ "nett": 321.27,
+ "vat": 44.98,
+ "total": 366.25
+},
+{
+ "invoiceNumber": "f96e253f-6270-492f-8b1b-9dcfc5fc118d",
+ "saleDateTime": "2024-05-21T09:13:58+02:00",
+ "store": {
+  "id": "324213412",
+  "name": "Sandton"
+ },
+ "clerk": {
+  "id": "10006",
+  "name": "Lisa"
+ },
+ "terminalPoint": "8",
+ "basketItems": [
+  {
+   "id": "000000041",
+   "name": "Castle Lite NRB 24 x 330ml",
+   "brand": "Castle",
+   "category": "Beverage",
+   "price": 269.99,
+   "quantity": 4
+  }
+ ],
+ "nett": 1079.96,
+ "vat": 151.19,
+ "total": 1231.15
+},
+{
+ "invoiceNumber": "032cea3a-377a-410d-8a0e-76f8eb6caafb",
+ "saleDateTime": "2024-05-21T09:13:58+02:00",
+ "store": {
+  "id": "324213412",
+  "name": "Milnerton"
+ },
+ "clerk": {
+  "id": "10007",
+  "name": "Roger"
+ },
+ "terminalPoint": "14",
+ "basketItems": [
+  {
+   "id": "000000005",
+   "name": "Jacobs Kronung Instant",
+   "brand": "Jabobs",
+   "category": "Food Cupboard",
+   "price": 94,
+   "quantity": 3
+  },
+  {
+   "id": "000000023",
+   "name": "Brookes Oros 2L",
+   "brand": "Brooks",
+   "category": "Beverage",
+   "price": 44.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000019",
+   "name": "Domestos Lemon Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.59,
+   "quantity": 4
+  },
+  {
+   "id": "000000053",
+   "name": "Mooi River Salted Butter 500g",
+   "brand": "MooiRiver",
+   "category": "Food Cupboard",
+   "price": 84.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000026",
+   "name": "Domestos Whitening Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000052",
+   "name": "Simba Potato Chips Creamy Cheddar 120g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000009",
+   "name": "Nescafe Salted Caramel 180g 10 Sachets",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 74,
+   "quantity": 3
+  }
+ ],
+ "nett": 907.3,
+ "vat": 127.02,
+ "total": 1034.32
+},
+{
+ "invoiceNumber": "27981636-0c3c-4325-a1e7-1da15f19643c",
+ "saleDateTime": "2024-05-21T09:13:58+02:00",
+ "store": {
+  "id": "324213422",
+  "name": "PineTown"
+ },
+ "clerk": {
+  "id": "10013",
+  "name": "Mohammed"
+ },
+ "terminalPoint": "8",
+ "basketItems": [
+  {
+   "id": "000000052",
+   "name": "Simba Potato Chips Creamy Cheddar 120g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000052",
+   "name": "Knorr Aromat Original All Purpose Seasoning Spice Trio Refill 200g",
+   "brand": "Knorr",
+   "category": "Food Cupboard",
+   "price": 36.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000053",
+   "name": "Mooi River Salted Butter 500g",
+   "brand": "MooiRiver",
+   "category": "Food Cupboard",
+   "price": 84.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000036",
+   "name": "Rama 70% Fat Spread Original 500g",
+   "brand": "Rama",
+   "category": "Food Cupboard",
+   "price": 43.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000030",
+   "name": "Kellogg's Corn Flakes 750g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 28.99,
+   "quantity": 3
+  }
+ ],
+ "nett": 491.87,
+ "vat": 68.86,
+ "total": 560.73
+},
+{
+ "invoiceNumber": "c83931d9-7d04-4582-92ce-e4ed988d1d02",
+ "saleDateTime": "2024-05-21T09:13:58+02:00",
+ "store": {
+  "id": "324213410",
+  "name": "Milnerton"
+ },
+ "clerk": {
+  "id": "10018",
+  "name": "Max"
+ },
+ "terminalPoint": "0",
+ "basketItems": [
+  {
+   "id": "000000023",
+   "name": "Brookes Oros 2L",
+   "brand": "Brooks",
+   "category": "Beverage",
+   "price": 44.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000053",
+   "name": "Mooi River Salted Butter 500g",
+   "brand": "MooiRiver",
+   "category": "Food Cupboard",
+   "price": 84.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000053",
+   "name": "Mooi River Salted Butter 500g",
+   "brand": "MooiRiver",
+   "category": "Food Cupboard",
+   "price": 84.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000052",
+   "name": "Knorr Aromat Original All Purpose Seasoning Spice Trio Refill 200g",
+   "brand": "Knorr",
+   "category": "Food Cupboard",
+   "price": 36.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000002",
+   "name": "Dove Soap Fresh Touch 90g",
+   "brand": "Dove",
+   "category": "Personal Health Care",
+   "price": 24.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000022",
+   "name": "Simba Potato Chips Mrs Balls Chutney 120g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000032",
+   "name": "Cadbury Dairy Milk Whole Nut Slab 80g",
+   "brand": "Cadbury",
+   "category": "Food Cupboard",
+   "price": 21.99,
+   "quantity": 1
+  }
+ ],
+ "nett": 1140.77,
+ "vat": 159.71,
+ "total": 1300.48
+},
+{
+ "invoiceNumber": "d9c6b260-cd1d-4bfb-9da1-057669749996",
+ "saleDateTime": "2024-05-21T09:13:58+02:00",
+ "store": {
+  "id": "224213412",
+  "name": "Durbanville"
+ },
+ "clerk": {
+  "id": "10007",
+  "name": "Roger"
+ },
+ "terminalPoint": "0",
+ "basketItems": [
+  {
+   "id": "000000022",
+   "name": "Simba Potato Chips Mrs Balls Chutney 120g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000021",
+   "name": "Stork Country 40% Fat Spread 1kg",
+   "brand": "Stork",
+   "category": "Food Cupboard",
+   "price": 46.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000048",
+   "name": "Liqui-Fruit Cranberry Cooler Juice 1L",
+   "brand": "Liqui-Fruit",
+   "category": "Beverage",
+   "price": 134.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000048",
+   "name": "Liqui-Fruit Cranberry Cooler Juice 1L",
+   "brand": "Liqui-Fruit",
+   "category": "Beverage",
+   "price": 134.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000003",
+   "name": "Dove Cotton whool Rounds 80 Pack",
+   "brand": "Dove",
+   "category": "Personal Health Care",
+   "price": 36.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000008",
+   "name": "Nescafe Espresso Jar 200g",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 174,
+   "quantity": 2
+  },
+  {
+   "id": "000000052",
+   "name": "Knorr Aromat Original All Purpose Seasoning Spice Trio Refill 200g",
+   "brand": "Knorr",
+   "category": "Food Cupboard",
+   "price": 36.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000027",
+   "name": "Knorr Spaghetti Bolognaise Dry Cook In Sauce 48g",
+   "brand": "Knorr",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000038",
+   "name": "PnP Full Cream Fresh Milk 2L",
+   "brand": "PnP",
+   "category": "Food Cupboard",
+   "price": 34.99,
+   "quantity": 2
+  }
+ ],
+ "nett": 1215.85,
+ "vat": 170.22,
+ "total": 1386.07
+},
+{
+ "invoiceNumber": "3b6f9bc2-52ab-4a1b-9890-1fa945a1846f",
+ "saleDateTime": "2024-05-21T09:13:58+02:00",
+ "store": {
+  "id": "324213412",
+  "name": "Milnerton"
+ },
+ "clerk": {
+  "id": "10007",
+  "name": "Roger"
+ },
+ "terminalPoint": "20",
+ "basketItems": [
+  {
+   "id": "000000024",
+   "name": "Kellogg's All Bran Flakes 750g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 69.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000036",
+   "name": "Rama 70% Fat Spread Original 500g",
+   "brand": "Rama",
+   "category": "Food Cupboard",
+   "price": 43.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000040",
+   "name": "Tastic Rice 2kg",
+   "brand": "Tastic",
+   "category": "Food Cupboard",
+   "price": 41.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000009",
+   "name": "Nescafe Salted Caramel 180g 10 Sachets",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 74,
+   "quantity": 2
+  },
+  {
+   "id": "000000010",
+   "name": "Nespresso Black",
+   "brand": "Nesspresso",
+   "category": "Coffee",
+   "price": 1.33,
+   "quantity": 1
+  },
+  {
+   "id": "000000011",
+   "name": "MintyFresh",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 1.43,
+   "quantity": 3
+  },
+  {
+   "id": "000000014",
+   "name": "Coca-Cola Soft Drink 1.5L",
+   "brand": "Coka Coke",
+   "category": "Beverage",
+   "price": 18.49,
+   "quantity": 1
+  },
+  {
+   "id": "000000043",
+   "name": "Hulett Sunsweet Brown Sugar 2kg",
+   "brand": "Hulett",
+   "category": "Food Cupboard",
+   "price": 49.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000047",
+   "name": "Omo Stain Removal Auto Washing Powder Detergent with Comfort Freshness 2kg",
+   "brand": "Omo",
+   "category": "Cleaning",
+   "price": 104.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000018",
+   "name": "McD Big Mac",
+   "brand": "McD",
+   "category": "Food Cupboard",
+   "price": 5.49,
+   "quantity": 1
+  }
+ ],
+ "nett": 1140.44,
+ "vat": 159.66,
+ "total": 1300.1
+},
+{
+ "invoiceNumber": "af41f5d2-bcf1-43d0-b222-fbe2b7c1516e",
+ "saleDateTime": "2024-05-21T09:13:58+02:00",
+ "store": {
+  "id": "324213412",
+  "name": "Milnerton"
+ },
+ "clerk": {
+  "id": "10002",
+  "name": "Greg"
+ },
+ "terminalPoint": "2",
+ "basketItems": [
+  {
+   "id": "000000008",
+   "name": "Nescafe Espresso Jar 200g",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 174,
+   "quantity": 2
+  }
+ ],
+ "nett": 348,
+ "vat": 48.72,
+ "total": 396.72
+},
+{
+ "invoiceNumber": "50c7db94-99a9-4d6c-8e88-a391c59f5436",
+ "saleDateTime": "2024-05-21T09:13:58+02:00",
+ "store": {
+  "id": "354213412",
+  "name": "C-Place"
+ },
+ "clerk": {
+  "id": "10012",
+  "name": "Michael"
+ },
+ "terminalPoint": "20",
+ "basketItems": [
+  {
+   "id": "000000038",
+   "name": "PnP Full Cream Fresh Milk 2L",
+   "brand": "PnP",
+   "category": "Food Cupboard",
+   "price": 34.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000035",
+   "name": "Nestle KitKat 4 Finger Milk Chocolate Bar 41.5g",
+   "brand": "Nestle",
+   "category": "Food Cupboard",
+   "price": 13.99,
+   "quantity": 3
+  }
+ ],
+ "nett": 181.93,
+ "vat": 25.47,
+ "total": 207.4
+},

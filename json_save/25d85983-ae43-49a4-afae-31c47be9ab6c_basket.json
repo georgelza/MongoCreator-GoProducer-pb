@@ -1,0 +1,1270 @@
+{
+ "invoiceNumber": "420385ef-f533-40b9-83c6-ad448855bc33",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "224213412",
+  "name": "Durbanville"
+ },
+ "clerk": {
+  "id": "10008",
+  "name": "Suanne"
+ },
+ "terminalPoint": "16",
+ "basketItems": [
+  {
+   "id": "000000012",
+   "name": "Milk",
+   "category": "Food Cupboard",
+   "price": 2.3,
+   "quantity": 2
+  },
+  {
+   "id": "000000041",
+   "name": "Castle Lite NRB 24 x 330ml",
+   "brand": "Castle",
+   "category": "Beverage",
+   "price": 269.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000002",
+   "name": "Dove Soap Fresh Touch 90g",
+   "brand": "Dove",
+   "category": "Personal Health Care",
+   "price": 24.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000007",
+   "name": "Nescafe Classic Gold 200g",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 104,
+   "quantity": 1
+  },
+  {
+   "id": "000000025",
+   "name": "Fatti's \u0026 Moni's Spaghetti 500g",
+   "brand": "Fatti's \u0026 Moni's",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000014",
+   "name": "Coca-Cola Soft Drink 1.5L",
+   "brand": "Coka Coke",
+   "category": "Beverage",
+   "price": 18.49,
+   "quantity": 4
+  },
+  {
+   "id": "000000004",
+   "name": "Jacobs Kronung Gold Instant",
+   "brand": "Jabobs",
+   "category": "Food Cupboard",
+   "price": 159,
+   "quantity": 2
+  },
+  {
+   "id": "000000047",
+   "name": "Omo Stain Removal Auto Washing Powder Detergent with Comfort Freshness 2kg",
+   "brand": "Omo",
+   "category": "Cleaning",
+   "price": 104.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000052",
+   "name": "Simba Potato Chips Creamy Cheddar 120g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000028",
+   "name": "PnP Sunflower Oil 2L",
+   "brand": "PnP",
+   "category": "Food Cupboard",
+   "price": 79.99,
+   "quantity": 2
+  }
+ ],
+ "nett": 1640.39,
+ "vat": 229.65,
+ "total": 1870.04
+},
+{
+ "invoiceNumber": "0245b4ee-30c8-4b63-a2bd-fd9bf22e9a65",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324213412",
+  "name": "Milnerton"
+ },
+ "clerk": {
+  "id": "10006",
+  "name": "Lisa"
+ },
+ "terminalPoint": "16",
+ "basketItems": [
+  {
+   "id": "000000039",
+   "name": "Robertsons Chicken Spice Refill 84g",
+   "brand": "Robertsons",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000005",
+   "name": "Jacobs Kronung Instant",
+   "brand": "Jabobs",
+   "category": "Food Cupboard",
+   "price": 94,
+   "quantity": 4
+  },
+  {
+   "id": "000000052",
+   "name": "Knorr Aromat Original All Purpose Seasoning Spice Trio Refill 200g",
+   "brand": "Knorr",
+   "category": "Food Cupboard",
+   "price": 36.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000011",
+   "name": "MintyFresh",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 1.43,
+   "quantity": 1
+  },
+  {
+   "id": "000000044",
+   "name": "Dettol Soap Active 175g",
+   "brand": "Dettol",
+   "category": "Personal Health Care",
+   "price": 17.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000034",
+   "name": "Kellogg's Coco Pops Original 350g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 55.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000039",
+   "name": "Robertsons Chicken Spice Refill 84g",
+   "brand": "Robertsons",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000044",
+   "name": "Dettol Soap Active 175g",
+   "brand": "Dettol",
+   "category": "Personal Health Care",
+   "price": 17.99,
+   "quantity": 3
+  }
+ ],
+ "nett": 1106.19,
+ "vat": 154.87,
+ "total": 1261.06
+},
+{
+ "invoiceNumber": "754be10f-dc58-4a21-a304-498f1cdfc927",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324213422",
+  "name": "PineTown"
+ },
+ "clerk": {
+  "id": "10012",
+  "name": "Michael"
+ },
+ "terminalPoint": "11",
+ "basketItems": [
+  {
+   "id": "000000041",
+   "name": "Castle Lite NRB 24 x 330ml",
+   "brand": "Castle",
+   "category": "Beverage",
+   "price": 269.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000003",
+   "name": "Dove Cotton whool Rounds 80 Pack",
+   "brand": "Dove",
+   "category": "Personal Health Care",
+   "price": 36.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000020",
+   "name": "Koo Baked Beans in Tomato Sauce 410g",
+   "brand": "Koo",
+   "category": "Food Cupboard",
+   "price": 16.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000034",
+   "name": "Kellogg's Coco Pops Original 350g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 55.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000027",
+   "name": "Knorr Spaghetti Bolognaise Dry Cook In Sauce 48g",
+   "brand": "Knorr",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000049",
+   "name": "Appletiser 100% Sparkling Apple 1.25L",
+   "brand": "Appletiser",
+   "category": "Beverage",
+   "price": 39.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000010",
+   "name": "Nespresso Black",
+   "brand": "Nesspresso",
+   "category": "Coffee",
+   "price": 1.33,
+   "quantity": 1
+  },
+  {
+   "id": "000000011",
+   "name": "MintyFresh",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 1.43,
+   "quantity": 4
+  },
+  {
+   "id": "000000042",
+   "name": "Nola Tangy Mayonnaise 750g",
+   "brand": "Nola",
+   "category": "Food Cupboard",
+   "price": 39.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000044",
+   "name": "Dettol Soap Active 175g",
+   "brand": "Dettol",
+   "category": "Personal Health Care",
+   "price": 17.99,
+   "quantity": 1
+  }
+ ],
+ "nett": 812.88,
+ "vat": 113.8,
+ "total": 926.68
+},
+{
+ "invoiceNumber": "6419e741-9839-418a-b13f-589c14f94f98",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324213412",
+  "name": "Warmer"
+ },
+ "clerk": {
+  "id": "10005",
+  "name": "Tshepo"
+ },
+ "terminalPoint": "12",
+ "basketItems": [
+  {
+   "id": "000000050",
+   "name": "Clover Vanilla Custard 1l",
+   "brand": "Clover",
+   "category": "Beverage",
+   "price": 27.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000016",
+   "name": "KFC Street Wise 2",
+   "brand": "KFC",
+   "category": "Food Cupboard",
+   "price": 20.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000007",
+   "name": "Nescafe Classic Gold 200g",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 104,
+   "quantity": 4
+  }
+ ],
+ "nett": 555.94,
+ "vat": 77.83,
+ "total": 633.77
+},
+{
+ "invoiceNumber": "ee336aef-2ff4-4508-83ed-f1f0c6569b36",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "224213412",
+  "name": "Durbanville"
+ },
+ "clerk": {
+  "id": "10020",
+  "name": "Liezel"
+ },
+ "terminalPoint": "3",
+ "basketItems": [
+  {
+   "id": "000000026",
+   "name": "Domestos Whitening Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000039",
+   "name": "Robertsons Chicken Spice Refill 84g",
+   "brand": "Robertsons",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000013",
+   "name": "Sunlight Dishwashing Liquid",
+   "brand": "Sunlight",
+   "category": "Cleaning",
+   "price": 2.2,
+   "quantity": 4
+  },
+  {
+   "id": "000000024",
+   "name": "Kellogg's All Bran Flakes 750g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 69.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000028",
+   "name": "PnP Sunflower Oil 2L",
+   "brand": "PnP",
+   "category": "Food Cupboard",
+   "price": 79.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000022",
+   "name": "Simba Potato Chips Mrs Balls Chutney 120g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000045",
+   "name": "HTH Floater + 1.6kg",
+   "brand": "HTH",
+   "category": "Pool Care",
+   "price": 179.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000011",
+   "name": "MintyFresh",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 1.43,
+   "quantity": 1
+  },
+  {
+   "id": "000000019",
+   "name": "Domestos Lemon Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.59,
+   "quantity": 3
+  },
+  {
+   "id": "000000028",
+   "name": "PnP Sunflower Oil 2L",
+   "brand": "PnP",
+   "category": "Food Cupboard",
+   "price": 79.99,
+   "quantity": 2
+  }
+ ],
+ "nett": 1888.78,
+ "vat": 264.43,
+ "total": 2153.21
+},
+{
+ "invoiceNumber": "6f93ecc7-c5c8-44a0-915a-5f3f2565c49f",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324223412",
+  "name": "Fountains"
+ },
+ "clerk": {
+  "id": "10012",
+  "name": "Michael"
+ },
+ "terminalPoint": "19",
+ "basketItems": [
+  {
+   "id": "000000028",
+   "name": "PnP Sunflower Oil 2L",
+   "brand": "PnP",
+   "category": "Food Cupboard",
+   "price": 79.99,
+   "quantity": 5
+  }
+ ],
+ "nett": 399.95,
+ "vat": 55.99,
+ "total": 455.94
+},
+{
+ "invoiceNumber": "8913cb4f-5d1a-40a7-9a3f-cce36b0e68e6",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324213411",
+  "name": "Randburg"
+ },
+ "clerk": {
+  "id": "10009",
+  "name": "Susan"
+ },
+ "terminalPoint": "12",
+ "basketItems": [
+  {
+   "id": "000000026",
+   "name": "Domestos Whitening Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000051",
+   "name": "PnP A4 Multi Purpose White Office Paper 500 Sheets x 5",
+   "brand": "PnP",
+   "category": "Stationary",
+   "price": 389.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000009",
+   "name": "Nescafe Salted Caramel 180g 10 Sachets",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 74,
+   "quantity": 2
+  },
+  {
+   "id": "000000040",
+   "name": "Tastic Rice 2kg",
+   "brand": "Tastic",
+   "category": "Food Cupboard",
+   "price": 41.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000026",
+   "name": "Domestos Whitening Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000021",
+   "name": "Stork Country 40% Fat Spread 1kg",
+   "brand": "Stork",
+   "category": "Food Cupboard",
+   "price": 46.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000052",
+   "name": "Knorr Aromat Original All Purpose Seasoning Spice Trio Refill 200g",
+   "brand": "Knorr",
+   "category": "Food Cupboard",
+   "price": 36.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000032",
+   "name": "Cadbury Dairy Milk Whole Nut Slab 80g",
+   "brand": "Cadbury",
+   "category": "Food Cupboard",
+   "price": 21.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000027",
+   "name": "Knorr Spaghetti Bolognaise Dry Cook In Sauce 48g",
+   "brand": "Knorr",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000024",
+   "name": "Kellogg's All Bran Flakes 750g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 69.99,
+   "quantity": 2
+  }
+ ],
+ "nett": 2206.73,
+ "vat": 308.94,
+ "total": 2515.67
+},
+{
+ "invoiceNumber": "2d74cfb2-ff67-4001-9a9c-ded50f4ce7ac",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324213412",
+  "name": "Sandton"
+ },
+ "clerk": {
+  "id": "10001",
+  "name": "Martin"
+ },
+ "terminalPoint": "13",
+ "basketItems": [
+  {
+   "id": "000000001",
+   "name": "Dove Soap Gentle 90g",
+   "brand": "Dove",
+   "category": "Personal Health Care",
+   "price": 24.99,
+   "quantity": 5
+  }
+ ],
+ "nett": 124.95,
+ "vat": 17.49,
+ "total": 142.44
+},
+{
+ "invoiceNumber": "10d3fc3e-41f3-4632-a052-73682a87bd07",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "224213412",
+  "name": "Durbanville"
+ },
+ "clerk": {
+  "id": "10012",
+  "name": "Michael"
+ },
+ "terminalPoint": "12",
+ "basketItems": [
+  {
+   "id": "000000016",
+   "name": "KFC Street Wise 2",
+   "brand": "KFC",
+   "category": "Food Cupboard",
+   "price": 20.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000019",
+   "name": "Domestos Lemon Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.59,
+   "quantity": 5
+  },
+  {
+   "id": "000000046",
+   "name": "HTH Granular Mineral Soft 8kg",
+   "brand": "HTH",
+   "category": "Pool Care",
+   "price": 439.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000036",
+   "name": "Rama 70% Fat Spread Original 500g",
+   "brand": "Rama",
+   "category": "Food Cupboard",
+   "price": 43.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000015",
+   "name": "Pepsi Cola Soft Drink 2L",
+   "brand": "Pepsi Cola",
+   "category": "Beverage",
+   "price": 19.75,
+   "quantity": 1
+  },
+  {
+   "id": "000000052",
+   "name": "Simba Potato Chips Creamy Cheddar 120g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000016",
+   "name": "KFC Street Wise 2",
+   "brand": "KFC",
+   "category": "Food Cupboard",
+   "price": 20.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000001",
+   "name": "Dove Soap Gentle 90g",
+   "brand": "Dove",
+   "category": "Personal Health Care",
+   "price": 24.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000019",
+   "name": "Domestos Lemon Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.59,
+   "quantity": 5
+  },
+  {
+   "id": "000000011",
+   "name": "MintyFresh",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 1.43,
+   "quantity": 4
+  }
+ ],
+ "nett": 2042.2,
+ "vat": 285.91,
+ "total": 2328.11
+},
+{
+ "invoiceNumber": "debf40cc-c19a-48f4-ab1d-9e8e24bab12e",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324213415",
+  "name": "Stellenbosch"
+ },
+ "clerk": {
+  "id": "10008",
+  "name": "Suanne"
+ },
+ "terminalPoint": "10",
+ "basketItems": [
+  {
+   "id": "000000050",
+   "name": "Clover Vanilla Custard 1l",
+   "brand": "Clover",
+   "category": "Beverage",
+   "price": 27.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000011",
+   "name": "MintyFresh",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 1.43,
+   "quantity": 2
+  },
+  {
+   "id": "000000021",
+   "name": "Stork Country 40% Fat Spread 1kg",
+   "brand": "Stork",
+   "category": "Food Cupboard",
+   "price": 46.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000030",
+   "name": "Kellogg's Corn Flakes 750g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 28.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000024",
+   "name": "Kellogg's All Bran Flakes 750g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 69.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000041",
+   "name": "Castle Lite NRB 24 x 330ml",
+   "brand": "Castle",
+   "category": "Beverage",
+   "price": 269.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000035",
+   "name": "Nestle KitKat 4 Finger Milk Chocolate Bar 41.5g",
+   "brand": "Nestle",
+   "category": "Food Cupboard",
+   "price": 13.99,
+   "quantity": 4
+  }
+ ],
+ "nett": 1806.68,
+ "vat": 252.94,
+ "total": 2059.62
+},
+{
+ "invoiceNumber": "987b67f2-508a-4999-897e-bfc762b9088a",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324213442",
+  "name": "Rondebosch"
+ },
+ "clerk": {
+  "id": "10020",
+  "name": "Liezel"
+ },
+ "terminalPoint": "12",
+ "basketItems": [
+  {
+   "id": "000000011",
+   "name": "MintyFresh",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 1.43,
+   "quantity": 4
+  },
+  {
+   "id": "000000049",
+   "name": "Appletiser 100% Sparkling Apple 1.25L",
+   "brand": "Appletiser",
+   "category": "Beverage",
+   "price": 39.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000014",
+   "name": "Coca-Cola Soft Drink 1.5L",
+   "brand": "Coka Coke",
+   "category": "Beverage",
+   "price": 18.49,
+   "quantity": 5
+  },
+  {
+   "id": "000000017",
+   "name": "KFC Street Wise 5",
+   "brand": "KFC",
+   "category": "Food Cupboard",
+   "price": 40.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000052",
+   "name": "Simba Nik Naks Cheese Flavour 135g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 14.99,
+   "quantity": 4
+  }
+ ],
+ "nett": 440.06,
+ "vat": 61.61,
+ "total": 501.67
+},
+{
+ "invoiceNumber": "5a42e897-ce26-4719-b286-204790301621",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324213410",
+  "name": "Milnerton"
+ },
+ "clerk": {
+  "id": "10019",
+  "name": "Leeanne"
+ },
+ "terminalPoint": "1",
+ "basketItems": [
+  {
+   "id": "000000046",
+   "name": "HTH Granular Mineral Soft 8kg",
+   "brand": "HTH",
+   "category": "Pool Care",
+   "price": 439.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000011",
+   "name": "MintyFresh",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 1.43,
+   "quantity": 4
+  },
+  {
+   "id": "000000022",
+   "name": "Simba Potato Chips Mrs Balls Chutney 120g",
+   "brand": "Simba",
+   "category": "Food Cupboard",
+   "price": 19.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000045",
+   "name": "HTH Floater + 1.6kg",
+   "brand": "HTH",
+   "category": "Pool Care",
+   "price": 179.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000043",
+   "name": "Hulett Sunsweet Brown Sugar 2kg",
+   "brand": "Hulett",
+   "category": "Food Cupboard",
+   "price": 49.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000043",
+   "name": "Hulett Sunsweet Brown Sugar 2kg",
+   "brand": "Hulett",
+   "category": "Food Cupboard",
+   "price": 49.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000052",
+   "name": "Knorr Aromat Original All Purpose Seasoning Spice Trio Refill 200g",
+   "brand": "Knorr",
+   "category": "Food Cupboard",
+   "price": 36.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000036",
+   "name": "Rama 70% Fat Spread Original 500g",
+   "brand": "Rama",
+   "category": "Food Cupboard",
+   "price": 43.99,
+   "quantity": 1
+  }
+ ],
+ "nett": 3017.53,
+ "vat": 422.45,
+ "total": 3439.98
+},
+{
+ "invoiceNumber": "dad01897-d12f-45ea-8099-e1c335529049",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "224213412",
+  "name": "Durbanville"
+ },
+ "clerk": {
+  "id": "10014",
+  "name": "Winston"
+ },
+ "terminalPoint": "7",
+ "basketItems": [
+  {
+   "id": "000000010",
+   "name": "Nespresso Black",
+   "brand": "Nesspresso",
+   "category": "Coffee",
+   "price": 1.33,
+   "quantity": 2
+  },
+  {
+   "id": "000000047",
+   "name": "Omo Stain Removal Auto Washing Powder Detergent with Comfort Freshness 2kg",
+   "brand": "Omo",
+   "category": "Cleaning",
+   "price": 104.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000031",
+   "name": "Kellogg's Coco Pops Original 350g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 55.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000052",
+   "name": "Knorr Aromat Original All Purpose Seasoning Spice Trio Refill 200g",
+   "brand": "Knorr",
+   "category": "Food Cupboard",
+   "price": 36.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000024",
+   "name": "Kellogg's All Bran Flakes 750g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 69.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000029",
+   "name": "Colgate Maximum Cavity Protection Regular Toothpaste 100ml",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 28.99,
+   "quantity": 1
+  },
+  {
+   "id": "000000009",
+   "name": "Nescafe Salted Caramel 180g 10 Sachets",
+   "brand": "Nescafe",
+   "category": "Food Cupboard",
+   "price": 74,
+   "quantity": 4
+  }
+ ],
+ "nett": 1306.51,
+ "vat": 182.91,
+ "total": 1489.42
+},
+{
+ "invoiceNumber": "10a0ed39-8ae3-4dff-a195-09a42eeadf76",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324223412",
+  "name": "Fountains"
+ },
+ "clerk": {
+  "id": "10019",
+  "name": "Leeanne"
+ },
+ "terminalPoint": "8",
+ "basketItems": [
+  {
+   "id": "000000041",
+   "name": "Castle Lite NRB 24 x 330ml",
+   "brand": "Castle",
+   "category": "Beverage",
+   "price": 269.99,
+   "quantity": 1
+  }
+ ],
+ "nett": 269.99,
+ "vat": 37.8,
+ "total": 307.79
+},
+{
+ "invoiceNumber": "3b3e367f-c4aa-47a0-b7c7-b6f94cd02bd7",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324213412",
+  "name": "Milnerton"
+ },
+ "clerk": {
+  "id": "10008",
+  "name": "Suanne"
+ },
+ "terminalPoint": "0",
+ "basketItems": [
+  {
+   "id": "000000034",
+   "name": "Kellogg's Coco Pops Original 350g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 55.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000013",
+   "name": "Sunlight Dishwashing Liquid",
+   "brand": "Sunlight",
+   "category": "Cleaning",
+   "price": 2.2,
+   "quantity": 1
+  }
+ ],
+ "nett": 226.16,
+ "vat": 31.66,
+ "total": 257.82
+},
+{
+ "invoiceNumber": "6989a6c7-693f-4b95-b75d-3799f8e36f9d",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324213422",
+  "name": "PineTown"
+ },
+ "clerk": {
+  "id": "10020",
+  "name": "Liezel"
+ },
+ "terminalPoint": "4",
+ "basketItems": [
+  {
+   "id": "000000030",
+   "name": "Kellogg's Corn Flakes 750g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 28.99,
+   "quantity": 2
+  }
+ ],
+ "nett": 57.98,
+ "vat": 8.12,
+ "total": 66.1
+},
+{
+ "invoiceNumber": "a562edc4-c520-41d5-88db-ef635bb99989",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324223412",
+  "name": "Fountains"
+ },
+ "clerk": {
+  "id": "10004",
+  "name": "Thabo"
+ },
+ "terminalPoint": "0",
+ "basketItems": [
+  {
+   "id": "000000018",
+   "name": "McD Big Mac",
+   "brand": "McD",
+   "category": "Food Cupboard",
+   "price": 5.49,
+   "quantity": 4
+  },
+  {
+   "id": "000000002",
+   "name": "Dove Soap Fresh Touch 90g",
+   "brand": "Dove",
+   "category": "Personal Health Care",
+   "price": 24.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000031",
+   "name": "Kellogg's Coco Pops Original 350g",
+   "brand": "Kellogg's",
+   "category": "Food Cupboard",
+   "price": 55.99,
+   "quantity": 4
+  },
+  {
+   "id": "000000035",
+   "name": "Nestle KitKat 4 Finger Milk Chocolate Bar 41.5g",
+   "brand": "Nestle",
+   "category": "Food Cupboard",
+   "price": 13.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000015",
+   "name": "Pepsi Cola Soft Drink 2L",
+   "brand": "Pepsi Cola",
+   "category": "Beverage",
+   "price": 19.75,
+   "quantity": 3
+  },
+  {
+   "id": "000000017",
+   "name": "KFC Street Wise 5",
+   "brand": "KFC",
+   "category": "Food Cupboard",
+   "price": 40.99,
+   "quantity": 5
+  }
+ ],
+ "nett": 588.08,
+ "vat": 82.33,
+ "total": 670.41
+},
+{
+ "invoiceNumber": "48ea3a92-f31e-4c7d-81cf-a18e09f76c42",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324213412",
+  "name": "Wavecrest"
+ },
+ "clerk": {
+  "id": "10019",
+  "name": "Leeanne"
+ },
+ "terminalPoint": "20",
+ "basketItems": [
+  {
+   "id": "000000023",
+   "name": "Brookes Oros 2L",
+   "brand": "Brooks",
+   "category": "Beverage",
+   "price": 44.99,
+   "quantity": 2
+  },
+  {
+   "id": "000000020",
+   "name": "Koo Baked Beans in Tomato Sauce 410g",
+   "brand": "Koo",
+   "category": "Food Cupboard",
+   "price": 16.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000046",
+   "name": "HTH Granular Mineral Soft 8kg",
+   "brand": "HTH",
+   "category": "Pool Care",
+   "price": 439.99,
+   "quantity": 3
+  },
+  {
+   "id": "000000012",
+   "name": "Milk",
+   "category": "Food Cupboard",
+   "price": 2.3,
+   "quantity": 5
+  },
+  {
+   "id": "000000044",
+   "name": "Dettol Soap Active 175g",
+   "brand": "Dettol",
+   "category": "Personal Health Care",
+   "price": 17.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000014",
+   "name": "Coca-Cola Soft Drink 1.5L",
+   "brand": "Coka Coke",
+   "category": "Beverage",
+   "price": 18.49,
+   "quantity": 1
+  },
+  {
+   "id": "000000042",
+   "name": "Nola Tangy Mayonnaise 750g",
+   "brand": "Nola",
+   "category": "Food Cupboard",
+   "price": 39.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000029",
+   "name": "Colgate Maximum Cavity Protection Regular Toothpaste 100ml",
+   "brand": "Colgate",
+   "category": "Personal Health Care",
+   "price": 28.99,
+   "quantity": 3
+  }
+ ],
+ "nett": 1867.78,
+ "vat": 261.49,
+ "total": 2129.27
+},
+{
+ "invoiceNumber": "34a923e2-bb3a-4f85-a9f9-65e323876045",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324213412",
+  "name": "Rosebank"
+ },
+ "clerk": {
+  "id": "10014",
+  "name": "Winston"
+ },
+ "terminalPoint": "16",
+ "basketItems": [
+  {
+   "id": "000000004",
+   "name": "Jacobs Kronung Gold Instant",
+   "brand": "Jabobs",
+   "category": "Food Cupboard",
+   "price": 159,
+   "quantity": 5
+  },
+  {
+   "id": "000000004",
+   "name": "Jacobs Kronung Gold Instant",
+   "brand": "Jabobs",
+   "category": "Food Cupboard",
+   "price": 159,
+   "quantity": 2
+  },
+  {
+   "id": "000000023",
+   "name": "Brookes Oros 2L",
+   "brand": "Brooks",
+   "category": "Beverage",
+   "price": 44.99,
+   "quantity": 5
+  },
+  {
+   "id": "000000044",
+   "name": "Dettol Soap Active 175g",
+   "brand": "Dettol",
+   "category": "Personal Health Care",
+   "price": 17.99,
+   "quantity": 4
+  }
+ ],
+ "nett": 1409.91,
+ "vat": 197.39,
+ "total": 1607.3
+},
+{
+ "invoiceNumber": "6f36fbf3-8dce-464d-a4f9-dd3bfa472a37",
+ "saleDateTime": "2024-05-20T17:00:11+02:00",
+ "store": {
+  "id": "324213415",
+  "name": "Stellenbosch"
+ },
+ "clerk": {
+  "id": "10010",
+  "name": "Claudia"
+ },
+ "terminalPoint": "0",
+ "basketItems": [
+  {
+   "id": "000000019",
+   "name": "Domestos Lemon Multipurpose Stain Removal Thick Bleach Cleaner 750ml",
+   "brand": "Domestos",
+   "category": "Cleaning",
+   "price": 34.59,
+   "quantity": 2
+  },
+  {
+   "id": "000000015",
+   "name": "Pepsi Cola Soft Drink 2L",
+   "brand": "Pepsi Cola",
+   "category": "Beverage",
+   "price": 19.75,
+   "quantity": 3
+  }
+ ],
+ "nett": 128.43,
+ "vat": 17.98,
+ "total": 146.41
+},

@@ -37,3 +37,9 @@ export Sasl_password=Vj8MASendaIs0j4r34rsdfe4Vc8LG6cZ1XWilAJjYS05bZIk7AaGx0Y49xb
 export Sasl_username=3MZ4dfgsdfdfIUUA
 
 This files is executed via the runs_producer.sh file, reading the values into local environment, from where they are injested by a os.Getenv call, if this code is pushed into a docker container then these values can be pushed into a secret included in the environment.
+
+My Version numbering.
+0.2	- 10/01/2024	Pushing/posting basket docs and associated payment docs onto Kafka.
+0.3	- 24/01/2024	To "circumvent" Confluent Kafka cluster "unavailability" at this time I'm modifying the code here to insert directly into
+					Mongo Atlas into 2 collections. This will allow the Creator community to interface with the inbound docs on the Atlas environment
+					irrespective how they got there.

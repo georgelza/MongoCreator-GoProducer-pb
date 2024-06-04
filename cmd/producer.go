@@ -24,6 +24,10 @@
 *					: made the max items per basket a configuration file value ()
 *					: made the quantity per product a configuration file value ()
 *
+*					: 24 Jan 2024
+*					: going to add code/module to disable the Kafka push of docs and rather directly push onto Mongo Atlas, thus
+*					: bypassing the Confluent Kakfa cluster avaiability challenge.
+*
 *
 *	Git				: https://github.com/georgelza/MongoCreator-GoProducer
 *
@@ -36,6 +40,7 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -47,6 +52,7 @@ import (
 	"time"
 
 	"github.com/brianvoe/gofakeit"
+
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/google/uuid"
 
@@ -57,6 +63,12 @@ import (
 	// My Types/Structs/functions
 	"cmd/types"
 	// Filter JSON array
+	// MongoDB
+	//
+	"go.mongodb.org/mongo-driver/bson/bsonrw"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 var (
@@ -67,6 +79,9 @@ var (
 	pathSep  = string(os.PathSeparator)
 	runId    string
 	vKafka   types.TKafka
+	vMongodb types.TMongodb
+
+	p *kafka.Producer
 )
 
 func init() {
@@ -135,19 +150,13 @@ func loadConfig(params ...string) types.Tp_general {
 	}
 
 	if vGeneral.EchoConfig == 1 {
-		printConfig(vGeneral)
-	}
-
-	if vGeneral.Debuglevel > 0 {
 		grpcLog.Infoln("*")
 		grpcLog.Infoln("* Config:")
 		grpcLog.Infoln("* Current path:", vGeneral.CurrentPath)
 		grpcLog.Infoln("* Config File :", fileName)
 		grpcLog.Infoln("*")
 
-		if vGeneral.Json_to_file == 1 {
-			grpcLog.Infoln("* Output path :", vGeneral.Output_path)
-		}
+		printConfig(vGeneral)
 	}
 
 	return vGeneral
@@ -179,7 +188,9 @@ func loadKafka(params ...string) types.TKafka {
 
 	}
 
-	if vGeneral.Debuglevel > 1 {
+	vGeneral.KafkaConfigFile = fileName
+
+	if vGeneral.Debuglevel > 0 {
 
 		grpcLog.Info("*")
 		grpcLog.Info("* Kafka Config :")
@@ -189,11 +200,69 @@ func loadKafka(params ...string) types.TKafka {
 
 	}
 
+	vKafka.Sasl_password = os.Getenv("Sasl_password")
+	vKafka.Sasl_username = os.Getenv("Sasl_username")
+
 	if vGeneral.EchoConfig == 1 {
 		printKafkaConfig(vKafka)
 	}
 
 	return vKafka
+}
+
+func loadMongoProps(params ...string) types.TMongodb {
+
+	vMongodb := types.TMongodb{}
+	env := "dev"
+	if len(params) > 0 {
+		env = params[0]
+	}
+
+	path, err := os.Getwd()
+	if err != nil {
+		grpcLog.Error(fmt.Sprintf("Problem retrieving current path: %s", err))
+		os.Exit(1)
+
+	}
+
+	//	fileName := fmt.Sprintf("%s/%s_app.json", path, env)
+	fileName := fmt.Sprintf("%s/%s_mongo.json", path, env)
+	err = gonfig.GetConf(fileName, &vMongodb)
+	if err != nil {
+		grpcLog.Error(fmt.Sprintf("Error Reading Mongo File: %s", err))
+		os.Exit(1)
+
+	}
+
+	vGeneral.MongoConfigFile = fileName
+
+	if vGeneral.Debuglevel > 0 {
+
+		grpcLog.Info("*")
+		grpcLog.Info("* Mongo Config :")
+		grpcLog.Info(fmt.Sprintf("* Current path : %s", path))
+		grpcLog.Info(fmt.Sprintf("* Mongo File   : %s", fileName))
+		grpcLog.Info("*")
+
+	}
+
+	vMongodb.Username = os.Getenv("mongo_username")
+	vMongodb.Password = os.Getenv("mongo_password")
+
+	if vMongodb.Username != "" {
+
+		vMongodb.Uri = fmt.Sprintf("%s://%s:%s@%s&w=majority", vMongodb.Root, vMongodb.Username, vMongodb.Password, vMongodb.Url)
+
+	} else {
+
+		vMongodb.Uri = fmt.Sprintf("%s://%s&w=majority", vMongodb.Root, vMongodb.Url)
+	}
+
+	if vGeneral.EchoConfig == 1 {
+		printMongoConfig(vMongodb)
+	}
+
+	return vMongodb
 }
 
 func loadSeed(fileName string) types.TPSeed {
@@ -220,7 +289,7 @@ func loadSeed(fileName string) types.TPSeed {
 		grpcLog.Infoln("*")
 		grpcLog.Infoln("* Seed :")
 		grpcLog.Infoln("* Current path:", vGeneral.CurrentPath)
-		grpcLog.Infoln("* Seed File :", vGeneral.SeedFile)
+		grpcLog.Infoln("* Seed File   :", vGeneral.SeedFile)
 		grpcLog.Infoln("*")
 
 	}
@@ -239,13 +308,14 @@ func printConfig(vGeneral types.Tp_general) {
 	grpcLog.Info("*")
 	grpcLog.Info("* Sleep Duration is\t\t", vGeneral.Sleep)
 	grpcLog.Info("* Test Batch Size is\t\t", vGeneral.Testsize)
-	grpcLog.Info("* Seed File is\t\t", vGeneral.SeedFile)
 	grpcLog.Info("* Echo Seed is\t\t", vGeneral.EchoSeed)
+	grpcLog.Info("* Seed File is\t\t", vGeneral.SeedFile)
 	grpcLog.Info("* Json to File is\t\t", vGeneral.Json_to_file)
+	if vGeneral.Json_to_file == 1 {
+		grpcLog.Infoln("* Output path\t\t\t", vGeneral.Output_path)
+	}
 	grpcLog.Info("* Kafka Enabled is\t\t", vGeneral.KafkaEnabled)
-	grpcLog.Info("*")
-
-	grpcLog.Info("* Current Path is \t\t", vGeneral.CurrentPath)
+	grpcLog.Info("* Mongo Enabled is\t\t", vGeneral.MongoAtlasEnabled)
 
 	grpcLog.Info("*")
 	grpcLog.Info("*******************************")
@@ -257,6 +327,8 @@ func printConfig(vGeneral types.Tp_general) {
 // print some more configurations
 func printKafkaConfig(vKafka types.TKafka) {
 
+	fmt.Printf("xxxxxxxxxxxxxxxxxxx")
+
 	grpcLog.Info("****** Kafka Connection Parameters *****")
 	grpcLog.Info("*")
 	grpcLog.Info("* Kafka bootstrap Server is\t", vKafka.Bootstrapservers)
@@ -266,8 +338,34 @@ func printKafkaConfig(vKafka types.TKafka) {
 	grpcLog.Info("* Kafka Rep Factor is\t\t", vKafka.Replicationfactor)
 	grpcLog.Info("* Kafka Retension is\t\t", vKafka.Retension)
 	grpcLog.Info("* Kafka ParseDuration is\t", vKafka.Parseduration)
+
+	grpcLog.Info("* Kafka SASL Mechanism is\t", vKafka.Sasl_mechanisms)
+	grpcLog.Info("* Kafka SASL Username is\t", vKafka.Sasl_username)
+
 	grpcLog.Info("*")
 	grpcLog.Info("* Kafka Flush Size is\t\t", vKafka.Flush_interval)
+	grpcLog.Info("*")
+	grpcLog.Info("*******************************")
+
+	grpcLog.Info("")
+
+}
+
+// print some more configurations
+func printMongoConfig(vMongodb types.TMongodb) {
+
+	grpcLog.Info("*")
+	grpcLog.Info("****** MongoDB Connection Parameters *****")
+	grpcLog.Info("*")
+
+	grpcLog.Info("* Mongo URL is\t\t", vMongodb.Url)
+	grpcLog.Info("* Mongo Port is\t\t", vMongodb.Port)
+	grpcLog.Info("* Mongo DataStore is\t\t", vMongodb.Datastore)
+	grpcLog.Info("* Mongo Username is\t\t", vMongodb.Username)
+	grpcLog.Info("* Mongo Basket Collection is\t", vMongodb.Basketcollection)
+	grpcLog.Info("* Mongo Payment Collection is\t", vMongodb.Paymentcollection)
+	grpcLog.Info("* Mongo Batch szie is\t\t", vMongodb.Batch_size)
+
 	grpcLog.Info("*")
 	grpcLog.Info("*******************************")
 
@@ -289,11 +387,13 @@ func CreateTopic(props types.TKafka) {
 		cm["security.protocol"] = props.Security_protocol
 		cm["sasl.username"] = props.Sasl_username
 		cm["sasl.password"] = props.Sasl_password
+
 		if vGeneral.Debuglevel > 0 {
 			grpcLog.Info("* Security Authentifaction configured in ConfigMap")
 
 		}
 	}
+
 	if vGeneral.Debuglevel > 0 {
 		grpcLog.Info("* Basic Client ConfigMap compiled")
 	}
@@ -304,10 +404,12 @@ func CreateTopic(props types.TKafka) {
 		os.Exit(1)
 
 	}
+
 	if vGeneral.Debuglevel > 0 {
 		grpcLog.Info("* Admin Client Created Succeeded")
 
 	}
+
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
@@ -317,6 +419,7 @@ func CreateTopic(props types.TKafka) {
 		os.Exit(1)
 
 	}
+
 	if vGeneral.Debuglevel > 0 {
 		grpcLog.Info("* Configured maxDuration via ParseDuration")
 
@@ -427,6 +530,21 @@ func toFixed(num float64, precision int) float64 {
 	return float64(round(num*output)) / output
 }
 
+func JsonToBson(message []byte) ([]byte, error) {
+	reader, err := bsonrw.NewExtJSONValueReader(bytes.NewReader(message), true)
+	if err != nil {
+		return []byte{}, err
+	}
+	buf := &bytes.Buffer{}
+	writer, _ := bsonrw.NewBSONValueWriter(buf)
+	err = bsonrw.Copier{}.CopyDocument(writer, reader)
+	if err != nil {
+		return []byte{}, err
+	}
+	marshaled := buf.Bytes()
+	return marshaled, nil
+}
+
 func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment, storeName string, err error) {
 
 	// Fake Data etc, not used much here though
@@ -515,13 +633,33 @@ func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment
 	return t_Basket, t_Payment, store.Name, nil
 }
 
+func KafkaPost(valueBytes []byte, storeName string) {
+
+	kafkaMsg := kafka.Message{
+		TopicPartition: kafka.TopicPartition{
+			Topic:     &vKafka.PaymentTopicname,
+			Partition: kafka.PartitionAny,
+		},
+		Value: valueBytes,        // This is the payload/body thats being posted
+		Key:   []byte(storeName), // We us this to group the same transactions together in order, IE submitting/Debtor Bank.
+	}
+
+	// This is where we publish message onto the topic... on the Confluent cluster for now,
+	if err := p.Produce(&kafkaMsg, nil); err != nil {
+		grpcLog.Error(fmt.Sprintf("😢 Darn, there's an error producing the message! %s", err.Error()))
+
+	}
+
+}
+
 // Big worker... This si where everything happens.
 func runLoader(arg string) {
 
-	var p *kafka.Producer
 	var err error
 	var f_basket *os.File
 	var f_pmnt *os.File
+	var basketcol *mongo.Collection
+	var paymentcol *mongo.Collection
 
 	// Initialize the vGeneral struct variable - This holds our configuration settings.
 	vGeneral = loadConfig(arg)
@@ -532,10 +670,13 @@ func runLoader(arg string) {
 	// Initiale the vKafka struct variable - This holds our Confluent Kafka configuration settings.
 	// if Kafka is enabled then create the confluent kafka connection session/objects
 	if vGeneral.KafkaEnabled == 1 {
+
 		vKafka = loadKafka(arg)
 
-		vKafka.Sasl_password = os.Getenv("Sasl_password")
-		vKafka.Sasl_username = os.Getenv("Sasl_username")
+		fmt.Println("Mechanism", vKafka.Sasl_mechanisms)
+		fmt.Println("Username", vKafka.Sasl_username)
+		fmt.Println("Password", vKafka.Sasl_password)
+		fmt.Println("Broker", vKafka.Bootstrapservers)
 
 		// Lets make sure the topic/s exist
 		CreateTopic(vKafka)
@@ -605,7 +746,6 @@ func runLoader(arg string) {
 			grpcLog.Info("**** LETS GO Processing ****")
 			grpcLog.Info("")
 		}
-
 	}
 
 	//
@@ -616,6 +756,57 @@ func runLoader(arg string) {
 
 	// We will use this to remember when we last flushed the kafka queues.
 	vFlush := 0
+
+	if vGeneral.MongoAtlasEnabled == 1 {
+
+		vMongodb = loadMongoProps(arg)
+
+		serverAPI := options.ServerAPI(options.ServerAPIVersion1)
+
+		opts := options.Client().ApplyURI(vMongodb.Uri).SetServerAPIOptions(serverAPI)
+
+		grpcLog.Infoln("* MongoDB URI Constructed: ", vMongodb.Uri)
+
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		grpcLog.Infoln("* MongoDB Context Object Created")
+
+		defer cancel()
+
+		Mongoclient, err := mongo.Connect(ctx, opts)
+		if err != nil {
+			grpcLog.Fatal("Mongo Connect Failed: ", err)
+		}
+		grpcLog.Infoln("* MongoDB Client Connected")
+
+		defer func() {
+			if err = Mongoclient.Disconnect(ctx); err != nil {
+				grpcLog.Fatal("Mongo Disconected: ", err)
+			}
+		}()
+
+		// Ping the primary
+		if err := Mongoclient.Ping(ctx, readpref.Primary()); err != nil {
+			grpcLog.Fatal("There was a error creating the Client object, Ping failed: ", err)
+		}
+		grpcLog.Infoln("* MongoDB Client Pinged")
+
+		// Create go routine to defer the closure
+		defer func() {
+			if err = Mongoclient.Disconnect(context.TODO()); err != nil {
+				grpcLog.Fatal("Mongo Disconected: ", err)
+			}
+		}()
+
+		// Define the Mongo Datastore
+		appLabDatabase := Mongoclient.Database(vMongodb.Datastore)
+		// Define the Mongo Collection Object
+		basketcol = appLabDatabase.Collection(vMongodb.Basketcollection)
+		paymentcol = appLabDatabase.Collection(vMongodb.Paymentcollection)
+
+		grpcLog.Infoln("* MongoDB Datastore and Collections Intialized")
+		grpcLog.Infoln("*")
+
+	}
 
 	//We've said we want to safe records to file so lets initiale the file handles etc.
 	if vGeneral.Json_to_file == 1 {
@@ -665,6 +856,10 @@ func runLoader(arg string) {
 		grpcLog.Infoln("")
 
 	}
+
+	basketdocs := make([]interface{}, vMongodb.Batch_size)
+	paymentdocs := make([]interface{}, vMongodb.Batch_size)
+	msg_mongo_count := 0
 
 	// this is to keep record of the total batch run time
 	vStart := time.Now()
@@ -737,8 +932,10 @@ func runLoader(arg string) {
 			}
 
 			// Payment
-			n := rand.Intn(vGeneral.Sleep) // if vGeneral.sleep = 1000, then n will be random value of 0 -> 1000  aka 0 and 1 second
-			time.Sleep(time.Duration(n) * time.Millisecond)
+			if vGeneral.Sleep > 0 {
+				n := rand.Intn(vGeneral.Sleep) // if vGeneral.sleep = 1000, then n will be random value of 0 -> 1000  aka 0 and 1 second
+				time.Sleep(time.Duration(n) * time.Millisecond)
+			}
 
 			valueBytes, err = json.Marshal(t_Payment)
 			if err != nil {
@@ -748,11 +945,11 @@ func runLoader(arg string) {
 
 			kafkaMsg = kafka.Message{
 				TopicPartition: kafka.TopicPartition{
-					Topic:     &vKafka.BasketTopicname,
+					Topic:     &vKafka.PaymentTopicname,
 					Partition: kafka.PartitionAny,
 				},
-				Value: valueBytes,     // This is the payload/body thats being posted
-				Key:   []byte("1001"), // We us this to group the same transactions together in order, IE submitting/Debtor Bank.
+				Value: valueBytes,        // This is the payload/body thats being posted
+				Key:   []byte(storeName), // We us this to group the same transactions together in order, IE submitting/Debtor Bank.
 			}
 
 			// This is where we publish message onto the topic... on the Confluent cluster for now,
@@ -825,6 +1022,126 @@ func runLoader(arg string) {
 
 		}
 
+		// Do we want to insertrecords/documents directly into Mongo Atlas?
+		if vGeneral.MongoAtlasEnabled == 1 {
+			msg_mongo_count += 1
+
+			// Flush/insert
+			// Cast a byte string to BSon
+			// https://stackoverflow.com/questions/39785289/how-to-marshal-json-string-to-bson-document-for-writing-to-mongodb
+			// this way we don't need to care what the source structure is, it is all cast and inserted into the defined collection.
+
+			// Sales Basket Doc
+			basketBytes, err := json.Marshal(t_SalesBasket)
+			if err != nil {
+				grpcLog.Error(fmt.Sprintf("Marchalling error: %s", err))
+
+			}
+
+			basketdoc, err := JsonToBson(basketBytes)
+			if err != nil {
+				grpcLog.Errorln("Oops, we had a problem JsonToBson converting the payload, ", err)
+
+			}
+
+			// Payment Doc
+			paymentBytes, err := json.Marshal(t_Payment)
+			if err != nil {
+				grpcLog.Error(fmt.Sprintf("Marchalling error: %s", err))
+
+			}
+
+			paymentdoc, err := JsonToBson(paymentBytes)
+			if err != nil {
+				grpcLog.Errorln("Oops, we had a problem JsonToBson converting the payload, ", err)
+
+			}
+
+			// Single Record inserts
+			if vMongodb.Batch_size == 1 {
+
+				// Sales Basket
+
+				// Time to get this into the MondoDB Collection
+				result, err := basketcol.InsertOne(context.TODO(), basketdoc)
+				if err != nil {
+					grpcLog.Errorln("Oops, we had a problem inserting (I1) the document, ", err)
+
+				}
+
+				if vGeneral.Debuglevel >= 2 {
+					// When you run this file, it should print:
+					// Document inserted with ID: ObjectID("...")
+					grpcLog.Infoln("Mongo Sales Basket Doc inserted with ID: ", result.InsertedID, "\n")
+
+				}
+				if vGeneral.Debuglevel >= 3 {
+					// prettyJSON takes a string which is actually JSON and makes it's pretty, and prints it.
+					prettyJSON(string(json_SalesBasket))
+
+				}
+
+				// Payment
+
+				// Time to get this into the MondoDB Collection
+				result, err = paymentcol.InsertOne(context.TODO(), paymentdoc)
+				if err != nil {
+					grpcLog.Errorln("Oops, we had a problem inserting (I1) the document, ", err)
+
+				}
+
+				if vGeneral.Debuglevel >= 2 {
+					// When you run this file, it should print:
+					// Document inserted with ID: ObjectID("...")
+					grpcLog.Infoln("Mongo Payment Doc inserted with ID: ", result.InsertedID, "\n")
+
+				}
+				if vGeneral.Debuglevel >= 3 {
+					// prettyJSON takes a string which is actually JSON and makes it's pretty, and prints it.
+					prettyJSON(string(json_Payment))
+
+				}
+
+			} else {
+
+				// Sales Basket
+				basketdocs[msg_mongo_count-1] = basketdoc
+				paymentdocs[msg_mongo_count-1] = paymentdoc
+
+				if msg_mongo_count%vMongodb.Batch_size == 0 {
+
+					// Time to get this into the MondoDB Collection
+
+					// Sales Basket
+					_, err = basketcol.InsertMany(context.TODO(), basketdocs)
+					if err != nil {
+						grpcLog.Errorln("Oops, we had a problem inserting (IM) the document, ", err)
+
+					}
+					if vGeneral.Debuglevel >= 2 {
+						grpcLog.Infoln("Mongo Sale Basket Docs inserted: ", msg_mongo_count)
+
+					}
+
+					// Payment
+					_, err = paymentcol.InsertMany(context.TODO(), paymentdocs)
+					if err != nil {
+						grpcLog.Errorln("Oops, we had a problem inserting (IM) the document, ", err)
+
+					}
+					if vGeneral.Debuglevel >= 2 {
+						grpcLog.Infoln("Mongo Payment Docs inserted: ", msg_mongo_count)
+
+					}
+
+					msg_mongo_count = 0
+
+				}
+
+			}
+
+		}
+
 		// Save multiple Basket docs and Payment docs to a single basket file and single payment file for the run
 		if vGeneral.Json_to_file == 1 {
 
@@ -866,12 +1183,14 @@ func runLoader(arg string) {
 		}
 
 		// used to slow the data production/posting to kafka and safe to file system down.
-		n := rand.Intn(vGeneral.Sleep) // if vGeneral.sleep = 1000, then n will be random value of 0 -> 1000  aka 0 and 1 second
-		if vGeneral.Debuglevel >= 2 {
-			grpcLog.Infof("Going to sleep for            : %d Milliseconds\n", n)
+		if vGeneral.Sleep > 0 {
+			n := rand.Intn(vGeneral.Sleep) // if vGeneral.sleep = 1000, then n will be random value of 0 -> 1000  aka 0 and 1 second
+			if vGeneral.Debuglevel >= 2 {
+				grpcLog.Infof("Going to sleep for            : %d Milliseconds\n", n)
 
+			}
+			time.Sleep(time.Duration(n) * time.Millisecond)
 		}
-		time.Sleep(time.Duration(n) * time.Millisecond)
 
 	}
 

@@ -1,0 +1,1200 @@
+{
+ "invoiceNumber": "24e3446b-bcad-47e6-a6c5-087f5228893b",
+ "payDateTime": "2024-08-18T13:11:01+02:00",
+ "paid": 666.84,
+ "finTransactionId": "efda6a79-2e6b-4bdd-9e97-926d0e29b16a"
+},
+{
+ "invoiceNumber": "578f8a10-4ff5-48bc-8379-714a51f396f6",
+ "payDateTime": "2024-09-08T13:11:01+02:00",
+ "paid": 194.4,
+ "finTransactionId": "5b58803c-ab98-47e5-8fa9-27e5881a7bc7"
+},
+{
+ "invoiceNumber": "1296b5fa-3992-4511-a404-5b08080b6ce1",
+ "payDateTime": "2024-10-18T13:11:01+02:00",
+ "paid": 675.81,
+ "finTransactionId": "e7ac4cf9-4bd9-4b84-a455-34f9ed0f8dcb"
+},
+{
+ "invoiceNumber": "398a9038-fe34-496b-852d-95ce0055c6de",
+ "payDateTime": "2024-11-03T13:11:01+02:00",
+ "paid": 801.25,
+ "finTransactionId": "83d30a0c-e66f-45c5-bb82-931d20e34d7d"
+},
+{
+ "invoiceNumber": "0826dc20-51f4-4deb-9920-5bb97540bda7",
+ "payDateTime": "2024-08-05T13:11:01+02:00",
+ "paid": 1441.95,
+ "finTransactionId": "4e3f44ae-76be-4c9f-84de-5947ce8c48d6"
+},
+{
+ "invoiceNumber": "6d8ab8af-e65f-49e2-8cf3-f1966d3498d5",
+ "payDateTime": "2024-10-02T13:11:01+02:00",
+ "paid": 2200.02,
+ "finTransactionId": "6d4040c4-369d-4adc-84fb-45f6fc1976d6"
+},
+{
+ "invoiceNumber": "3c0392aa-a4fa-4719-8004-73238ad16542",
+ "payDateTime": "2024-07-17T13:11:01+02:00",
+ "paid": 1679.01,
+ "finTransactionId": "71e2ee7f-43b0-4723-8966-cc3727fe9989"
+},
+{
+ "invoiceNumber": "2605c826-6659-499f-8a3f-b2e4db70185f",
+ "payDateTime": "2024-11-13T13:11:01+02:00",
+ "paid": 783.64,
+ "finTransactionId": "53b3616b-30f3-44d7-abd4-68a840335526"
+},
+{
+ "invoiceNumber": "5c5b1bf9-82cb-4878-bff1-9c778920f395",
+ "payDateTime": "2024-07-09T13:11:01+02:00",
+ "paid": 3424.38,
+ "finTransactionId": "48f1155a-531a-4bda-ac60-195a715361be"
+},
+{
+ "invoiceNumber": "5d2fbf7b-62cf-4189-abbc-55dba47bea8e",
+ "payDateTime": "2024-09-25T13:11:01+02:00",
+ "paid": 227.92,
+ "finTransactionId": "9fb680a0-c3a5-4fd7-a0ca-ae5a1125e990"
+},
+{
+ "invoiceNumber": "5a2da25b-1a3d-4e0a-bb2e-0fc30ac5e5cc",
+ "payDateTime": "2024-11-25T13:11:02+02:00",
+ "paid": 3066.14,
+ "finTransactionId": "86152e84-35f6-400f-a262-011004ace0d8"
+},
+{
+ "invoiceNumber": "7ff2b021-b4b8-4b00-8282-b7ae7a8ab74b",
+ "payDateTime": "2024-09-30T13:11:02+02:00",
+ "paid": 553.98,
+ "finTransactionId": "bdbe9bb1-3771-4041-8553-920abae64db6"
+},
+{
+ "invoiceNumber": "cc68002a-a47c-40d3-935f-0e7693f75a82",
+ "payDateTime": "2024-11-20T13:11:02+02:00",
+ "paid": 10.03,
+ "finTransactionId": "1daab64d-98f0-47dc-a40a-e1e3de90de51"
+},
+{
+ "invoiceNumber": "5d56eaf1-661a-49d1-ab6a-8342ebad94e9",
+ "payDateTime": "2024-11-11T13:11:02+02:00",
+ "paid": 798.79,
+ "finTransactionId": "b9ae38b4-0b37-4bd5-9fb7-24792916b69f"
+},
+{
+ "invoiceNumber": "23119487-a32e-4265-b835-0b833037c73d",
+ "payDateTime": "2024-06-01T13:11:02+02:00",
+ "paid": 2456.48,
+ "finTransactionId": "82c9e3a8-5174-419a-819e-afdb1adedf20"
+},
+{
+ "invoiceNumber": "0bb27823-4e33-48ab-8aa0-b93e41e5e2e8",
+ "payDateTime": "2024-10-06T13:11:02+02:00",
+ "paid": 1757.01,
+ "finTransactionId": "a4a9403f-a912-4fdb-a447-08c886aeb7ad"
+},
+{
+ "invoiceNumber": "e30f151a-ac69-43ce-ba59-8673d9f3e50b",
+ "payDateTime": "2024-08-10T13:11:02+02:00",
+ "paid": 662.49,
+ "finTransactionId": "42b015ea-c735-4e8b-ade2-355675b89780"
+},
+{
+ "invoiceNumber": "19700d0e-05a0-438d-a77a-a586911ffd1b",
+ "payDateTime": "2024-08-04T13:11:02+02:00",
+ "paid": 466.91,
+ "finTransactionId": "71f62dfb-35a3-4977-8019-e859261d3d96"
+},
+{
+ "invoiceNumber": "3f24c3e2-f508-4287-a94a-e52fc3c52dfb",
+ "payDateTime": "2024-08-25T13:11:02+02:00",
+ "paid": 2522.34,
+ "finTransactionId": "0b7c26b7-96a9-4ae5-bd86-bbb8f08ffeb3"
+},
+{
+ "invoiceNumber": "a023023b-6799-4600-b5f9-aec551f63c0b",
+ "payDateTime": "2024-08-17T13:11:02+02:00",
+ "paid": 1103.43,
+ "finTransactionId": "b57f150c-309f-47e1-aa6b-d005bdb25a46"
+},
+{
+ "invoiceNumber": "b3330df9-e15d-4e1e-b148-179044d342fc",
+ "payDateTime": "2024-06-21T13:11:02+02:00",
+ "paid": 84.31,
+ "finTransactionId": "ba5810f1-18e2-4b9c-bb1a-76195a5cc628"
+},
+{
+ "invoiceNumber": "d770f114-5019-4195-853d-4fa219a6dc9c",
+ "payDateTime": "2024-09-16T13:11:02+02:00",
+ "paid": 4414.96,
+ "finTransactionId": "0f41b7ae-a15e-40cf-987e-ab2493cfaa95"
+},
+{
+ "invoiceNumber": "897fbc71-2d18-4eea-a175-47da5a1e8797",
+ "payDateTime": "2024-09-10T13:11:02+02:00",
+ "paid": 3364.88,
+ "finTransactionId": "c9edb648-c8b6-4d39-ac96-a81d3b398c0d"
+},
+{
+ "invoiceNumber": "1379bcde-0fff-438f-ba57-61a7971a34c9",
+ "payDateTime": "2024-08-17T13:11:02+02:00",
+ "paid": 2862.31,
+ "finTransactionId": "5cc08aec-ad04-4ca5-9d76-ebe9c1355bef"
+},
+{
+ "invoiceNumber": "829fd99d-0911-4874-acff-47ccbb1b907c",
+ "payDateTime": "2024-09-17T13:11:02+02:00",
+ "paid": 1079.48,
+ "finTransactionId": "4fcc9c1d-f467-48dc-bf05-e0ac60ed9850"
+},
+{
+ "invoiceNumber": "660c4823-1fe6-4fd4-b842-44702d2be13c",
+ "payDateTime": "2024-08-23T13:11:02+02:00",
+ "paid": 862.75,
+ "finTransactionId": "8508b402-9f30-4e02-8d51-cb41752dce5a"
+},
+{
+ "invoiceNumber": "cd5150ac-505e-4a58-9bfd-de541d49559e",
+ "payDateTime": "2024-09-23T13:11:02+02:00",
+ "paid": 1280.96,
+ "finTransactionId": "06b980f6-dc2d-4935-a482-a6a827bda2b5"
+},
+{
+ "invoiceNumber": "cc8ec3b1-01dd-4988-81fc-2da6ef604a1a",
+ "payDateTime": "2024-10-16T13:11:02+02:00",
+ "paid": 1105.24,
+ "finTransactionId": "8d8877e5-5d48-4a16-95d4-c3f22a70b232"
+},
+{
+ "invoiceNumber": "3c257a3b-00a8-48de-8835-557b6901c604",
+ "payDateTime": "2024-10-02T13:11:02+02:00",
+ "paid": 1673.76,
+ "finTransactionId": "0294aaf3-1dc3-44bd-9cd6-bc866369b4f9"
+},
+{
+ "invoiceNumber": "ff6243e0-a7e4-49a8-bc6e-5f4bc00303b9",
+ "payDateTime": "2024-07-30T13:11:02+02:00",
+ "paid": 2048.37,
+ "finTransactionId": "301e5dc4-fee8-41b2-b34d-7139715625f1"
+},
+{
+ "invoiceNumber": "cce79e86-e30d-4f5b-823a-c08d5f8a8b15",
+ "payDateTime": "2024-10-21T13:11:02+02:00",
+ "paid": 1451.37,
+ "finTransactionId": "8fecb960-6c03-43b6-bf79-d8fdf1689423"
+},
+{
+ "invoiceNumber": "6d152aca-9f44-4462-8c82-c64fc37ef4aa",
+ "payDateTime": "2024-07-14T13:11:02+02:00",
+ "paid": 2722.11,
+ "finTransactionId": "34a22064-96a2-492b-a0f5-8acf43ef9d1c"
+},
+{
+ "invoiceNumber": "04606b18-788b-4f69-b14f-c97a5caea44f",
+ "payDateTime": "2024-08-14T13:11:02+02:00",
+ "paid": 80.06,
+ "finTransactionId": "a549cc92-de0c-415f-82e2-d60f27cf288a"
+},
+{
+ "invoiceNumber": "520faffa-f354-40c4-bbe5-d07b07c02d86",
+ "payDateTime": "2024-06-02T13:11:02+02:00",
+ "paid": 79.78,
+ "finTransactionId": "d8575550-253f-4b7f-9097-3105c4e4349b"
+},
+{
+ "invoiceNumber": "9c2c950a-3b8d-40c8-95da-784c331c850e",
+ "payDateTime": "2024-06-13T13:11:02+02:00",
+ "paid": 1003.18,
+ "finTransactionId": "d78ff7be-e376-48ef-a29c-49e9fc8842b4"
+},
+{
+ "invoiceNumber": "d443247d-d9a6-4992-97f5-27f08c8b013b",
+ "payDateTime": "2024-06-17T13:11:02+02:00",
+ "paid": 690.6,
+ "finTransactionId": "04aaa96f-b499-418c-9a23-736e61401510"
+},
+{
+ "invoiceNumber": "c4e30473-a8ac-49bf-99d0-ea0c9ac7ff1c",
+ "payDateTime": "2024-08-18T13:11:02+02:00",
+ "paid": 615.57,
+ "finTransactionId": "b28165df-0ea5-457c-ba4e-080f2043701c"
+},
+{
+ "invoiceNumber": "c0ecb84e-465a-45b5-8c96-aec47612dbaf",
+ "payDateTime": "2024-07-10T13:11:02+02:00",
+ "paid": 1656.29,
+ "finTransactionId": "463084c3-f7cc-45d9-b39b-5d0ae9ed9565"
+},
+{
+ "invoiceNumber": "8a974eaa-1da7-4f41-8ef7-1ef6ab09ec26",
+ "payDateTime": "2024-10-25T13:11:02+02:00",
+ "paid": 1618.48,
+ "finTransactionId": "465dc35e-72f5-4d30-87d4-e74272e517e1"
+},
+{
+ "invoiceNumber": "7e5e9c88-c129-48d8-bfba-1feba6be87b9",
+ "payDateTime": "2024-11-20T13:11:02+02:00",
+ "paid": 1098.98,
+ "finTransactionId": "fdbcdaa7-2182-41c6-8524-8a58e62b4790"
+},
+{
+ "invoiceNumber": "5674180a-d545-4249-a8b4-59a1c2837d77",
+ "payDateTime": "2024-06-01T13:11:02+02:00",
+ "paid": 602.56,
+ "finTransactionId": "971a9afd-ac55-4822-94c6-38ac5206eaf6"
+},
+{
+ "invoiceNumber": "96e45a14-95fd-4be0-bc99-0dd15b2de389",
+ "payDateTime": "2024-11-08T13:11:02+02:00",
+ "paid": 1692.71,
+ "finTransactionId": "b8b7611a-c62a-43a0-bdd9-6ad4e653b481"
+},
+{
+ "invoiceNumber": "e3eb1243-603d-4052-a334-1ebb0436d837",
+ "payDateTime": "2024-08-07T13:11:02+02:00",
+ "paid": 3543.48,
+ "finTransactionId": "57acdeee-ee9d-41dd-b147-cb655ef553a9"
+},
+{
+ "invoiceNumber": "86027067-8c14-4191-b9a1-37cffbc7bbb8",
+ "payDateTime": "2024-07-20T13:11:02+02:00",
+ "paid": 1215.05,
+ "finTransactionId": "869ff23f-c00d-4cfb-afdc-fd60f0478802"
+},
+{
+ "invoiceNumber": "5f183044-22ae-4f5a-85b5-d0880f883534",
+ "payDateTime": "2024-09-10T13:11:02+02:00",
+ "paid": 1891.07,
+ "finTransactionId": "c0616c16-1a69-4754-aa05-53c64576e213"
+},
+{
+ "invoiceNumber": "3efc14c2-2139-45db-8812-1a1fa5183be2",
+ "payDateTime": "2024-09-16T13:11:02+02:00",
+ "paid": 377.33,
+ "finTransactionId": "902c844c-eddf-4999-9c40-ca2a2ad49fe3"
+},
+{
+ "invoiceNumber": "9023ec5f-9726-47c2-b30a-9b5df244342a",
+ "payDateTime": "2024-09-04T13:11:02+02:00",
+ "paid": 1721.3,
+ "finTransactionId": "8bfda5cc-a38c-4709-aee7-fff9bb978ec0"
+},
+{
+ "invoiceNumber": "18c071d5-24a5-4428-86ff-9e21f2925180",
+ "payDateTime": "2024-09-03T13:11:02+02:00",
+ "paid": 378.33,
+ "finTransactionId": "55afbd6e-4163-431f-aae5-bf217441a609"
+},
+{
+ "invoiceNumber": "bcb1fed7-d009-4c2e-a65a-40ef6e1c564f",
+ "payDateTime": "2024-08-15T13:11:02+02:00",
+ "paid": 2235.37,
+ "finTransactionId": "1e0041a7-90ce-42d8-aba7-6b884a6a02c3"
+},
+{
+ "invoiceNumber": "e78a89c1-13e2-419e-809f-ec202391268c",
+ "payDateTime": "2024-07-10T13:11:02+02:00",
+ "paid": 931.71,
+ "finTransactionId": "8a09b020-55c7-49cc-8ead-b7227f78784b"
+},
+{
+ "invoiceNumber": "eb1d89da-20b9-4478-956a-cbe006d3aaab",
+ "payDateTime": "2024-10-28T13:11:02+02:00",
+ "paid": 1333.73,
+ "finTransactionId": "76d0314f-f2dd-4d1e-829f-aad3d25f3a17"
+},
+{
+ "invoiceNumber": "b8367fc3-b6d4-4ccd-ae1c-3da690c636b1",
+ "payDateTime": "2024-09-25T13:11:02+02:00",
+ "paid": 1416.76,
+ "finTransactionId": "81c248d2-d8eb-403c-83ed-763efdd985e2"
+},
+{
+ "invoiceNumber": "d1b88346-8336-46cb-82ef-89b97f0d51e1",
+ "payDateTime": "2024-08-19T13:11:02+02:00",
+ "paid": 1806.64,
+ "finTransactionId": "f4a51dbb-1c63-41eb-bd11-6b7ddebb6c4c"
+},
+{
+ "invoiceNumber": "d37e7a2a-905e-4d1a-9fbc-ae151a63dfb7",
+ "payDateTime": "2024-12-11T13:11:02+02:00",
+ "paid": 1245.39,
+ "finTransactionId": "0bc207e5-969a-42a1-a36d-4dfa638d670c"
+},
+{
+ "invoiceNumber": "c8ab15c1-65d7-48eb-8c0e-bd90c8943f06",
+ "payDateTime": "2024-08-23T13:11:02+02:00",
+ "paid": 3320.57,
+ "finTransactionId": "3858d115-9b1a-42c4-9a6a-55d3e22ec21f"
+},
+{
+ "invoiceNumber": "856989a3-a355-45a5-b82d-19a88f81ab0b",
+ "payDateTime": "2024-07-31T13:11:02+02:00",
+ "paid": 855.87,
+ "finTransactionId": "39e2103f-4cb0-40aa-9331-9ef6f1f50922"
+},
+{
+ "invoiceNumber": "5ce7b129-5449-4274-afd6-dae3aea83cf7",
+ "payDateTime": "2024-10-09T13:11:02+02:00",
+ "paid": 815.23,
+ "finTransactionId": "df1384fb-03cc-4722-ad79-84019788b2f0"
+},
+{
+ "invoiceNumber": "ae8a9b0d-e142-4d00-bfde-f0927a6847b2",
+ "payDateTime": "2024-10-16T13:11:02+02:00",
+ "paid": 590.73,
+ "finTransactionId": "a1d4cb9b-5a68-4e54-951a-d63244add71f"
+},
+{
+ "invoiceNumber": "351c5b21-33f0-4d81-bbb6-cb7f62e7c4ca",
+ "payDateTime": "2024-10-19T13:11:02+02:00",
+ "paid": 1809.6,
+ "finTransactionId": "c4c3ee19-aa34-4592-8917-2e3ec284c7bb"
+},
+{
+ "invoiceNumber": "fe379b7f-b60f-4312-9dae-50677ac0e42a",
+ "payDateTime": "2024-08-28T13:11:02+02:00",
+ "paid": 3996.6,
+ "finTransactionId": "86092cdd-c3bb-4ed6-b151-07658d49d398"
+},
+{
+ "invoiceNumber": "5dfcc93f-ea43-4c2d-a266-a3fef60d5735",
+ "payDateTime": "2024-08-09T13:11:02+02:00",
+ "paid": 402.32,
+ "finTransactionId": "023b4cd1-1071-4e3d-a18d-d388430eed62"
+},
+{
+ "invoiceNumber": "0f3cf0a1-873f-432e-acc2-9e961221d0d2",
+ "payDateTime": "2024-10-15T13:11:02+02:00",
+ "paid": 1721.29,
+ "finTransactionId": "9c47ad75-fe5c-4392-a49a-8590abda223e"
+},
+{
+ "invoiceNumber": "168d0759-c652-4c38-a5f0-37a3b7b35517",
+ "payDateTime": "2024-10-06T13:11:02+02:00",
+ "paid": 4012.71,
+ "finTransactionId": "e8a49320-fcca-4b1c-be17-d7916e719275"
+},
+{
+ "invoiceNumber": "64472504-cbfa-4c21-aba4-6e2b82ef43e4",
+ "payDateTime": "2024-10-25T13:11:02+02:00",
+ "paid": 601.74,
+ "finTransactionId": "00096277-ae93-4bde-8883-da5d1c3bc6b5"
+},
+{
+ "invoiceNumber": "337df28f-ac7c-4d89-ae63-621eeabe6b08",
+ "payDateTime": "2024-09-19T13:11:02+02:00",
+ "paid": 1605.67,
+ "finTransactionId": "b20bf856-9f83-42bf-95f2-385926ba4f6d"
+},
+{
+ "invoiceNumber": "86d01d65-0220-40b2-a689-6239b5bf35fa",
+ "payDateTime": "2024-09-24T13:11:02+02:00",
+ "paid": 1437.72,
+ "finTransactionId": "2ebf4076-927e-4696-8e3a-96c0567b4d7f"
+},
+{
+ "invoiceNumber": "edfd4fc0-74f9-4fbe-9281-07602942b53e",
+ "payDateTime": "2024-11-13T13:11:02+02:00",
+ "paid": 1491.53,
+ "finTransactionId": "82269961-13af-4982-98d2-8b063c910942"
+},
+{
+ "invoiceNumber": "14da629f-7ea6-4845-a7fe-ed0b9779bb61",
+ "payDateTime": "2024-11-15T13:11:02+02:00",
+ "paid": 7.58,
+ "finTransactionId": "6cd81b4d-3b4c-40e0-b306-0eb3fa172a79"
+},
+{
+ "invoiceNumber": "817281f4-4318-43b4-970d-7545986adf4f",
+ "payDateTime": "2024-08-05T13:11:02+02:00",
+ "paid": 310.9,
+ "finTransactionId": "0c1bc445-9dd1-4a13-aff1-5f624deb47c6"
+},
+{
+ "invoiceNumber": "9e960fb8-058a-45c5-a8d1-8dbae692300b",
+ "payDateTime": "2024-07-16T13:11:02+02:00",
+ "paid": 239.33,
+ "finTransactionId": "1b2e9908-66ce-4fe3-8c67-50c7a4402726"
+},
+{
+ "invoiceNumber": "9b04d72e-9a2c-479b-8e16-d6d752739b2b",
+ "payDateTime": "2024-06-05T13:11:02+02:00",
+ "paid": 1630.9,
+ "finTransactionId": "768e4f01-2dd0-4791-9a01-05e18ddde8fd"
+},
+{
+ "invoiceNumber": "4e88b595-e8a0-4f14-a52f-1de26853e0b5",
+ "payDateTime": "2024-10-15T13:11:02+02:00",
+ "paid": 1130.21,
+ "finTransactionId": "91c5dc82-b7da-4e41-b365-04c62d6f9e8f"
+},
+{
+ "invoiceNumber": "a8e30ec0-b62a-4086-a35d-2b72a5963633",
+ "payDateTime": "2024-11-20T13:11:02+02:00",
+ "paid": 2617.67,
+ "finTransactionId": "425a837c-dac0-4acd-b8c2-ccd4386fea4c"
+},
+{
+ "invoiceNumber": "c517276a-f5c4-4352-b921-615351700090",
+ "payDateTime": "2024-11-24T13:11:02+02:00",
+ "paid": 1001.76,
+ "finTransactionId": "f2b6e8fc-4ad8-4df7-9ebb-485e1b64c2b1"
+},
+{
+ "invoiceNumber": "986dcdef-819f-499f-a801-a64d0fe89539",
+ "payDateTime": "2024-10-06T13:11:02+02:00",
+ "paid": 1344.95,
+ "finTransactionId": "7dff92ba-6da4-4062-9dcf-ea14a48d9712"
+},
+{
+ "invoiceNumber": "90e35475-1fcd-4b10-9c1a-3e91227a61ca",
+ "payDateTime": "2024-09-12T13:11:02+02:00",
+ "paid": 127.63,
+ "finTransactionId": "45d6dbff-8ce1-4c80-bb3c-27264ebc6c9d"
+},
+{
+ "invoiceNumber": "e3e702af-7363-4bc1-8b4b-5145c33fe0f6",
+ "payDateTime": "2024-10-09T13:11:02+02:00",
+ "paid": 53.57,
+ "finTransactionId": "1b3ad623-5bd3-4d39-98dd-0561b8e86e4c"
+},
+{
+ "invoiceNumber": "b7508d12-e816-4530-b539-bf5e3f81b03d",
+ "payDateTime": "2024-09-08T13:11:02+02:00",
+ "paid": 644.62,
+ "finTransactionId": "af1d7852-11ca-483b-978c-284d7a80e578"
+},
+{
+ "invoiceNumber": "6e5ce82f-c9b8-45e7-933c-f9867cb3ebd6",
+ "payDateTime": "2024-10-27T13:11:02+02:00",
+ "paid": 1146.45,
+ "finTransactionId": "18a7eb6d-3d1c-43b8-83e5-2cb8ba3753b9"
+},
+{
+ "invoiceNumber": "d12791b6-fbe8-4202-9707-8cc5d46ca99c",
+ "payDateTime": "2024-09-06T13:11:02+02:00",
+ "paid": 25.07,
+ "finTransactionId": "660de0f6-cfb3-456b-a02e-b8c01e675be8"
+},
+{
+ "invoiceNumber": "10d0e1d9-cfdc-4a11-9003-9fab8aad9b5f",
+ "payDateTime": "2024-06-22T13:11:02+02:00",
+ "paid": 1371.23,
+ "finTransactionId": "fa605f05-2c7b-429a-92b6-a3d88a78d8f5"
+},
+{
+ "invoiceNumber": "872373ed-51ea-428e-b070-f62f26fec61b",
+ "payDateTime": "2024-10-22T13:11:02+02:00",
+ "paid": 1087.31,
+ "finTransactionId": "e5a48f35-ba91-4d1a-b7a4-44d4c4e55ccd"
+},
+{
+ "invoiceNumber": "7ad7df60-a077-4720-836b-95422a7c08d1",
+ "payDateTime": "2024-10-22T13:11:02+02:00",
+ "paid": 33.05,
+ "finTransactionId": "4b0f0601-6f6d-41b3-a1e6-2997d8962ef7"
+},
+{
+ "invoiceNumber": "2459be81-7a97-461d-80d0-a8e6405312c9",
+ "payDateTime": "2024-11-23T13:11:02+02:00",
+ "paid": 444.43,
+ "finTransactionId": "20b8005a-26ac-48db-8540-b5e0fdaec07f"
+},
+{
+ "invoiceNumber": "51711f76-4ed2-4687-9df2-53ec07e524f1",
+ "payDateTime": "2024-10-28T13:11:02+02:00",
+ "paid": 410.29,
+ "finTransactionId": "e93e3de1-b84e-45e1-87cd-da371919bc82"
+},
+{
+ "invoiceNumber": "6c33a3cc-b40c-4d55-be90-39c9aef3bb01",
+ "payDateTime": "2024-09-02T13:11:02+02:00",
+ "paid": 553.96,
+ "finTransactionId": "3513f270-804d-4289-a7b4-5a4016958e3d"
+},
+{
+ "invoiceNumber": "16a7758a-c83e-454f-b374-fcfb0d19393f",
+ "payDateTime": "2024-08-07T13:11:02+02:00",
+ "paid": 1005.22,
+ "finTransactionId": "a216a32d-7829-46c4-8e51-9cd7658b096e"
+},
+{
+ "invoiceNumber": "fd96a186-616f-416c-ac01-9652e6443dbe",
+ "payDateTime": "2024-09-01T13:11:02+02:00",
+ "paid": 947.08,
+ "finTransactionId": "b7a02245-cfe2-422a-b1f0-7ff49e170b22"
+},
+{
+ "invoiceNumber": "67dfcb56-a1e8-40b8-8939-8cca03177044",
+ "payDateTime": "2024-12-05T13:11:02+02:00",
+ "paid": 2596.66,
+ "finTransactionId": "f794db09-94fd-495b-a77a-6dd15225da30"
+},
+{
+ "invoiceNumber": "8e3c7610-6c51-4052-a422-0b33b6d5a49e",
+ "payDateTime": "2024-06-01T13:11:02+02:00",
+ "paid": 550.72,
+ "finTransactionId": "ed38a577-fba4-4f82-a003-3f47bca35187"
+},
+{
+ "invoiceNumber": "08c755cf-ba30-487f-a741-92dadea167c9",
+ "payDateTime": "2024-08-15T13:11:02+02:00",
+ "paid": 1075.82,
+ "finTransactionId": "b36e0ded-aed7-4fb0-ad2b-06d01d00d092"
+},
+{
+ "invoiceNumber": "1175d1e3-2396-4463-82cc-6330d9245413",
+ "payDateTime": "2024-06-15T13:11:02+02:00",
+ "paid": 1220.84,
+ "finTransactionId": "30126d7f-4f21-487a-b42a-64cc6a932325"
+},
+{
+ "invoiceNumber": "a21bf85d-65bd-4a8c-bd5f-7136ff102805",
+ "payDateTime": "2024-06-22T13:11:02+02:00",
+ "paid": 1378,
+ "finTransactionId": "da8ad83f-9ad8-4c04-90b2-1662efee1610"
+},
+{
+ "invoiceNumber": "d488fe43-1879-4d92-8ff7-9f7e2936b03d",
+ "payDateTime": "2024-06-16T13:11:02+02:00",
+ "paid": 801.75,
+ "finTransactionId": "63475585-0fe7-438d-bcc0-297aea47b581"
+},
+{
+ "invoiceNumber": "e94b1e5c-5648-4d47-a4d6-185f3ee7080e",
+ "payDateTime": "2024-12-18T13:11:02+02:00",
+ "paid": 1503.85,
+ "finTransactionId": "aeb0085c-9e8b-4046-a192-d83af69de60c"
+},
+{
+ "invoiceNumber": "63103b42-64dd-44be-95f3-8c621fb5f0ee",
+ "payDateTime": "2024-09-15T13:11:02+02:00",
+ "paid": 433.6,
+ "finTransactionId": "0d1c8eec-da12-445d-957b-dfee502a9f26"
+},
+{
+ "invoiceNumber": "e38d6a06-0522-4f58-b139-185076443fdd",
+ "payDateTime": "2024-10-02T13:11:02+02:00",
+ "paid": 411.08,
+ "finTransactionId": "2c446b63-0e94-4892-90b1-6d07ba9757e1"
+},
+{
+ "invoiceNumber": "f7fdfeca-7892-485e-aa93-2a397d4f2517",
+ "payDateTime": "2024-07-19T13:11:02+02:00",
+ "paid": 79.78,
+ "finTransactionId": "94d2b59f-4fbc-48c1-bc3f-9a4dce6be6ff"
+},
+{
+ "invoiceNumber": "c96c179d-d31d-465b-bd5f-dfbf9d8242b6",
+ "payDateTime": "2024-07-23T13:11:02+02:00",
+ "paid": 69.88,
+ "finTransactionId": "cc00561e-b75d-4e29-aac1-13f346b6af78"
+},
+{
+ "invoiceNumber": "038383d5-c108-4d36-b5dc-cfaee32bb462",
+ "payDateTime": "2024-09-17T13:11:02+02:00",
+ "paid": 1492.57,
+ "finTransactionId": "9b5442b9-f219-4739-90d8-e2ff2a40742b"
+},
+{
+ "invoiceNumber": "022fc462-2c5b-459f-a6dc-42ded81b7229",
+ "payDateTime": "2024-09-28T13:11:02+02:00",
+ "paid": 1497.71,
+ "finTransactionId": "891a0e61-e2cb-4ede-9363-ae6ac7e334b6"
+},
+{
+ "invoiceNumber": "1bae9089-bd5a-489d-beb2-52647d3d5863",
+ "payDateTime": "2024-12-03T13:11:02+02:00",
+ "paid": 159.51,
+ "finTransactionId": "0159666f-9e70-4f56-85e8-1ea0056557e1"
+},
+{
+ "invoiceNumber": "2971d0b4-9247-4c6b-be66-843025cb1f55",
+ "payDateTime": "2024-09-06T13:11:02+02:00",
+ "paid": 777.39,
+ "finTransactionId": "00028b8e-8f93-490d-9e3d-860d3475f048"
+},
+{
+ "invoiceNumber": "51795d81-7fc9-498e-b2f6-cfa950939037",
+ "payDateTime": "2024-09-14T13:11:02+02:00",
+ "paid": 760.16,
+ "finTransactionId": "69c97d4f-07f6-49d3-b43f-681d66f1e653"
+},
+{
+ "invoiceNumber": "08a7048e-c915-4a9f-ae7e-f4182c1257b7",
+ "payDateTime": "2024-09-07T13:11:02+02:00",
+ "paid": 444.49,
+ "finTransactionId": "faa77d81-2dbc-4aec-b314-955989f030ff"
+},
+{
+ "invoiceNumber": "87b49fef-d386-42db-8659-407a86635280",
+ "payDateTime": "2024-08-02T13:11:02+02:00",
+ "paid": 577.85,
+ "finTransactionId": "b655e758-eade-4a2e-b32e-0c1685c3f684"
+},
+{
+ "invoiceNumber": "d1262085-2e12-4ce5-95a8-ffb9fb69f0b5",
+ "payDateTime": "2024-06-26T13:11:02+02:00",
+ "paid": 1778.35,
+ "finTransactionId": "10771e85-4c07-4968-9585-53ad50bfb834"
+},
+{
+ "invoiceNumber": "2335102e-a022-4217-836f-7dc41e8a8ebe",
+ "payDateTime": "2024-11-05T13:11:02+02:00",
+ "paid": 205.11,
+ "finTransactionId": "6a88d10b-058b-4777-b968-41c4ccb4ae2f"
+},
+{
+ "invoiceNumber": "a4144ca7-a4e6-4d56-acbc-a0495b281762",
+ "payDateTime": "2024-10-21T13:11:02+02:00",
+ "paid": 324.23,
+ "finTransactionId": "cd736818-b73c-4a8d-b38d-796e5589b749"
+},
+{
+ "invoiceNumber": "42ce29ef-9abf-4bba-9076-e70ff766cb66",
+ "payDateTime": "2024-12-09T13:11:02+02:00",
+ "paid": 523.08,
+ "finTransactionId": "f28cff28-26d3-4f1c-94df-8886a2b77d87"
+},
+{
+ "invoiceNumber": "96624220-f396-4fde-88d4-3574ea6a3424",
+ "payDateTime": "2024-11-30T13:11:02+02:00",
+ "paid": 1051.8,
+ "finTransactionId": "6dbbbbff-ac72-4b03-908a-aa4bc03dacb0"
+},
+{
+ "invoiceNumber": "f79b54b8-ca86-43b7-aca0-24042d1b50c0",
+ "payDateTime": "2024-11-09T13:11:02+02:00",
+ "paid": 3297.15,
+ "finTransactionId": "3102a472-5ca9-44a9-b91d-63a2a4ad3699"
+},
+{
+ "invoiceNumber": "6d21fd7a-d405-4116-afc7-14c57bad18e9",
+ "payDateTime": "2024-10-25T13:11:02+02:00",
+ "paid": 1123.05,
+ "finTransactionId": "445fdfaa-3ee0-4563-aeac-89ccbc2a75f3"
+},
+{
+ "invoiceNumber": "c8bb221d-e2b5-4220-9d7d-bc17b38ba418",
+ "payDateTime": "2024-07-01T13:11:02+02:00",
+ "paid": 5.24,
+ "finTransactionId": "5efe9706-2a8f-493b-86f1-a7d519cff071"
+},
+{
+ "invoiceNumber": "158e3bf3-7131-441d-bee3-9ccaa900e868",
+ "payDateTime": "2024-07-03T13:11:02+02:00",
+ "paid": 290.62,
+ "finTransactionId": "1a34fa0a-efae-447f-a3cb-59dfb1224d24"
+},
+{
+ "invoiceNumber": "0a92e43a-e417-49ed-b98c-12b2d8b88d70",
+ "payDateTime": "2024-06-20T13:11:02+02:00",
+ "paid": 1388.83,
+ "finTransactionId": "71661985-2e33-4d36-a5dc-7f9e0f5f642e"
+},
+{
+ "invoiceNumber": "92c4995d-f2ee-4933-b602-8c528be9eb02",
+ "payDateTime": "2024-12-02T13:11:02+02:00",
+ "paid": 25.03,
+ "finTransactionId": "0288f7aa-3189-4faa-bf37-8e6b9899a214"
+},
+{
+ "invoiceNumber": "2d29856b-abba-45f2-9bb0-ed44c1f3a8f4",
+ "payDateTime": "2024-12-09T13:11:02+02:00",
+ "paid": 2037.29,
+ "finTransactionId": "f0a5fdb1-e211-4acd-ba32-6ee43f2196ef"
+},
+{
+ "invoiceNumber": "6c8fa5f1-72ef-40bf-8fa6-0d5e71a507d8",
+ "payDateTime": "2024-07-11T13:11:02+02:00",
+ "paid": 191.47,
+ "finTransactionId": "4db4e3eb-c514-49ac-9130-e531ad47399d"
+},
+{
+ "invoiceNumber": "d3f7ebf5-c5ff-4ce4-b5e2-8d68c21ad289",
+ "payDateTime": "2024-10-17T13:11:02+02:00",
+ "paid": 2265.1,
+ "finTransactionId": "f31582e6-9753-4730-98d8-5b2620651e11"
+},
+{
+ "invoiceNumber": "94a4b556-3275-443e-826a-a1c8733d50b0",
+ "payDateTime": "2024-10-31T13:11:02+02:00",
+ "paid": 918.6,
+ "finTransactionId": "6fd37350-5009-424c-ac0c-8730a55e0b7f"
+},
+{
+ "invoiceNumber": "dc47cafb-ebe7-49f4-9a16-e4b5876cf29a",
+ "payDateTime": "2024-10-07T13:11:02+02:00",
+ "paid": 91.15,
+ "finTransactionId": "4aae657b-6e43-4a80-93ca-9091112d94ae"
+},
+{
+ "invoiceNumber": "7e0d2f61-c8e9-4ae6-a93b-71d45db5b6ca",
+ "payDateTime": "2024-10-19T13:11:02+02:00",
+ "paid": 1076.57,
+ "finTransactionId": "458e1e31-9e3a-4502-a3f7-1edb94251bd9"
+},
+{
+ "invoiceNumber": "671bef37-24de-40b6-82b2-f5f2b66ddcab",
+ "payDateTime": "2024-11-10T13:11:02+02:00",
+ "paid": 364.75,
+ "finTransactionId": "e0e84948-f318-431d-bccb-3de1ebcdc329"
+},
+{
+ "invoiceNumber": "1941e3d1-514d-4f3d-b4f5-6c823567a2e5",
+ "payDateTime": "2024-09-16T13:11:02+02:00",
+ "paid": 1696.14,
+ "finTransactionId": "a84023d7-d37f-4f7b-ba7f-0a8c964ffee6"
+},
+{
+ "invoiceNumber": "27bbcbc7-413b-43f0-b960-78fee7e434ae",
+ "payDateTime": "2024-08-08T13:11:02+02:00",
+ "paid": 33.05,
+ "finTransactionId": "ca808b71-dc60-4ec3-b4f4-9bd5cb2e0496"
+},
+{
+ "invoiceNumber": "460cc6a5-b57d-4823-afea-aeabcd53ddcf",
+ "payDateTime": "2024-11-25T13:11:02+02:00",
+ "paid": 1681.36,
+ "finTransactionId": "270d2b6d-9bd1-4475-9b44-3cc412399c95"
+},
+{
+ "invoiceNumber": "4864026c-b420-4e67-9bff-b3ed73574f89",
+ "payDateTime": "2024-09-13T13:11:02+02:00",
+ "paid": 313.43,
+ "finTransactionId": "35a801dc-fd03-43f2-9c94-2d08b92b5862"
+},
+{
+ "invoiceNumber": "ad9c1e61-4a3e-4d9a-b58b-d08591891050",
+ "payDateTime": "2024-11-07T13:11:02+02:00",
+ "paid": 582.43,
+ "finTransactionId": "176ce8e3-562e-4e0f-99ca-93febe3cc9fe"
+},
+{
+ "invoiceNumber": "ffa877a9-6415-4bc7-a852-585b2e486df0",
+ "payDateTime": "2024-08-22T13:11:02+02:00",
+ "paid": 1551.32,
+ "finTransactionId": "0adc3e66-e20a-4624-8221-9edc75a36535"
+},
+{
+ "invoiceNumber": "87c64664-d987-4ac5-95d9-19ee1b7ae0ad",
+ "payDateTime": "2024-10-22T13:11:02+02:00",
+ "paid": 2532.72,
+ "finTransactionId": "270346c3-e7b5-4bb2-8840-fa67ded4d9c8"
+},
+{
+ "invoiceNumber": "c84e4ee3-ea30-406d-b7c4-fba5a2f0beb6",
+ "payDateTime": "2024-10-21T13:11:02+02:00",
+ "paid": 2197.75,
+ "finTransactionId": "21b627dd-aedf-43f0-bc36-cde93f3933c0"
+},
+{
+ "invoiceNumber": "93ff7417-df74-4d21-8690-2419149d8cd6",
+ "payDateTime": "2024-09-21T13:11:02+02:00",
+ "paid": 102.58,
+ "finTransactionId": "e4a26874-0a8f-45ed-944f-4cef2fd1d285"
+},
+{
+ "invoiceNumber": "e4c38991-ff62-4315-9eae-df03f728b103",
+ "payDateTime": "2024-11-28T13:11:02+02:00",
+ "paid": 5931.52,
+ "finTransactionId": "99128715-e677-4db6-82fe-f9f0ef0628fe"
+},
+{
+ "invoiceNumber": "bf7fe6a9-63bc-4b1f-adfa-3d215b35e3b1",
+ "payDateTime": "2024-10-10T13:11:02+02:00",
+ "paid": 3495.01,
+ "finTransactionId": "2a427748-cee5-4a1e-a56e-00d531fb5df9"
+},
+{
+ "invoiceNumber": "99e9535a-40d4-41ca-8751-0517580144cb",
+ "payDateTime": "2024-08-24T13:11:02+02:00",
+ "paid": 182.35,
+ "finTransactionId": "de9bdc01-8875-4cd0-97cd-2ea1e1fff73c"
+},
+{
+ "invoiceNumber": "67c94f06-a016-4b41-ab8d-2d360aa5e6bb",
+ "payDateTime": "2024-09-23T13:11:02+02:00",
+ "paid": 1267.65,
+ "finTransactionId": "20881b0c-5a60-4446-923e-51256d1612cd"
+},
+{
+ "invoiceNumber": "ec097d72-9a07-4a55-9a4a-b06ae566081e",
+ "payDateTime": "2024-08-13T13:11:02+02:00",
+ "paid": 3126.71,
+ "finTransactionId": "8aac5a77-f9bf-4f2f-9d30-03d18de04b8d"
+},
+{
+ "invoiceNumber": "c21a9b56-543a-446f-8728-bb39444fb5d5",
+ "payDateTime": "2024-07-14T13:11:02+02:00",
+ "paid": 1799.78,
+ "finTransactionId": "5639e0bf-d9ab-44c7-8228-5d9ce7712039"
+},
+{
+ "invoiceNumber": "38d28d7f-0b9a-4987-abb3-b91882a64696",
+ "payDateTime": "2024-08-24T13:11:02+02:00",
+ "paid": 164.08,
+ "finTransactionId": "4bdfe7d0-0c40-4e97-8dab-9ece04c9396f"
+},
+{
+ "invoiceNumber": "7fbb9cbb-5316-4f71-b182-67784a090ea6",
+ "payDateTime": "2024-07-31T13:11:03+02:00",
+ "paid": 2522.48,
+ "finTransactionId": "90c066cd-4707-4d1b-a092-351e2be656d6"
+},
+{
+ "invoiceNumber": "ccfaf789-6c2c-4243-bb1c-56ceb2dd4894",
+ "payDateTime": "2024-09-15T13:11:03+02:00",
+ "paid": 2033.7,
+ "finTransactionId": "df0f2010-238e-4ee1-b98e-bb979820bc93"
+},
+{
+ "invoiceNumber": "b59ae4b1-ab04-4f84-a93d-8f8f8fe9d3b3",
+ "payDateTime": "2024-06-04T13:11:03+02:00",
+ "paid": 2602.35,
+ "finTransactionId": "326ececf-6429-42bf-9a4b-c4a5bb343980"
+},
+{
+ "invoiceNumber": "f7cb5b6e-d686-4c66-b0a0-ab4b77493467",
+ "payDateTime": "2024-09-09T13:11:03+02:00",
+ "paid": 2104.25,
+ "finTransactionId": "f089c64b-99af-47b3-aba7-5c11f72b90d0"
+},
+{
+ "invoiceNumber": "7c61061b-9fe6-4ede-babd-d67ca5d82ecc",
+ "payDateTime": "2024-10-10T13:11:03+02:00",
+ "paid": 256.45,
+ "finTransactionId": "f4755e25-3e69-49d5-8033-7be216eebd98"
+},
+{
+ "invoiceNumber": "59bbe344-433d-479d-8ae7-411b95c75063",
+ "payDateTime": "2024-07-23T13:11:03+02:00",
+ "paid": 1870.19,
+ "finTransactionId": "f632b365-a9c0-41b3-8de2-0cde79b2d3be"
+},
+{
+ "invoiceNumber": "7da5cbe7-0e3e-40ad-adb2-feb6f656306c",
+ "payDateTime": "2024-11-16T13:11:03+02:00",
+ "paid": 1253.01,
+ "finTransactionId": "4f30788a-7da0-4a59-b13f-d782be2920b1"
+},
+{
+ "invoiceNumber": "0d6d4166-5353-4eae-8aba-d64a46574387",
+ "payDateTime": "2024-11-03T13:11:03+02:00",
+ "paid": 205.19,
+ "finTransactionId": "74804feb-8226-4e88-bc40-f8dda1d6cfcc"
+},
+{
+ "invoiceNumber": "485e4ed5-640a-46aa-9497-330a46cc11b7",
+ "payDateTime": "2024-11-02T13:11:03+02:00",
+ "paid": 68.37,
+ "finTransactionId": "e88b8c07-2b82-4c66-b759-1ce60a671538"
+},
+{
+ "invoiceNumber": "fe055358-82f1-4225-905e-7881b143a33d",
+ "payDateTime": "2024-11-05T13:11:03+02:00",
+ "paid": 509.45,
+ "finTransactionId": "d0d1bbdc-50b6-4e36-977e-66466bac8261"
+},
+{
+ "invoiceNumber": "b23d852c-4c83-48b7-918e-dd0f34905615",
+ "payDateTime": "2024-09-03T13:11:03+02:00",
+ "paid": 1771.82,
+ "finTransactionId": "0e3cf94c-d191-455b-83bd-05071b9bd593"
+},
+{
+ "invoiceNumber": "99e20f0d-3a24-4ac5-ba99-a113f6a18894",
+ "payDateTime": "2024-07-10T13:11:03+02:00",
+ "paid": 335.1,
+ "finTransactionId": "d65f2b54-2d02-4c8a-9538-0fb51b96419e"
+},
+{
+ "invoiceNumber": "51352f78-e53e-4b7a-b3e3-8b910b5e0244",
+ "payDateTime": "2024-07-23T13:11:03+02:00",
+ "paid": 153.89,
+ "finTransactionId": "d5ddf17e-3699-4ff2-ac1d-2d9c0fb59b06"
+},
+{
+ "invoiceNumber": "af4797d9-edbb-4890-b896-ae3d5c22be9d",
+ "payDateTime": "2024-10-18T13:11:03+02:00",
+ "paid": 121.16,
+ "finTransactionId": "9a8fda97-cbbd-471c-9486-9791f90b0919"
+},
+{
+ "invoiceNumber": "b07169a5-f239-4934-adf5-dc4ae97548a8",
+ "payDateTime": "2024-12-13T13:11:03+02:00",
+ "paid": 2654.97,
+ "finTransactionId": "92b6c2ec-e0ad-4ee2-8205-2d781dfff743"
+},
+{
+ "invoiceNumber": "82528b88-0859-40f8-be5b-912c4685e065",
+ "payDateTime": "2024-11-06T13:11:03+02:00",
+ "paid": 3114.96,
+ "finTransactionId": "23e00e5a-3839-43bd-b310-f0c93295e7d8"
+},
+{
+ "invoiceNumber": "02106b27-5488-4d8e-9544-9e136f8f9baf",
+ "payDateTime": "2024-10-02T13:11:03+02:00",
+ "paid": 78.64,
+ "finTransactionId": "8ce52892-6150-4d9e-8af8-2b27ad33508d"
+},
+{
+ "invoiceNumber": "7adfe6d6-589e-4be9-909b-3b4fac71ab8a",
+ "payDateTime": "2024-07-11T13:11:03+02:00",
+ "paid": 104.82,
+ "finTransactionId": "1291d61e-322f-4de2-b775-f7c0f0b52957"
+},
+{
+ "invoiceNumber": "63399343-230d-45ab-922b-82d57b74f076",
+ "payDateTime": "2024-11-01T13:11:03+02:00",
+ "paid": 1804.32,
+ "finTransactionId": "86d5e8e7-aff4-4e6f-a085-0a72e58a82e6"
+},
+{
+ "invoiceNumber": "de2624f6-1527-4bf9-ab9c-eda3257dc1a7",
+ "payDateTime": "2024-06-15T13:11:03+02:00",
+ "paid": 120.81,
+ "finTransactionId": "1a092aa3-bb06-4d9d-8c09-59aa18bb7859"
+},
+{
+ "invoiceNumber": "311d4170-c458-478d-86f7-ec3c08dcadc7",
+ "payDateTime": "2024-09-29T13:11:03+02:00",
+ "paid": 1055.93,
+ "finTransactionId": "6dd2ed11-92b6-43db-87c1-9f203c7da569"
+},
+{
+ "invoiceNumber": "7013ecf2-cd4b-4138-a5b7-9bfa2e51dd4d",
+ "payDateTime": "2024-06-22T13:11:03+02:00",
+ "paid": 4723.81,
+ "finTransactionId": "90f46b70-7ab7-4551-b8e8-07b6dcad12e3"
+},
+{
+ "invoiceNumber": "654c99a3-e7e3-4d62-b4cb-8ce7ff690d31",
+ "payDateTime": "2024-10-20T13:11:03+02:00",
+ "paid": 2146.62,
+ "finTransactionId": "bf7c2771-3fb7-4fb0-8ec5-c9f9104204ff"
+},
+{
+ "invoiceNumber": "1f32a165-196b-4bbd-b282-5d648b54cb41",
+ "payDateTime": "2024-11-02T13:11:03+02:00",
+ "paid": 1708.15,
+ "finTransactionId": "3cc1f190-c8c3-4fe2-88e0-8af0feaa3af9"
+},
+{
+ "invoiceNumber": "c601e491-cce5-44b4-a8ce-1f4d4d8d98d4",
+ "payDateTime": "2024-07-18T13:11:03+02:00",
+ "paid": 590.51,
+ "finTransactionId": "950581ef-6eee-41e3-b415-db595b303063"
+},
+{
+ "invoiceNumber": "b90605d2-5b40-440d-a054-d0ec9640b7c7",
+ "payDateTime": "2024-06-28T13:11:03+02:00",
+ "paid": 259.85,
+ "finTransactionId": "6c4ceebd-536f-4a88-9ef5-b61f079cae52"
+},
+{
+ "invoiceNumber": "9672db1f-c99d-42c9-a5d6-7b424f2a09ef",
+ "payDateTime": "2024-11-14T13:11:03+02:00",
+ "paid": 3287.79,
+ "finTransactionId": "924c7be8-19e0-4e8a-87db-5d1d189ead30"
+},
+{
+ "invoiceNumber": "87e54737-a7cd-4f19-a8ac-46f5f5cc3c60",
+ "payDateTime": "2024-07-18T13:11:03+02:00",
+ "paid": 1220.68,
+ "finTransactionId": "cbfa9480-b888-4cc9-b549-45d02012ae6f"
+},
+{
+ "invoiceNumber": "0b831306-3901-488f-9aca-d741336a68b1",
+ "payDateTime": "2024-09-12T13:11:03+02:00",
+ "paid": 1190.52,
+ "finTransactionId": "97d177f5-7cac-427c-8026-0028a56afa11"
+},
+{
+ "invoiceNumber": "e8ef8045-f04f-4fd5-b2da-a2e1e5546a50",
+ "payDateTime": "2024-10-02T13:11:03+02:00",
+ "paid": 113.94,
+ "finTransactionId": "263ba7f6-be85-48f1-a540-9edd65ca25c3"
+},
+{
+ "invoiceNumber": "dbd3cd80-2dd6-4546-938c-e68ace295053",
+ "payDateTime": "2024-11-04T13:11:03+02:00",
+ "paid": 606.3,
+ "finTransactionId": "f0eb6585-36e5-40d8-b4d0-1af350022e8c"
+},
+{
+ "invoiceNumber": "c05e10cd-d50b-4394-b3e5-7ceba2e56caf",
+ "payDateTime": "2024-11-14T13:11:03+02:00",
+ "paid": 1734.91,
+ "finTransactionId": "400790a6-7be8-492f-8278-4796fe25aeba"
+},
+{
+ "invoiceNumber": "8a971fb5-7f3e-439d-9105-b575c4263148",
+ "payDateTime": "2024-08-15T13:11:03+02:00",
+ "paid": 3434.15,
+ "finTransactionId": "0b2059e2-6932-435a-a65d-08ccb441f2b7"
+},
+{
+ "invoiceNumber": "f01ba626-4356-4a34-b15f-0e37be18b819",
+ "payDateTime": "2024-09-24T13:11:03+02:00",
+ "paid": 1351.87,
+ "finTransactionId": "e0361949-6a7a-4d80-a0a4-d655e0f3c9a6"
+},
+{
+ "invoiceNumber": "a706513d-e3ec-4f95-87bb-c700e86219ca",
+ "payDateTime": "2024-05-28T13:11:03+02:00",
+ "paid": 536.78,
+ "finTransactionId": "11bc731d-182f-4fdf-926e-3396693637dc"
+},
+{
+ "invoiceNumber": "57277c18-f1c7-42af-83c9-995b09b73e7b",
+ "payDateTime": "2024-06-28T13:11:03+02:00",
+ "paid": 2361.72,
+ "finTransactionId": "9afc72b2-2341-43cd-a91a-5e247f8c2248"
+},
+{
+ "invoiceNumber": "5355be26-1eec-4fe9-b095-f418a22b3063",
+ "payDateTime": "2024-11-15T13:11:03+02:00",
+ "paid": 95.71,
+ "finTransactionId": "24e79052-9468-4d0f-8c00-04b849f37d98"
+},
+{
+ "invoiceNumber": "c65cefee-45ba-4eb3-bc0e-b5d314a8baf7",
+ "payDateTime": "2024-08-07T13:11:03+02:00",
+ "paid": 290.57,
+ "finTransactionId": "7f8d865c-a97f-4096-af6c-d387874ebaf5"
+},
+{
+ "invoiceNumber": "e6b43814-8515-4945-ad82-d9a6c7cd3a84",
+ "payDateTime": "2024-09-18T13:11:03+02:00",
+ "paid": 1240.3,
+ "finTransactionId": "046c2d55-f67e-4897-81cd-1fa9b0ab8655"
+},
+{
+ "invoiceNumber": "5ea9babf-bb7b-4be7-86ae-92e96d700446",
+ "payDateTime": "2024-10-03T13:11:03+02:00",
+ "paid": 374.88,
+ "finTransactionId": "4603084e-b961-47db-b74a-e3210c907237"
+},
+{
+ "invoiceNumber": "c7df9982-a7bf-4888-9161-e2fda51f7290",
+ "payDateTime": "2024-09-06T13:11:03+02:00",
+ "paid": 874.31,
+ "finTransactionId": "2c792972-1176-4452-8448-c4b7bf7f19d5"
+},
+{
+ "invoiceNumber": "515589e0-949a-41f2-a12c-e9d5f6a04323",
+ "payDateTime": "2024-11-25T13:11:03+02:00",
+ "paid": 225.61,
+ "finTransactionId": "ee8ae87f-671f-4d56-bd1a-bd5755801078"
+},
+{
+ "invoiceNumber": "4e40d7aa-5900-409a-9934-5ae92888f35f",
+ "payDateTime": "2024-08-13T13:11:03+02:00",
+ "paid": 525.12,
+ "finTransactionId": "229ebd88-20d0-4b17-9fe8-0769e33d7e73"
+},
+{
+ "invoiceNumber": "b0501739-11c8-46e9-b67d-d71d7ca33b8f",
+ "payDateTime": "2024-10-15T13:11:03+02:00",
+ "paid": 1056.89,
+ "finTransactionId": "f263ff00-26ae-4dc9-be35-bbf311e6b959"
+},
+{
+ "invoiceNumber": "5377b957-f5ce-41a4-b38c-af4fe6f2afbc",
+ "payDateTime": "2024-10-07T13:11:03+02:00",
+ "paid": 1196.97,
+ "finTransactionId": "6e92d42d-fb15-4c82-b6bc-0f6966f401d3"
+},
+{
+ "invoiceNumber": "0063bcc7-add3-4b4b-9157-66ce1f37f9f1",
+ "payDateTime": "2024-07-05T13:11:03+02:00",
+ "paid": 1318.02,
+ "finTransactionId": "2d71241d-d860-4df8-8b99-37336d34968c"
+},
+{
+ "invoiceNumber": "3cbbe32e-31e5-4b59-b65c-99755bff632b",
+ "payDateTime": "2024-07-17T13:11:03+02:00",
+ "paid": 276.94,
+ "finTransactionId": "c73c2bb0-ce00-403e-a1f0-8b5457f15b89"
+},
+{
+ "invoiceNumber": "732d4062-9200-469d-9591-024e6b40bf09",
+ "payDateTime": "2024-08-02T13:11:03+02:00",
+ "paid": 1478.87,
+ "finTransactionId": "810695a9-e85b-4aa5-8392-cc94deb874e6"
+},
+{
+ "invoiceNumber": "9aba21d2-ca9f-460a-932f-345be05e6ae0",
+ "payDateTime": "2024-12-21T13:11:03+02:00",
+ "paid": 849.4,
+ "finTransactionId": "95286068-a191-4160-80f8-ecb7066963f2"
+},
+{
+ "invoiceNumber": "f51e95d7-3af6-4d79-bbba-b8351b43f3b1",
+ "payDateTime": "2024-09-19T13:11:03+02:00",
+ "paid": 744.96,
+ "finTransactionId": "afdffb81-37df-4b3f-a01f-a3a167b6e9bd"
+},
+{
+ "invoiceNumber": "ad4636c0-c978-4c61-9095-146937949a9c",
+ "payDateTime": "2024-06-14T13:11:03+02:00",
+ "paid": 340.76,
+ "finTransactionId": "62ff65b5-c6c5-41b5-bd17-aee2a670e4ad"
+},
+{
+ "invoiceNumber": "20e31b72-41ca-4a99-b1eb-948c5ab3e5f3",
+ "payDateTime": "2024-06-27T13:11:03+02:00",
+ "paid": 2058.68,
+ "finTransactionId": "43ed47b1-e5d9-4564-a553-2d9eb70fd9a0"
+},
+{
+ "invoiceNumber": "3e715273-671b-4078-9bbc-49a4e90d3b14",
+ "payDateTime": "2024-06-28T13:11:03+02:00",
+ "paid": 228.73,
+ "finTransactionId": "d42d8a23-fac7-4344-a4ac-8d6aac48698a"
+},
+{
+ "invoiceNumber": "e96adc09-36fc-429e-8485-11e64b2ce0ce",
+ "payDateTime": "2024-12-13T13:11:03+02:00",
+ "paid": 275.96,
+ "finTransactionId": "63ae9adf-8f93-47c2-963f-518c779ffc11"
+},
+{
+ "invoiceNumber": "795c193e-3980-48ba-acc8-c9fcc5d05408",
+ "payDateTime": "2024-08-06T13:11:03+02:00",
+ "paid": 2836.06,
+ "finTransactionId": "0f7e647d-0017-44d0-a84f-9562a6637c66"
+},
+{
+ "invoiceNumber": "aaab8645-cd03-4be2-9fd4-f486df77471c",
+ "payDateTime": "2024-10-07T13:11:03+02:00",
+ "paid": 503.79,
+ "finTransactionId": "6f432cc5-ac0e-48bf-b62f-849f85734098"
+},
+{
+ "invoiceNumber": "4fd15a79-2825-4452-9fe9-6a5cefd53c0f",
+ "payDateTime": "2024-09-25T13:11:03+02:00",
+ "paid": 2132.7,
+ "finTransactionId": "172ddf4d-ad2a-4a9c-bce3-d7ff9938c098"
+},
+{
+ "invoiceNumber": "c3a6e751-7ed9-40ba-ac5f-a67377909b52",
+ "payDateTime": "2024-08-12T13:11:03+02:00",
+ "paid": 1668.85,
+ "finTransactionId": "87ab3c61-0338-481f-96ed-f1f89400b15a"
+},
+{
+ "invoiceNumber": "285e8fdb-4824-460f-bbc8-51734467ff8f",
+ "payDateTime": "2024-08-17T13:11:03+02:00",
+ "paid": 651.11,
+ "finTransactionId": "b2205216-4c15-4e89-9764-c4d82252c680"
+},
+{
+ "invoiceNumber": "4c03b91c-e772-4bc7-8ad9-017f061e06b3",
+ "payDateTime": "2024-07-24T13:11:03+02:00",
+ "paid": 1474.57,
+ "finTransactionId": "954552ad-0bd7-4a27-8b17-f9219563c6a5"
+},

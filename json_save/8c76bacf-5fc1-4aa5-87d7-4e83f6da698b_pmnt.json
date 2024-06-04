@@ -1,0 +1,12 @@
+{
+ "invoiceNumber": "595e06af-0a88-4db8-a5f5-4d712481fd82",
+ "payDateTime": "2024-08-08T16:59:21+02:00",
+ "paid": 3494.28,
+ "finTransactionId": "30dd5d95-de9c-4b2f-bc88-c3200c2740af"
+},
+{
+ "invoiceNumber": "4cda7bfc-efbc-4e6d-97ad-0622159798bc",
+ "payDateTime": "2024-11-27T16:59:21+02:00",
+ "paid": 22.79,
+ "finTransactionId": "ab3ab1cb-f0a6-4218-be19-5664eb8e35ad"
+},

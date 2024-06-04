@@ -1,0 +1,113 @@
+
+-- MongoAtlast
+use admin
+db.createUser(
+  {
+    user: "admin",
+    pwd: "abfr24", // or cleartext password
+    roles: [ { role: "root", db: "admin" }, "readWriteAnyDatabase" ]
+  }
+)
+
+db.createUser(
+  {
+    user: "go_etl_app",
+    pwd: "FAVOm5MEj963jA4j", // or cleartext password
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+  }
+)
+
+
+// or cleartext password
+
+db.auth("admin", passwordPrompt()) 
+
+db.adminCommand( { shutdown: 1 } )
+
+
+-- List connectors
+curl -X GET http://localhost:8083/connectors
+
+
+-- Local Mongo andConfluent Kafka
+-- Sink from Kafka to MongoDB
+
+
+  curl -X POST \
+  -H "Content-Type: application/json" \
+  --data '
+      {"name": "mongo-local-creator-sales-sink",
+        "config": {
+          "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
+          "connection.uri":"mongodb://mongolocal:27017/?directConnection=true",
+          "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+          "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+          "value.converter.schemas.enable": false,
+          "database":"MongoCom0",
+          "collection":"creator_salesbasket",
+          "topics":"mongocreator_basket"
+          }
+      }
+      ' \
+  http://localhost:8083/connectors -w "\n"
+
+
+  curl -X POST \
+  -H "Content-Type: application/json" \
+  --data '
+      {"name": "mongo-local-creator-payments-sink",
+        "config": {
+          "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
+          "connection.uri":"mongodb://mongolocal:27017/?directConnection=true",
+          "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+          "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+          "value.converter.schemas.enable": false,
+          "database":"MongoCom0",
+          "collection":"creator_salespayments",
+          "topics":"mongocreator_payments"
+          }
+      }
+      ' \
+  http://localhost:8083/connectors -w "\n"
+
+
+------------------------------------------------------------------------------
+
+-- Post/Sink to Atlas
+  curl -X POST \
+  -H "Content-Type: application/json" \
+  --data '
+     { 
+        "name": "mongo-cloud-creator-payments-sink",
+        "config": {
+          "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+          "connection.uri": "mongodb+srv://adminuser:password@cluster0.gqtneeXX.mongodb.net",
+          "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+          "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+          "value.converter.schemas.enable": false,
+          "database": "MongoCom0",
+          "collection": "creator_salespayments",
+          "topics": "mongocreator_payments"
+        }
+      } 
+      ' \
+  http://localhost:8083/connectors -w "\n"
+
+curl -X POST \
+  -H "Content-Type: application/json" \
+  --data '
+     { 
+        "name": "mongo-cloud-creator-basket-sink",
+        "config": {
+          "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+          "connection.uri": "mongodb+srv://adminuser:password@cluster0.gqtneeXX.mongodb.net",
+          "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+          "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+          "value.converter.schemas.enable": false,
+          "database": "MongoCom0",
+          "collection": "creator_salesbasket",
+          "topics": "mongocreator_basket"
+        }
+      } 
+      ' \
+  http://localhost:8083/connectors -w "\n"
