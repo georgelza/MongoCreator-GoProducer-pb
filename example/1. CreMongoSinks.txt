@@ -69,7 +69,7 @@ curl -s "http://mbp.local:8083/connectors?expand=info&expand=status" | \
         "name": "mongo-cloud-creator-payments-sink",
         "config": {
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
-          "connection.uri": "mongodb+srv://adminuser:BUJuCZnmugQgO85g@cluster0.gqtnee9.mongodb.net",
+          "connection.uri": "mongodb+srv://adminuser:password@cluster0.gqtneeXX.mongodb.net",
           "key.converter": "org.apache.kafka.connect.storage.StringConverter",
           "value.converter": "org.apache.kafka.connect.json.JsonConverter",
           "value.converter.schemas.enable": false,
@@ -88,7 +88,7 @@ curl -X POST \
         "name": "mongo-cloud-creator-basket-sink",
         "config": {
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
-          "connection.uri": "mongodb+srv://adminuser:BUJuCZnmugQgO85g@cluster0.gqtnee9.mongodb.net",
+          "connection.uri": "mongodb+srv://adminuser:password@cluster0.gqtneeXX.mongodb.net",
           "key.converter": "org.apache.kafka.connect.storage.StringConverter",
           "value.converter": "org.apache.kafka.connect.json.JsonConverter",
           "value.converter.schemas.enable": false,
