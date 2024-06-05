@@ -622,7 +622,9 @@ func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment
 	}
 
 	// We're saying payment can be now up to 5min and 59 seconds later
-	payTime := time.Now().AddDate(0, gofakeit.Number(0, 5), gofakeit.Number(0, 59)).Format("2006-01-02T15:04:05") + vGeneral.TimeOffset
+	//payTime := time.Now().AddDate( 0, 0, gofakeit.Number(0, 5), gofakeit.Number(0, 59)).Format("2006-01-02T15:04:05") + vGeneral.TimeOffset
+	payTime := time.Now().Local().Add(time.Minute*time.Duration(gofakeit.Number(0, 5))+time.Second*time.Duration(gofakeit.Number(0, 59))).Format("2006-01-02T15:04:05") + vGeneral.TimeOffset
+
 	t_Payment = types.Tp_payment{
 		InvoiceNumber:    txnId,
 		PayDateTime:      payTime,
