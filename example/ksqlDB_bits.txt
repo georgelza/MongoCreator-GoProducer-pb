@@ -350,6 +350,8 @@ docker exec -t kafkacat \
 }
 
 
+-- Working with time/dates and timestamps in ksqldb
+-- https://www.confluent.io/blog/ksqldb-2-0-introduces-date-and-time-data-types/
 
 -- salesbaskets
 CREATE STREAM salesbaskets (
@@ -388,7 +390,7 @@ CREATE STREAM salespayments	 (
        VALUE_FORMAT='JSON',
        PARTITIONS=1);
      
-CREATE STREAM salescompleted WITH "sales_completed" as  
+CREATE STREAM salescompleted as  
 select 
 	b.InvoiceNumber InvNumber, 
 	b.SaleDateTime,
