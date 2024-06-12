@@ -23,7 +23,7 @@ curl -s "http://mbp.local:8083/connectors?expand=info&expand=status" | \
   curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-      {"name": "mongo-local-creator-sales-sink",
+      {"name": "mongo-local-creator-baskets-sink",
         "config": {
           "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
           "connection.uri":"mongodb://mbp.local:27017/?directConnection=true",
@@ -31,8 +31,8 @@ curl -s "http://mbp.local:8083/connectors?expand=info&expand=status" | \
           "value.converter": "org.apache.kafka.connect.json.JsonConverter",
           "value.converter.schemas.enable": false,
           "database":"MongoCom0",
-          "collection":"salesbasket",
-          "topics":"salesbasket"
+          "collection":"salesbaskets",
+          "topics":"salesbaskets"
           }
       }
       ' \
@@ -62,39 +62,38 @@ curl -s "http://mbp.local:8083/connectors?expand=info&expand=status" | \
 
 -- Post/Sink to Atlas
 
+curl -X POST \
+  -H "Content-Type: application/json" \
+  --data '
+     { "name": "mongo-cloud-creator-baskets-sink",
+        "config": {
+          "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+          "connection.uri": "mongodb+srv://adminuser:password@clusterXX.gqtnee9.mongodb.net",
+          "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+          "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+          "value.converter.schemas.enable": false,
+          "database": "MongoCom0",
+          "collection": "salesbaskets",
+          "topics": "salesbaskets"
+        }
+      } 
+      ' \
+  http://localhost:8083/connectors -w "\n"
+
+  
   curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-     { 
-        "name": "mongo-cloud-creator-payments-sink",
+     { "name": "mongo-cloud-creator-payments-sink",
         "config": {
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
-          "connection.uri": "mongodb+srv://adminuser:password@cluster0.gqtneeXX.mongodb.net",
+          "connection.uri": "mongodb+srv://adminuser:password@cluster0.gqtneeXXX.mongodb.net",
           "key.converter": "org.apache.kafka.connect.storage.StringConverter",
           "value.converter": "org.apache.kafka.connect.json.JsonConverter",
           "value.converter.schemas.enable": false,
           "database": "MongoCom0",
           "collection": "salespayments",
           "topics": "salespayments"
-        }
-      } 
-      ' \
-  http://localhost:8083/connectors -w "\n"
-
-curl -X POST \
-  -H "Content-Type: application/json" \
-  --data '
-     { 
-        "name": "mongo-cloud-creator-basket-sink",
-        "config": {
-          "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
-          "connection.uri": "mongodb+srv://adminuser:password@cluster0.gqtneeXX.mongodb.net",
-          "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-          "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-          "value.converter.schemas.enable": false,
-          "database": "MongoCom0",
-          "collection": "salesbasket",
-          "topics": "salesbasket"
         }
       } 
       ' \

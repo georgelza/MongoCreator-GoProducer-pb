@@ -1,3 +1,6 @@
+-- Pull Mongodb Atlas container
+docker pull mongodb/mongodb-atlas-local:latest
+
 -- MongoAtlas
 use admin
 db.createUser(
@@ -76,14 +79,5 @@ https://docs.confluent.io/platform/current/connect/logging.html
 
 kcat -b localhost:9092 -t quickstart.sampleData
 
--- Installing Mongo connector plugin into containerised CP Kafka
-https://www.youtube.com/watch?v=18gDPSOH3wU
-
--- after adding.modifying Dockerfile - adding a plugin, redeploy using below.
--- docker compose up -d --build
-
-
-curl -s "http://mbp.local:8083/connectors?expand=info&expand=status" | \
-       jq '. | to_entries[] | [ .value.info.type, .key, .value.status.connector.state,.value.status.tasks[].state,.value.info.config."connector.class"]|join(":|:")' | \
-       column -s : -t| sed 's/\"//g'| sort
-
+create json schema from json:
+https://www.liquid-technologies.com/online-json-to-schema-converter

@@ -572,8 +572,13 @@ func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment
 	nClerkId := gofakeit.Number(0, clerkCount)
 	clerk := varSeed.Clerks[nClerkId]
 
+	// Uniqiue reference to the basket/sale
 	txnId := uuid.New().String()
-	eventTime := time.Now().Format("2006-01-02T15:04:05") + vGeneral.TimeOffset
+
+	// time that everything happened, the 1st as a Unix Epoc time representation,
+	// the 2nd in nice human readable milli second representation.
+	eventTimestamp := time.Now()
+	eventTime := eventTimestamp.Format("2006-01-02T15:04:05.000") + vGeneral.TimeOffset
 
 	// How many potential products do we have
 	productCount := len(varSeed.Products) - 1
@@ -612,6 +617,7 @@ func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment
 	t_Basket = types.Tp_basket{
 		InvoiceNumber: txnId,
 		SaleDateTime:  eventTime,
+		SaleTimestamp: fmt.Sprint(eventTimestamp.UnixMilli()),
 		Store:         store,
 		Clerk:         clerk,
 		TerminalPoint: strconv.Itoa(terminalPoint),
@@ -621,18 +627,28 @@ func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment
 		Total:         total_amount,
 	}
 
+	// For now we call it from here... real life it will be a seperate process/thread thats completed as the
+	// customer pays for his basket
+	t_Payment = constructPayments(txnId, eventTimestamp, total_amount)
+
+	return t_Basket, t_Payment, store.Name, nil
+}
+
+func constructPayments(txnId string, eventTimestamp time.Time, total_amount float64) (t_Payment types.Tp_payment) {
+
 	// We're saying payment can be now up to 5min and 59 seconds later
-	//payTime := time.Now().AddDate( 0, 0, gofakeit.Number(0, 5), gofakeit.Number(0, 59)).Format("2006-01-02T15:04:05") + vGeneral.TimeOffset
-	payTime := time.Now().Local().Add(time.Minute*time.Duration(gofakeit.Number(0, 5))+time.Second*time.Duration(gofakeit.Number(0, 59))).Format("2006-01-02T15:04:05") + vGeneral.TimeOffset
+	payTimestamp := eventTimestamp.Local().Add(time.Minute*time.Duration(gofakeit.Number(0, 5)) + time.Second*time.Duration(gofakeit.Number(0, 59)))
+	payTime := payTimestamp.Format("2006-01-02T15:04:05.000") + vGeneral.TimeOffset
 
 	t_Payment = types.Tp_payment{
 		InvoiceNumber:    txnId,
 		PayDateTime:      payTime,
+		PayTimestamp:     fmt.Sprint(payTimestamp.UnixMilli()),
 		Paid:             total_amount,
 		FinTransactionID: uuid.New().String(),
 	}
 
-	return t_Basket, t_Payment, store.Name, nil
+	return t_Payment
 }
 
 func KafkaPost(valueBytes []byte, storeName string) {
@@ -654,7 +670,7 @@ func KafkaPost(valueBytes []byte, storeName string) {
 
 }
 
-// Big worker... This si where everything happens.
+// Big worker... This is where all the magic is called from, ha ha.
 func runLoader(arg string) {
 
 	var err error

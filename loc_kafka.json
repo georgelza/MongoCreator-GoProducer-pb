@@ -4,7 +4,7 @@
     "Bootstrapservers": "localhost:9092",
     "Security_protocol": "",
     "Sasl_mechanisms": "",
-    "BasketTopicname": "salesbasket",
+    "BasketTopicname": "salesbaskets",
     "PaymentTopicname": "salespayments",
     "Numpartitions": 1,
     "Replicationfactor": 1,

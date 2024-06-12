@@ -1,11 +1,11 @@
 
 {
-    "EchoConfig": 1,                                                        # Note EchoConfig from General setup must == 0  for this to be considered
+    "EchoConfig": 1,                                                           # Note EchoConfig from General setup must == 0  for this to be considered
     "Bootstrapservers": "server-q283m.af-south-1.aws.confluent.cloud:9092",    # This points to my previous confluent cluster, no more...
     "Security_protocol": "SASL_SSL",
     "Sasl_mechanisms": "PLAIN",
-    "BasketTopicname": "mongocreator_basket",
-    "PaymentTopicname": "mongocreator_payments",
+    "BasketTopicname": "salesbaskets",
+    "PaymentTopicname": "salespayments",
     "Numpartitions": 3,
     "Replicationfactor": 3,
     "Retension": 3600,

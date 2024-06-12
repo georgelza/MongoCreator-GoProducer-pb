@@ -65,6 +65,7 @@ type Tp_BasketItem struct {
 type Tp_basket struct {
 	InvoiceNumber string          `json:"invoiceNumber,omitempty"`
 	SaleDateTime  string          `json:"saleDateTime,omitempty"`
+	SaleTimestamp string          `json:"saleTimestamp,omitempty"`
 	Store         TStoreStruct    `json:"store,omitempty"`
 	Clerk         TPClerkStruct   `json:"clerk,omitempty"`
 	TerminalPoint string          `json:"terminalPoint,omitempty"`
@@ -77,6 +78,7 @@ type Tp_basket struct {
 type Tp_payment struct {
 	InvoiceNumber    string  `json:"invoiceNumber,omitempty"`
 	PayDateTime      string  `json:"payDateTime,omitempty"`
+	PayTimestamp     string  `json:"payTimestamp,omitempty"`
 	Paid             float64 `json:"paid,omitempty"`
 	FinTransactionID string  `json:"finTransactionId,omitempty"`
 }
