@@ -81,3 +81,6 @@ kcat -b localhost:9092 -t quickstart.sampleData
 
 create json schema from json:
 https://www.liquid-technologies.com/online-json-to-schema-converter
+
+create avro schema from json:
+http://www.dataedu.ca/avro

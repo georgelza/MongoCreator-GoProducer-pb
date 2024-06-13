@@ -25,7 +25,7 @@ curl --request GET \
 
 -- list plugins installed
 curl --request GET \
- --url 'https://127.0.0.1:8083/connector-plugins' \
+ --url 'http://127.0.0.1:8083/connector-plugins' \
  | jq '.'
   
 -- if CP stack is the tar.gz file based
@@ -58,12 +58,6 @@ curl --request POST \
   	"tasks.max": "1"
 	}
 }'
-
-
-
--- Access ksqldb cli
-docker exec -it ksqldb-cli ksql http://mbp.local:8088
-
 
 
 Blog https://rmoff.net/2020/06/17/loading-csv-data-into-kafka/
@@ -173,9 +167,12 @@ curl -X PUT http://localhost:8083/connectors/sink-postgres-orders-00/config \
     }'
 
 -- ksql
+-- Access ksqldb cli
+docker exec -it ksqldb-cli ksql http://mbp.local:8088
+
 CREATE STREAM ORDERS_02 WITH (KAFKA_TOPIC='orders_spooldir_02', VALUE_FORMAT='AVRO');
 DESCRIBE ORDERS_02;
-ksql> SELECT DELIVERY_CITY, COUNT(*) AS ORDER_COUNT, MAX(CAST(ORDER_TOTAL_USD AS DECIMAL(9,2))) AS BIGGEST_ORDER_USD FROM ORDERS_02 GROUP BY DELIVERY_CITY EMIT CHANGES;
+SELECT DELIVERY_CITY, COUNT(*) AS ORDER_COUNT, MAX(CAST(ORDER_TOTAL_USD AS DECIMAL(9,2))) AS BIGGEST_ORDER_USD FROM ORDERS_02 GROUP BY DELIVERY_CITY EMIT CHANGES;
 
 
 CREATE STREAM salesbasket WITH (KAFKA_TOPIC='salesbasket', 
@@ -192,6 +189,7 @@ docker run -d \
   confluentinc/cp-kcat:latest
   
   
+-- now added to docker-compose.yaml file
 docker exec -t kafkacat  kcat \
   -b broker:29092 \
   -t orders_spooldir_02 \
@@ -200,14 +198,6 @@ docker exec -t kafkacat  kcat \
   -r http://schema-registry:8081 \
   | jq '.payload'
 
-docker exec -t kafkacat \
-  kcat \
-  -b broker:29092 \
-  -t salesbaskets \
-  -C -o-1 -J \
-  -s key=s -s value=avro \
-  -r http://schema-registry:8081 \
-  | jq '.payload'
 
 
 -- Salesbaskets Schema
@@ -427,6 +417,19 @@ docker exec -t kafkacat \
 docker exec -t kafkacat \
   kcat \
   -b broker:29092 \
+  -t salespayments \
+  -C 
+  -r http://schema-registry:8081 \
+  | jq '.payload'
+
+docker exec -t kafkacat \
+  kcat \
+  -b broker:29092 \
   -t SALESCOMPLETED \
   -C \
   | jq
+
+
+SELECT 
+       COUNT(InvNumber) AS TotalInvoices
+FROM SALESCOMPLETED;
