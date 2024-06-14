@@ -380,7 +380,10 @@ CREATE STREAM salespayments	 (
        VALUE_FORMAT='JSON',
        PARTITIONS=1);
      
-CREATE STREAM salescompleted as  
+CREATE STREAM salescompleted WITH (KAFKA_TOPIC='salescompleted',
+       VALUE_FORMAT='JSON',
+       PARTITIONS=1)
+       as  
 select 
 	b.InvoiceNumber InvNumber, 
 	b.SaleDateTime,
