@@ -28,6 +28,9 @@
 *					: going to add code/module to disable the Kafka push of docs and rather directly push onto Mongo Atlas, thus
 *					: bypassing the Confluent Kakfa cluster avaiability challenge.
 *
+*					: 15 Jun 2025
+*					: Moved create of the payment out into constructPayments()
+*					: changed types.t_payment as a normal struct into types.pb_payment => protobuf
 *
 *	Git				: https://github.com/georgelza/MongoCreator-GoProducer
 *
@@ -62,6 +65,7 @@ import (
 
 	// My Types/Structs/functions
 	"cmd/types"
+
 	// Filter JSON array
 	// MongoDB
 	//
@@ -545,7 +549,7 @@ func JsonToBson(message []byte) ([]byte, error) {
 	return marshaled, nil
 }
 
-func constructFakeBasket() (t_Basket types.Tp_basket, storeName string, err error) {
+func constructFakeBasket() (t_Basket types.Tp_basket, eventTimestamp time.Time, storeName string, err error) {
 
 	// Fake Data etc, not used much here though
 	// https://github.com/brianvoe/gofakeit
@@ -577,7 +581,7 @@ func constructFakeBasket() (t_Basket types.Tp_basket, storeName string, err erro
 
 	// time that everything happened, the 1st as a Unix Epoc time representation,
 	// the 2nd in nice human readable milli second representation.
-	eventTimestamp := time.Now()
+	eventTimestamp = time.Now()
 	eventTime := eventTimestamp.Format("2006-01-02T15:04:05.000") + vGeneral.TimeOffset
 
 	// How many potential products do we have
@@ -627,30 +631,24 @@ func constructFakeBasket() (t_Basket types.Tp_basket, storeName string, err erro
 		Total:         total_amount,
 	}
 
-	return t_Basket, store.Name, nil
+	return t_Basket, eventTimestamp, store.Name, nil
 }
 
-func constructPayments(txnId string, eTimestamp string, total_amount float64) (t_Payment types.Tp_payment) {
-
-	i, err := strconv.ParseInt(eTimestamp, 10, 64)
-	if err != nil {
-		panic(err)
-	}
-	tm := time.Unix(i, 0)
+func constructPayments(txnId string, eventTimestamp time.Time, total_amount float64) (pb_Payment types.Pb_Payment) {
 
 	// We're saying payment can be now up to 5min and 59 seconds later
-	payTimestamp := tm.Local().Add(time.Minute*time.Duration(gofakeit.Number(0, 5)) + time.Second*time.Duration(gofakeit.Number(0, 59)))
+	payTimestamp := eventTimestamp.Local().Add(time.Minute*time.Duration(gofakeit.Number(0, 5)) + time.Second*time.Duration(gofakeit.Number(0, 59)))
 	payTime := payTimestamp.Format("2006-01-02T15:04:05.000") + vGeneral.TimeOffset
 
-	t_Payment = types.Tp_payment{
+	pb_Payment = types.Pb_Payment{
 		InvoiceNumber:    txnId,
 		PayDateTime:      payTime,
-		PayTimestamp:     fmt.Sprint(tm.UnixMilli()),
+		PayTimestamp:     fmt.Sprint(payTimestamp.UnixMilli()),
 		Paid:             total_amount,
 		FinTransactionID: uuid.New().String(),
 	}
 
-	return t_Payment
+	return pb_Payment
 }
 
 func KafkaPost(valueBytes []byte, storeName string) {
@@ -897,14 +895,14 @@ func runLoader(arg string) {
 		txnStart := time.Now()
 
 		// Build an sales basket
-		t_SalesBasket, storeName, err := constructFakeBasket()
+		t_SalesBasket, eventTimestamp, storeName, err := constructFakeBasket()
 		if err != nil {
 			os.Exit(1)
 
 		}
 
 		// Build an payment record for created sales basket
-		t_Payment := constructPayments(t_SalesBasket.InvoiceNumber, t_SalesBasket.SaleTimestamp, t_SalesBasket.Total)
+		pb_Payment := constructPayments(t_SalesBasket.InvoiceNumber, eventTimestamp, t_SalesBasket.Total)
 		if err != nil {
 			os.Exit(1)
 
@@ -916,7 +914,7 @@ func runLoader(arg string) {
 
 		}
 
-		json_Payment, err := json.Marshal(t_Payment)
+		json_Payment, err := json.Marshal(pb_Payment)
 		if err != nil {
 			os.Exit(1)
 
@@ -964,7 +962,7 @@ func runLoader(arg string) {
 				time.Sleep(time.Duration(n) * time.Millisecond)
 			}
 
-			valueBytes, err = json.Marshal(t_Payment)
+			valueBytes, err = json.Marshal(pb_Payment)
 			if err != nil {
 				grpcLog.Error(fmt.Sprintf("Marchalling error: %s", err))
 
@@ -1072,7 +1070,7 @@ func runLoader(arg string) {
 			}
 
 			// Payment Doc
-			paymentBytes, err := json.Marshal(t_Payment)
+			paymentBytes, err := json.Marshal(pb_Payment)
 			if err != nil {
 				grpcLog.Error(fmt.Sprintf("Marchalling error: %s", err))
 
@@ -1191,7 +1189,7 @@ func runLoader(arg string) {
 			}
 
 			// Payment
-			pretty_pmnt, err := json.MarshalIndent(t_Payment, "", " ")
+			pretty_pmnt, err := json.MarshalIndent(pb_Payment, "", " ")
 			if err != nil {
 				grpcLog.Errorln("MarshalIndent error", err)
 

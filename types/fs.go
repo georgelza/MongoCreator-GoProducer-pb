@@ -75,13 +75,13 @@ type Tp_basket struct {
 	Total         float64         `json:"total,omitempty"`
 }
 
-type Tp_payment struct {
+/* type Tp_payment struct {
 	InvoiceNumber    string  `json:"invoiceNumber,omitempty"`
 	PayDateTime      string  `json:"payDateTime,omitempty"`
 	PayTimestamp     string  `json:"payTimestamp,omitempty"`
 	Paid             float64 `json:"paid,omitempty"`
 	FinTransactionID string  `json:"finTransactionId,omitempty"`
-}
+} */
 
 type TPClerkStruct struct {
 	Id   string `json:"id,omitempty"`
