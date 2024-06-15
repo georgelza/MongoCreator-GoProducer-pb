@@ -545,7 +545,7 @@ func JsonToBson(message []byte) ([]byte, error) {
 	return marshaled, nil
 }
 
-func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment, storeName string, err error) {
+func constructFakeBasket() (t_Basket types.Tp_basket, storeName string, err error) {
 
 	// Fake Data etc, not used much here though
 	// https://github.com/brianvoe/gofakeit
@@ -627,23 +627,25 @@ func constructFakeBasket() (t_Basket types.Tp_basket, t_Payment types.Tp_payment
 		Total:         total_amount,
 	}
 
-	// For now we call it from here... real life it will be a seperate process/thread thats completed as the
-	// customer pays for his basket
-	t_Payment = constructPayments(txnId, eventTimestamp, total_amount)
-
-	return t_Basket, t_Payment, store.Name, nil
+	return t_Basket, store.Name, nil
 }
 
-func constructPayments(txnId string, eventTimestamp time.Time, total_amount float64) (t_Payment types.Tp_payment) {
+func constructPayments(txnId string, eTimestamp string, total_amount float64) (t_Payment types.Tp_payment) {
+
+	i, err := strconv.ParseInt(eTimestamp, 10, 64)
+	if err != nil {
+		panic(err)
+	}
+	tm := time.Unix(i, 0)
 
 	// We're saying payment can be now up to 5min and 59 seconds later
-	payTimestamp := eventTimestamp.Local().Add(time.Minute*time.Duration(gofakeit.Number(0, 5)) + time.Second*time.Duration(gofakeit.Number(0, 59)))
+	payTimestamp := tm.Local().Add(time.Minute*time.Duration(gofakeit.Number(0, 5)) + time.Second*time.Duration(gofakeit.Number(0, 59)))
 	payTime := payTimestamp.Format("2006-01-02T15:04:05.000") + vGeneral.TimeOffset
 
 	t_Payment = types.Tp_payment{
 		InvoiceNumber:    txnId,
 		PayDateTime:      payTime,
-		PayTimestamp:     fmt.Sprint(payTimestamp.UnixMilli()),
+		PayTimestamp:     fmt.Sprint(tm.UnixMilli()),
 		Paid:             total_amount,
 		FinTransactionID: uuid.New().String(),
 	}
@@ -894,8 +896,15 @@ func runLoader(arg string) {
 		// We're going to time every record and push that to prometheus
 		txnStart := time.Now()
 
-		// Build an sales basket and get the associated payment document
-		t_SalesBasket, t_Payment, storeName, err := constructFakeBasket()
+		// Build an sales basket
+		t_SalesBasket, storeName, err := constructFakeBasket()
+		if err != nil {
+			os.Exit(1)
+
+		}
+
+		// Build an payment record for created sales basket
+		t_Payment := constructPayments(t_SalesBasket.InvoiceNumber, t_SalesBasket.SaleTimestamp, t_SalesBasket.Total)
 		if err != nil {
 			os.Exit(1)
 
