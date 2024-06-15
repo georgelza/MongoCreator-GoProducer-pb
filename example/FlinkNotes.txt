@@ -4,6 +4,8 @@ https://github.com/confluentinc/tutorials/tree/master/aggregating-count/flinksql
 
 https://github.com/confluentinc/tutorials/blob/36e9deeda90819371a593964395deff613fa222d/docker/docker-compose-flinksql.yml
 
+-- A all in one CP stack, confluent broker, connect, schema,ksqldb, CC & flink etc.
+https://github.com/confluentinc/cp-all-in-one/blob/08214d200c21d0b7382fca4e01d9900945a51498/cp-all-in-one-flink/docker-compose.yml
 
 -- error atm, no data
 docker exec -t kafkacat \
