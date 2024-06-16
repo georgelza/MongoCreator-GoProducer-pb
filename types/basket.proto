@@ -7,7 +7,7 @@ message BasketItem {
   string name = 2;
   string brand = 3;
   string category = 4;
-  double Price = 5;
+  double price = 5;
   int32 quantity = 6;
 }
 
@@ -22,8 +22,8 @@ message Pb_Basket {
   string saleTimestamp = 3;  
   Idstruct store = 4;
   Idstruct clerk = 5;
-  string TerminalPoint = 6;
-  repeated BasketItem BasketItems = 7;
+  string terminalPoint = 6;
+  repeated BasketItem basketItems = 7;
   double nett = 8;  
   double vat = 9;
   double total = 10; 
