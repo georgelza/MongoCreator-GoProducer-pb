@@ -1,20 +1,20 @@
 {
     "Stores": [
-      {"name": "Rosebank", "id": "324213412"},
-      {"name": "Sandton",  "id": "324213412"},
-      {"name": "Milnerton", "id": "324213412"},
-      {"name": "Stellenbosch", "id": "324213415"},
-      {"name": "Rondebosch", "id": "324213442"},
-      {"name": "Wavecrest", "id": "324213412"},
-      {"name": "C-Place", "id": "354213412"},
-      {"name": "Fountains", "id": "324223412"},
-      {"name": "Durbanville", "id": "224213412"},
-      {"name": "Bellville", "id": "324213992"},
-      {"name": "PineTown", "id": "324213422"},
-      {"name": "Meyerton", "id": "324213442"},
-      {"name": "Randburg", "id": "324213411"},
-      {"name": "Milnerton", "id": "324213410"},
-      {"name": "Warmer", "id": "324213412"}
+      {"id": "324213412", "name": "Rosebank"},
+      {"id": "324213413", "name": "Sandton"},
+      {"id": "324213414", "name": "Milnerton"},
+      {"id": "324213415", "name": "Stellenbosch"},
+      {"id": "324213442", "name": "Rondebosch"},
+      {"id": "324213411", "name": "Wavecrest"},
+      {"id": "354213412", "name": "C-Place"},
+      {"id": "324223412", "name": "Fountains"},
+      {"id": "224213412", "name": "Durbanville"},
+      {"id": "324213992", "name": "Bellville"},
+      {"id": "324213422", "name": "PineTown"},
+      {"id": "324213441", "name": "Meyerton"},
+      {"id": "324213410", "name": "Randburg"},
+      {"id": "324213410", "name": "Milnerton"},
+      {"id": "324213416", "name": "Warmer"}
     ],
 
     "Clerks": [
