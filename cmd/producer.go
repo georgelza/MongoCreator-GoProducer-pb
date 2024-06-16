@@ -103,9 +103,9 @@ func init() {
 
 	grpcLog.Infoln("###############################################################")
 	grpcLog.Infoln("#")
-	grpcLog.Infoln("#   Project   : GoProducer 1.0")
+	grpcLog.Infoln("#   Project   : GoProducer 2.0")
 	grpcLog.Infoln("#")
-	grpcLog.Infoln("#   Comment   : MongoCreator Project")
+	grpcLog.Infoln("#   Comment   : MongoCreator Project and lots of Kafka")
 	grpcLog.Infoln("#")
 	grpcLog.Infoln("#   By        : George Leonard (georgelza@gmail.com)")
 	grpcLog.Infoln("#")
