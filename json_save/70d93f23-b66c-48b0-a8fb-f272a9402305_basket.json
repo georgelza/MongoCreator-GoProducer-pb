@@ -1,6 +1,7 @@
 {
  "invoiceNumber": "252b6376-6110-4447-b68d-573abdc900ce",
  "saleDateTime": "2024-06-05T15:18:55+02:00",
+ "saleTimetamp": "1718117619911",
  "store": {
   "id": "324213410",
   "name": "Milnerton"
@@ -75,6 +76,7 @@
 {
  "invoiceNumber": "c1f1c59d-2ec7-4a54-8310-0693d49911f3",
  "saleDateTime": "2024-06-05T15:18:55+02:00",
+ "saleTimetamp": "1718117619911",
  "store": {
   "id": "324213415",
   "name": "Stellenbosch"
@@ -149,6 +151,7 @@
 {
  "invoiceNumber": "acaec143-82c7-4bf5-822c-00a923b9f556",
  "saleDateTime": "2024-06-05T15:18:55+02:00",
+ "saleTimetamp": "1718117619911",
  "store": {
   "id": "324213442",
   "name": "Meyerton"
@@ -199,6 +202,7 @@
 {
  "invoiceNumber": "741be8f5-7a04-4185-a302-c43b6a410153",
  "saleDateTime": "2024-06-05T15:18:55+02:00",
+ "saleTimetamp": "1718117619911",
  "store": {
   "id": "224213412",
   "name": "Durbanville"
