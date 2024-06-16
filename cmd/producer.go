@@ -30,7 +30,11 @@
 *
 *					: 15 Jun 2025
 *					: Moved create of the payment out into constructPayments()
-*					: changed types.t_payment as a normal struct into types.pb_payment => protobuf
+*					: changed types.Tp_payment as a normal struct into types.Pb_Payment => protobuf
+*
+*					: 16 June 2025
+*					: changed types.Tp_basket as a normal struct into types.Pb_Basket => protobuf
+*
 *
 *	Git				: https://github.com/georgelza/MongoCreator-GoProducer
 *
@@ -47,6 +51,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"math"
 	"math/rand"
 	"os"
@@ -57,6 +62,9 @@ import (
 	"github.com/brianvoe/gofakeit"
 
 	"github.com/confluentinc/confluent-kafka-go/kafka"
+	"github.com/confluentinc/confluent-kafka-go/schemaregistry"
+	"github.com/confluentinc/confluent-kafka-go/schemaregistry/serde/protobuf"
+
 	"github.com/google/uuid"
 
 	"github.com/TylerBrock/colorjson"
@@ -336,6 +344,7 @@ func printKafkaConfig(vKafka types.TKafka) {
 	grpcLog.Info("****** Kafka Connection Parameters *****")
 	grpcLog.Info("*")
 	grpcLog.Info("* Kafka bootstrap Server is\t", vKafka.Bootstrapservers)
+	grpcLog.Info("* Kafka schema Registry is\t", vKafka.SchemaRegistryURL)
 	grpcLog.Info("* Kafka Basket Topic is\t", vKafka.BasketTopicname)
 	grpcLog.Info("* Kafka Payment Topic is\t", vKafka.PaymentTopicname)
 	grpcLog.Info("* Kafka # Parts is\t\t", vKafka.Numpartitions)
@@ -549,7 +558,7 @@ func JsonToBson(message []byte) ([]byte, error) {
 	return marshaled, nil
 }
 
-func constructFakeBasket() (t_Basket types.Tp_basket, eventTimestamp time.Time, storeName string, err error) {
+func constructFakeBasket() (pb_Basket types.Pb_Basket, eventTimestamp time.Time, storeName string, err error) {
 
 	// Fake Data etc, not used much here though
 	// https://github.com/brianvoe/gofakeit
@@ -557,24 +566,28 @@ func constructFakeBasket() (t_Basket types.Tp_basket, eventTimestamp time.Time, 
 
 	gofakeit.Seed(0)
 
-	var store types.TStoreStruct
+	var store types.Idstruct
+	var clerk types.Idstruct
 	if vGeneral.Store == 0 {
 		// Determine how many Stores we have in seed file,
 		// and build the 2 structures from that viewpoint
 		storeCount := len(varSeed.Stores) - 1
 		nStoreId := gofakeit.Number(0, storeCount)
-		store = varSeed.Stores[nStoreId]
+		store.Id = varSeed.Stores[nStoreId].Id
+		store.Name = varSeed.Stores[nStoreId].Name
 
 	} else {
 		// We specified a specific store
-		store = varSeed.Stores[vGeneral.Store]
+		store.Id = varSeed.Stores[vGeneral.Store].Id
+		store.Name = varSeed.Stores[vGeneral.Store].Name
 
 	}
 
 	// Determine how many Clerks we have in seed file,
 	clerkCount := len(varSeed.Clerks) - 1
 	nClerkId := gofakeit.Number(0, clerkCount)
-	clerk := varSeed.Clerks[nClerkId]
+	clerk.Id = varSeed.Clerks[nClerkId].Id
+	clerk.Name = varSeed.Clerks[nClerkId].Name
 
 	// Uniqiue reference to the basket/sale
 	txnId := uuid.New().String()
@@ -589,8 +602,9 @@ func constructFakeBasket() (t_Basket types.Tp_basket, eventTimestamp time.Time, 
 	// now pick from array a random products to add to basket, by using 1 as a start point we ensure we always have at least 1 item.
 	nBasketItems := gofakeit.Number(1, vGeneral.Max_items_basket)
 
-	var arBasketItems []types.Tp_BasketItem
 	nett_amount := 0.0
+
+	var BasketItems []*types.BasketItem
 
 	for count := 0; count < nBasketItems; count++ {
 
@@ -599,15 +613,15 @@ func constructFakeBasket() (t_Basket types.Tp_basket, eventTimestamp time.Time, 
 		quantity := gofakeit.Number(1, vGeneral.Max_quantity)
 		price := varSeed.Products[productId].Price
 
-		BasketItem := types.Tp_BasketItem{
+		BasketItem := &types.BasketItem{
 			Id:       varSeed.Products[productId].Id,
 			Name:     varSeed.Products[productId].Name,
 			Brand:    varSeed.Products[productId].Brand,
 			Category: varSeed.Products[productId].Category,
 			Price:    varSeed.Products[productId].Price,
-			Quantity: quantity,
+			Quantity: int32(quantity),
 		}
-		arBasketItems = append(arBasketItems, BasketItem)
+		BasketItems = append(BasketItems, BasketItem)
 
 		nett_amount = nett_amount + price*float64(quantity)
 
@@ -618,20 +632,20 @@ func constructFakeBasket() (t_Basket types.Tp_basket, eventTimestamp time.Time, 
 	total_amount := toFixed(nett_amount+vat_amount, 2)
 	terminalPoint := gofakeit.Number(0, 20)
 
-	t_Basket = types.Tp_basket{
+	pb_Basket = types.Pb_Basket{
 		InvoiceNumber: txnId,
 		SaleDateTime:  eventTime,
 		SaleTimestamp: fmt.Sprint(eventTimestamp.UnixMilli()),
-		Store:         store,
-		Clerk:         clerk,
+		Store:         &store,
+		Clerk:         &clerk,
 		TerminalPoint: strconv.Itoa(terminalPoint),
-		BasketItems:   arBasketItems,
+		BasketItems:   BasketItems,
 		Nett:          nett_amount,
-		VAT:           vat_amount,
+		Vat:           vat_amount,
 		Total:         total_amount,
 	}
 
-	return t_Basket, eventTimestamp, store.Name, nil
+	return pb_Basket, eventTimestamp, store.Name, nil
 }
 
 func constructPayments(txnId string, eventTimestamp time.Time, total_amount float64) (pb_Payment types.Pb_Payment) {
@@ -678,6 +692,8 @@ func runLoader(arg string) {
 	var f_pmnt *os.File
 	var basketcol *mongo.Collection
 	var paymentcol *mongo.Collection
+	var client schemaregistry.Client
+	var serializer *protobuf.Serializer
 
 	// Initialize the vGeneral struct variable - This holds our configuration settings.
 	vGeneral = loadConfig(arg)
@@ -707,7 +723,9 @@ func runLoader(arg string) {
 			grpcLog.Info("**** Configure Client Kafka Connection ****")
 			grpcLog.Info("*")
 			grpcLog.Info(fmt.Sprintf("* Kafka bootstrap Server is %s", vKafka.Bootstrapservers))
-
+			if vKafka.SchemaRegistryURL != "" {
+				grpcLog.Info(fmt.Sprintf("* Schema Registry URL is    %s", vKafka.SchemaRegistryURL))
+			}
 		}
 
 		cm := kafka.ConfigMap{
@@ -735,13 +753,17 @@ func runLoader(arg string) {
 
 		// Variable p holds the new Producer instance.
 		p, err = kafka.NewProducer(&cm)
+		if err != nil {
+			grpcLog.Error(fmt.Sprintf("Failed to create producer: %s", err))
+
+		}
 		defer p.Close()
 
 		// Check for errors in creating the Producer
 		if err != nil {
 			grpcLog.Error(fmt.Sprintf("😢Oh noes, there's an error creating the Producer! %s", err))
 
-			if ke, ok := err.(kafka.Error); ok == true {
+			if ke, ok := err.(kafka.Error); ok {
 				switch ec := ke.Code(); ec {
 				case kafka.ErrInvalidArg:
 					grpcLog.Error(fmt.Sprintf("😢 Can't create the producer because you've configured it wrong (code: %d)!\n\t%v\n\nTo see the configuration options, refer to https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md", ec, err))
@@ -758,10 +780,22 @@ func runLoader(arg string) {
 
 		}
 
+		// Create a new Schema Registry client
+		client, err = schemaregistry.NewClient(schemaregistry.NewConfig(vKafka.SchemaRegistryURL))
+		if err != nil {
+			grpcLog.Error(fmt.Sprintf("Failed to create Schema Registry client: %s", err))
+
+		}
+
+		// Create a Protobuf serializer
+		serializer, err = protobuf.NewSerializer(client, 2, protobuf.NewSerializerConfig())
+		if err != nil {
+			grpcLog.Error(fmt.Sprintf("Failed to create Protobuf serializer: %s", err))
+
+		}
+
 		if vGeneral.Debuglevel > 0 {
 			grpcLog.Info("* Created Kafka Producer instance :")
-			grpcLog.Info("")
-			grpcLog.Info("**** LETS GO Processing ****")
 			grpcLog.Info("")
 		}
 	}
@@ -821,8 +855,10 @@ func runLoader(arg string) {
 		basketcol = appLabDatabase.Collection(vMongodb.Basketcollection)
 		paymentcol = appLabDatabase.Collection(vMongodb.Paymentcollection)
 
-		grpcLog.Infoln("* MongoDB Datastore and Collections Intialized")
-		grpcLog.Infoln("*")
+		if vGeneral.Debuglevel > 0 {
+			grpcLog.Infoln("* MongoDB Datastore and Collections Intialized")
+			grpcLog.Infoln("*")
+		}
 
 	}
 
@@ -895,20 +931,20 @@ func runLoader(arg string) {
 		txnStart := time.Now()
 
 		// Build an sales basket
-		t_SalesBasket, eventTimestamp, storeName, err := constructFakeBasket()
+		pb_Basket, eventTimestamp, storeName, err := constructFakeBasket()
 		if err != nil {
 			os.Exit(1)
 
 		}
 
 		// Build an payment record for created sales basket
-		pb_Payment := constructPayments(t_SalesBasket.InvoiceNumber, eventTimestamp, t_SalesBasket.Total)
+		pb_Payment := constructPayments(pb_Basket.InvoiceNumber, eventTimestamp, pb_Basket.Total)
 		if err != nil {
 			os.Exit(1)
 
 		}
 
-		json_SalesBasket, err := json.Marshal(t_SalesBasket)
+		json_SalesBasket, err := json.Marshal(pb_Basket)
 		if err != nil {
 			os.Exit(1)
 
@@ -935,10 +971,13 @@ func runLoader(arg string) {
 			}
 
 			// SalesBasket
-			valueBytes, err := json.Marshal(t_SalesBasket)
+			valueBytes, err := serializer.Serialize(vKafka.BasketTopicname, pb_Basket)
 			if err != nil {
-				grpcLog.Error(fmt.Sprintf("Marchalling error: %s", err))
+				log.Fatalf("Basket: Failed to serialize record: %s", err)
+			}
 
+			if err != nil {
+				log.Fatalf("Failed to produce message: %s", err)
 			}
 
 			kafkaMsg := kafka.Message{
@@ -962,10 +1001,9 @@ func runLoader(arg string) {
 				time.Sleep(time.Duration(n) * time.Millisecond)
 			}
 
-			valueBytes, err = json.Marshal(pb_Payment)
+			valueBytes, err = serializer.Serialize(vKafka.PaymentTopicname, pb_Payment)
 			if err != nil {
-				grpcLog.Error(fmt.Sprintf("Marchalling error: %s", err))
-
+				log.Fatalf("Payment: Failed to serialize record: %s", err)
 			}
 
 			kafkaMsg = kafka.Message{
@@ -1057,7 +1095,7 @@ func runLoader(arg string) {
 			// this way we don't need to care what the source structure is, it is all cast and inserted into the defined collection.
 
 			// Sales Basket Doc
-			basketBytes, err := json.Marshal(t_SalesBasket)
+			basketBytes, err := json.Marshal(pb_Basket)
 			if err != nil {
 				grpcLog.Error(fmt.Sprintf("Marchalling error: %s", err))
 
@@ -1177,7 +1215,7 @@ func runLoader(arg string) {
 			}
 
 			// Basket
-			pretty_basket, err := json.MarshalIndent(t_SalesBasket, "", " ")
+			pretty_basket, err := json.MarshalIndent(pb_Basket, "", " ")
 			if err != nil {
 				grpcLog.Errorln("MarshalIndent error", err)
 

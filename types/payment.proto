@@ -2,10 +2,10 @@ syntax = "proto3";
 package types;
 option go_package  = ".";
 
-message pb_Payment {
-  string InvoiceNumber = 1; 
-  string PayDateTime = 2; 
-  string  PayTimestamp = 3;  
-  double Paid = 4;  
-  string FinTransactionID = 5; 
+message Pb_Payment {
+  string invoiceNumber = 1; 
+  string payDateTime = 2; 
+  string payTimestamp = 3;  
+  double paid = 4;  
+  string finTransactionID = 5; 
   }

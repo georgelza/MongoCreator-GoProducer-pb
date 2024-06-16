@@ -27,6 +27,7 @@ type Tp_general struct {
 type TKafka struct {
 	EchoConfig        int
 	Bootstrapservers  string
+	SchemaRegistryURL string
 	BasketTopicname   string
 	PaymentTopicname  string
 	Numpartitions     int
@@ -62,7 +63,7 @@ type Tp_BasketItem struct {
 	Quantity int     `json:"quantity,omitempty"`
 }
 
-type Tp_basket struct {
+/* type Tp_basket struct {
 	InvoiceNumber string          `json:"invoiceNumber,omitempty"`
 	SaleDateTime  string          `json:"saleDateTime,omitempty"`
 	SaleTimestamp string          `json:"saleTimestamp,omitempty"`
@@ -73,7 +74,7 @@ type Tp_basket struct {
 	Nett          float64         `json:"nett,omitempty"`
 	VAT           float64         `json:"vat,omitempty"`
 	Total         float64         `json:"total,omitempty"`
-}
+} */
 
 /* type Tp_payment struct {
 	InvoiceNumber    string  `json:"invoiceNumber,omitempty"`
