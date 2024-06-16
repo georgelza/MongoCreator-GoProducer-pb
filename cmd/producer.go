@@ -35,6 +35,7 @@
 *					: 16 June 2025
 *					: changed types.Tp_basket as a normal struct into types.Pb_Basket => protobuf
 *					: Schema registries created as per .proto files in the types/ directory
+*					: protoc --proto_path=. --go_out=. record.proto
 *
 *	Git				: https://github.com/georgelza/MongoCreator-GoProducer
 *
