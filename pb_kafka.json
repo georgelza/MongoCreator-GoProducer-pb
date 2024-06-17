@@ -2,7 +2,7 @@
 {
     "EchoConfig": 1,                                                        # Note EchoConfig from General setup must == 0  for this to be considered
     "Bootstrapservers": "localhost:9092",
-    "SchemaRegistryURL": "localhost:8081",
+    "SchemaRegistryURL": "http://localhost:8081",
     "Security_protocol": "",
     "Sasl_mechanisms": "",
     "BasketTopicname": "pb_salesbaskets",
