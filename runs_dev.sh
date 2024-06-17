@@ -12,7 +12,7 @@
 #
 # *_mongo.json & -> See .pws
 
-go run -v cmd/producer.go dev
+go run -v cmd/main.go dev
 
 
 # https://docs.confluent.io/platform/current/app-development/kafkacat-usage.html
