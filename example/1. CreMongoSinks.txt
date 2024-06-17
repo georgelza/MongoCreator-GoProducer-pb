@@ -68,7 +68,7 @@ curl -X POST \
      { "name": "mongo-cloud-creator-baskets-sink",
         "config": {
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
-          "connection.uri": "mongodb+srv://adminuser:pass@cluster0.gqtneexx.mongodb.net",
+          "connection.uri": "mongodb+srv://adminuser:pass@cluster0.gqtneeXX.mongodb.net",
           "key.converter": "org.apache.kafka.connect.storage.StringConverter",
           "value.converter": "org.apache.kafka.connect.json.JsonConverter",
           "value.converter.schemas.enable": false,

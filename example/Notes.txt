@@ -6,7 +6,7 @@ use admin
 db.createUser(
   {
     user: "admin",
-    pwd: "abfr24", // or cleartext password
+    pwd: "pass", // or cleartext password
     roles: [ { role: "root", db: "admin" }, "readWriteAnyDatabase" ]
   }
 )
@@ -14,7 +14,7 @@ db.createUser(
 db.createUser(
   {
     user: "go_etl_app",
-    pwd: "FAVOm5MEj963jA4j", // or cleartext password
+    pwd: "pass", // or cleartext password
     roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
   }
 )

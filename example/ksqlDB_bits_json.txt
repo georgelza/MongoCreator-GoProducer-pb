@@ -1,0 +1,440 @@
+
+-- Create Datagen Connector job / creating transactions -> Source connector
+curl --request POST \
+  --url 'http://127.0.0.1:8083/connectors' \
+    --header 'content-type: application/json' \
+  --data '{
+  "name": "DatagenConnectorConnector_0",
+  "config": {
+    "name": "DatagenConnectorConnector_0",
+    "connector.class": "io.confluent.kafka.connect.datagen.DatagenConnector",
+    "kafka.topic": "transactions",
+    "quickstart": "TRANSACTIONS"
+  }
+}'
+
+-- List Connectors
+curl --request GET \
+  --url 'http://127.0.0.1:8083/connectors' \ |jq
+  
+-- List a specific connector status
+curl --request GET \
+  --url 'http://127.0.0.1:8083/connectors/DatagenConnectorConnector_0/status' \
+   | jq '.'
+   
+
+-- list plugins installed
+curl --request GET \
+ --url 'http://127.0.0.1:8083/connector-plugins' \
+ | jq '.'
+  
+-- if CP stack is the tar.gz file based
+confluent local services connect plugin list |grep "class"
+
+
+-- create sink into local containerised mysql instance.
+
+
+-- https://stackoverflow.com/questions/51758456/no-suitable-driver-found-for-jdbcmysql-in-kafka-connect/51760565#51760565
+-- MySQL Sink connector
+curl --request POST \
+  --url 'http://127.0.0.1:8083/connectors' \
+  --header 'content-type: application/json' \
+  --data '{
+  "name": "MySqlSinkConnector_0",
+  "config": {
+  	"connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+  	"name": "MySqlSinkConnector_0",
+  	"topics": "transactions",
+ 	"connection.url": "jdbc:mysql://172.16.20.29:3306/demo",
+  	"input.data.format": "AVRO",
+  	"input.key.format": "AVRO",
+  	"connection.user": "kc101user",
+  	"connection.password": "kc101pw",
+  	"db.name": "demo",
+  	"insert.mode": "INSERT",
+  	"auto.create": "true",
+  	"auto.evolve": "true",
+  	"tasks.max": "1"
+	}
+}'
+
+
+Blog https://rmoff.net/2020/06/17/loading-csv-data-into-kafka/
+Code https://github.com/confluentinc/demo-scene/tree/master/csv-to-kafka
+
+-- straight load from csv, generating schema
+curl -i -X PUT -H "Accept:application/json" \
+     -H  "Content-Type:application/json" http://localhost:8083/connectors/source-csv-spooldir-00/config \
+     -d '{
+         "connector.class": "com.github.jcustenborder.kafka.connect.spooldir.SpoolDirCsvSourceConnector",
+         "topic": "orders_spooldir_00",
+         "input.path": "/data/unprocessed",
+         "finished.path": "/data/processed",
+         "error.path": "/data/error",
+         "input.file.pattern": ".*\\.csv",
+         "schema.generation.enabled":"true",
+         "csv.first.row.as.header":"true"
+         }'
+
+
+-- adding a key field.
+curl -i -X PUT -H "Accept:application/json" \
+    -H  "Content-Type:application/json" http://localhost:8083/connectors/source-csv-spooldir-01/config \
+    -d '{
+        "connector.class": "com.github.jcustenborder.kafka.connect.spooldir.SpoolDirCsvSourceConnector",
+        "topic": "orders_spooldir_01",
+        "input.path": "/data/unprocessed",
+        "finished.path": "/data/processed",
+        "error.path": "/data/error",
+        "input.file.pattern": ".*\\.csv",
+        "schema.generation.enabled":"true",
+        "schema.generation.key.fields":"order_id",
+        "csv.first.row.as.header":"true"
+        }'
+
+
+--  changing field types
+curl -i -X PUT -H "Accept:application/json" \
+    -H  "Content-Type:application/json" http://localhost:8083/connectors/source-csv-spooldir-02/config \
+    -d '{
+        "connector.class": "com.github.jcustenborder.kafka.connect.spooldir.SpoolDirCsvSourceConnector",
+        "topic": "orders_spooldir_02",
+        "input.path": "/data/unprocessed",
+        "finished.path": "/data/processed",
+        "error.path": "/data/error",
+        "input.file.pattern": ".*\\.csv",
+        "schema.generation.enabled":"true",
+        "schema.generation.key.fields":"order_id",
+        "csv.first.row.as.header":"true",
+        "transforms":"castTypes",
+        "transforms.castTypes.type":"org.apache.kafka.connect.transforms.Cast$Value",
+        "transforms.castTypes.spec":"order_id:int32,customer_id:int32,order_total_usd:float32"
+        }'
+
+
+
+-- Get/Inspect schema definition
+ curl --silent --location --request GET 'http://localhost:8081/subjects/orders_spooldir_02-value/versions/latest' |jq '.schema|fromjson'
+{
+  "type": "record", "name": "Value", "namespace": "com.github.jcustenborder.kafka.connect.model",
+  "fields": [
+    { "name": "order_id", "type": [ "null", "int" ], "default": null },
+    { "name": "customer_id", "type": [ "null", "int" ], "default": null },
+    { "name": "order_total_usd", "type": [ "null", "float" ], "default": null },
+    { "name": "make", "type": [ "null", "string" ], "default": null },
+    { "name": "model", "type": [ "null", "string" ], "default": null },
+    { "name": "delivery_city", "type": [ "null", "string" ], "default": null },
+    { "name": "delivery_company", "type": [ "null", "string" ], "default": null },
+    { "name": "delivery_address", "type": [ "null", "string" ], "default": null }
+  ],
+  "connect.name": "com.github.jcustenborder.kafka.connect.model.Value"
+}
+
+
+-- straight load of csv into a simple string, no schema
+curl -i -X PUT -H "Accept:application/json" \
+    -H  "Content-Type:application/json" http://localhost:8083/connectors/source-csv-spooldir-03/config \
+    -d '{
+        "connector.class": "com.github.jcustenborder.kafka.connect.spooldir.SpoolDirLineDelimitedSourceConnector",
+        "value.converter":"org.apache.kafka.connect.storage.StringConverter",
+        "topic": "orders_spooldir_03",
+        "input.path": "/data/unprocessed",
+        "finished.path": "/data/processed",
+        "error.path": "/data/error",
+        "input.file.pattern": ".*\\.csv"
+        }'
+
+
+-- Sink into Postgresql
+
+-- primary key based on key assigned for orders_spooldir_01 step.
+curl -X PUT http://localhost:8083/connectors/sink-postgres-orders-00/config \
+    -H "Content-Type: application/json" \
+    -d '{
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "connection.url": "jdbc:postgresql://mbp-local:5432/",
+        "connection.user": "postgres",
+        "connection.password": "postgres",
+        "tasks.max": "1",
+        "topics": "orders_spooldir_02",
+        "auto.create": "true",
+        "auto.evolve":"true",
+        "pk.mode":"record_value",
+        "pk.fields":"order_id",
+        "insert.mode": "upsert",
+        "table.name.format":"orders"
+    }'
+
+-- ksql
+-- Access ksqldb cli
+docker exec -it ksqldb-cli ksql http://mbp.local:8088
+
+CREATE STREAM ORDERS_02 WITH (KAFKA_TOPIC='orders_spooldir_02', VALUE_FORMAT='AVRO');
+DESCRIBE ORDERS_02;
+SELECT DELIVERY_CITY, COUNT(*) AS ORDER_COUNT, MAX(CAST(ORDER_TOTAL_USD AS DECIMAL(9,2))) AS BIGGEST_ORDER_USD FROM ORDERS_02 GROUP BY DELIVERY_CITY EMIT CHANGES;
+
+
+CREATE STREAM salesbasket WITH (KAFKA_TOPIC='salesbasket', 
+                                VALUE_FORMAT='JSON',
+                                PARTITIONS=1, 
+                                TIMESTAMP='SaleDateTime');
+
+
+-- start kcat pod
+docker run -d \
+  --network aws-kafka-confluent_default \
+  --name kafkacat \
+  --entrypoint bash -i \
+  confluentinc/cp-kcat:latest
+  
+  
+-- now added to docker-compose.yaml file
+docker exec -t kafkacat  kcat \
+  -b broker:29092 \
+  -t orders_spooldir_02 \
+  -C -o-1 -J \
+  -s key=s -s value=avro \
+  -r http://schema-registry:8081 \
+  | jq '.payload'
+
+
+
+-- Salesbaskets Schema
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "properties": {
+    "BasketItems": {
+      "items": [
+        {
+          "properties": {
+            "Brand": {
+              "type": "string"
+            },
+            "Category": {
+              "type": "string"
+            },
+            "Id": {
+              "type": "string"
+            },
+            "Name": {
+              "type": "string"
+            },
+            "Price": {
+              "type": "number"
+            },
+            "Quantity": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "Id",
+            "Name",
+            "Brand",
+            "Category",
+            "Price",
+            "Quantity"
+          ],
+          "type": "object"
+        }
+      ],
+      "type": "array"
+    },
+    "Clerk": {
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Id",
+        "Name"
+      ],
+      "type": "object"
+    },
+    "InvoiceNumber": {
+      "type": "string"
+    },
+    "Nett": {
+      "type": "number"
+    },
+    "SaleDateTime": {
+      "format": "date",
+      "type": "string"
+    },
+    "SaleTimestamp": {
+      "type": "number"
+    },
+    "Store": {
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Id",
+        "Name"
+      ],
+      "type": "object"
+    },
+    "TerminalPoint": {
+      "type": "string"
+    },
+    "Total": {
+      "type": "number"
+    },
+    "VAT": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "InvoiceNumber",
+    "SaleDateTime",
+    "SaleTimestamp",
+    "Store",
+    "Clerk",
+    "TerminalPoint",
+    "BasketItems",
+    "Nett",
+    "VAT",
+    "Total"
+  ],
+  "type": "object"
+}
+
+-- Salespayments Schema => JSON based
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "properties": {
+    "FinTransactionID": {
+      "type": "string"
+    },
+    "InvoiceNumber": {
+      "type": "string"
+    },
+    "Paid": {
+      "type": "number"
+    },
+    "PayDateTime": {
+      "format": "date",
+      "type": "string"
+    },
+      "PayTimestamp": {
+      "type": "number"
+    }  
+  },
+  "required": [
+    "InvoiceNumber",
+    "PayDateTime",
+	"PayTimestamp",
+    "Paid",
+    "FinTransactionID"
+  ],
+  "type": "object"
+}
+-- Salespayments Schema => ProtoBuf based
+?
+
+
+-- Working with time/dates and timestamps in ksqldb
+-- https://www.confluent.io/blog/ksqldb-2-0-introduces-date-and-time-data-types/
+
+-- salesbaskets
+CREATE STREAM salesbaskets (
+	   	InvoiceNumber VARCHAR,
+	 	SaleDateTime VARCHAR,
+	 	SaleTimestamp TIMESTAMP,
+	  	TerminalPoint VARCHAR,
+	   	Nett DOUBLE,
+	  	Vat DOUBLE,
+	 	Total DOUBLE,
+       	Store STRUCT<
+       		Id VARCHAR,
+     		Name VARCHAR>,
+     	Clerk STRUCT<
+     		Id VARCHAR,
+          	Name VARCHAR>,
+    	BasketItems ARRAY< STRUCT<id VARCHAR,
+        	Name VARCHAR,
+          	Brand VARCHAR,
+          	Category VARCHAR,
+         	Price DOUBLE,
+        	Quantity integer >>) 
+WITH (KAFKA_TOPIC='salesbaskets',
+		VALUE_FORMAT='JSON',
+       	PARTITIONS=1);
+       
+       
+-- salespayments       
+CREATE STREAM salespayments1	 (	
+	      InvoiceNumber VARCHAR,
+	      FinTransactionID VARCHAR,
+	      PayDateTime VARCHAR,
+	      PayTimestamp TIMESTAMP,
+	      Paid DOUBLE )        
+ WITH (KAFKA_TOPIC='salespayments',
+       VALUE_FORMAT='ProtoBuf',
+       PARTITIONS=1);
+     
+CREATE STREAM salescompleted WITH (KAFKA_TOPIC='salescompleted',
+       VALUE_FORMAT='JSON',
+       PARTITIONS=1)
+       as  
+select 
+	b.InvoiceNumber InvNumber, 
+	b.SaleDateTime,
+	b.SaleTimestamp, 
+	b.TerminalPoint,
+	b.Nett,
+	b.Vat,
+	b.Total,
+	b.store,
+	b.clerk,
+	b.BasketItems,
+	p.FinTransactionID,
+	p.PayDateTime,
+	p.PayTimestamp,
+	p.Paid
+from 
+	salespayments p INNER JOIN
+	salesbaskets b
+WITHIN 7 DAYS 
+on b.InvoiceNumber = p.InvoiceNumber
+emit changes;
+
+
+
+docker exec -t kafkacat \
+  kcat \
+  -b broker:29092 \
+  -t salesbaskets \
+  -C 
+  -s key=s -s value=json \
+  -r http://schema-registry:8081 \
+  | jq '.payload'
+  
+docker exec -t kafkacat \
+  kcat \
+  -b broker:29092 \
+  -t salespayments \
+  -C 
+  -r http://schema-registry:8081 \
+  | jq '.payload'
+
+docker exec -t kafkacat \
+  kcat \
+  -b broker:29092 \
+  -t SALESCOMPLETED \
+  -C \
+  | jq
+
+
+SELECT 
+       COUNT(InvNumber) AS TotalInvoices
+FROM SALESCOMPLETED;
