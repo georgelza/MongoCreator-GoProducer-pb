@@ -38,7 +38,7 @@
 *					: protoc --proto_path=. --go_out=. record.proto
 *
 *					: 17 June
-*					: Making the main repo the Protobuf version, will be a second repo thats json based
+*					: Renaming the main repo => *-pb as the Protobuf version & a second version/repo *-json thats json based
 *
 *
 *
