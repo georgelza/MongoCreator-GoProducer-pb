@@ -1,22 +1,4 @@
 
--- Installing connector plugin into containerised CP Kafka
-https://www.youtube.com/watch?v=18gDPSOH3wU
-
--- after adding.modifying Dockerfile - adding a plugin, redeploy using below.
--- docker compose up -d --build
-
--- List plugins installed 
-curl -s localhost:8083/connector-plugins |jq '.[].class'
-
--- List connectors created
-curl -X GET http://localhost:8083/connectors
-
--- List connector status
-curl -s "http://mbp.local:8083/connectors?expand=info&expand=status" | \
-       jq '. | to_entries[] | [ .value.info.type, .key, .value.status.connector.state,.value.status.tasks[].state,.value.info.config."connector.class"]|join(":|:")' | \
-       column -s : -t| sed 's/\"//g'| sort
-
-
 ------------------------------------------------------------------------------
 -- Post/Sink to Local Mongo container
 
