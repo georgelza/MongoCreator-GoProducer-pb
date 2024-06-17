@@ -37,9 +37,16 @@
 *					: Schema registries created as per .proto files in the types/ directory
 *					: protoc --proto_path=. --go_out=. record.proto
 *
+*					: 17 June
+*					: Making the main repo the Protobuf version, will be a second repo thats json based
+*
+*
+*
 *	Git				: https://github.com/georgelza/MongoCreator-GoProducer
 *
-*	By				: George Leonard (georgelza@gmail.com) aka georgelza on Discord and Mongo Community Forum
+*	Author			: George Leonard
+*
+*	Copyright © 2021: George Leonard georgelza@gmail.com aka georgelza on Discord and Mongo Community Forum
 *
 *	jsonformatter 	: https://jsonformatter.curiousconcept.com/#
 *

@@ -67,7 +67,7 @@ WITH (KAFKA_TOPIC='pb_salespayments',
        VALUE_FORMAT='ProtoBuf',
        PARTITIONS=1);
      
-CREATE STREAM salescompleted WITH (KAFKA_TOPIC='pb_salescompleted',
+CREATE STREAM pb_salescompleted WITH (KAFKA_TOPIC='pb_salescompleted',
        VALUE_FORMAT='JSON',
        PARTITIONS=1)
        as  
