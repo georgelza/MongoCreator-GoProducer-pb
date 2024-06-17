@@ -190,6 +190,8 @@ services:
         FLINK_PROPERTIES=
         jobmanager.rpc.address: flink-jobmanager
         rest.bind-port: 9081
+
+# Flink console http://localhost:9081/#/overview
         
   flink-taskmanager:
     image: cnfldemos/flink-kafka:1.16.0-scala_2.12-java11
@@ -204,7 +206,7 @@ services:
         FLINK_PROPERTIES=
         jobmanager.rpc.address: flink-jobmanager
         taskmanager.numberOfTaskSlots: 10
-        
+
   kafkacat-cli:
     image: confluentinc/cp-kcat:latest
     hostname: kafkacat-cli
