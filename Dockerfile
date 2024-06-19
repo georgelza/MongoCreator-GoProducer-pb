@@ -9,8 +9,11 @@ RUN confluent-hub install --no-prompt markteehan/file-chunk-sink:latest
 RUN confluent-hub install --no-prompt tabular/iceberg-kafka-connect:latest
 RUN confluent-hub install --no-prompt jcustenborder/kafka-connect-spooldir:latest
 RUN confluent-hub install --no-prompt confluentinc/kafka-connect-datagen:latest
+#RUN confluent-hub install --no-prompt confluentinc/kafka-connect-protobuf-converter:latest
 
 USER root
 RUN wget -O /usr/share/java/kafka/mysql-connector-j-8.4.0.jar \
     https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.4.0/mysql-connector-j-8.4.0.jar
 USER appuser
+
+# docker build -t kafka-connect-custom:1.1 .

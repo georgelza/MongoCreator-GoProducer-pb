@@ -99,8 +99,6 @@ var (
 	runId    string
 	vKafka   types.TKafka
 	vMongodb types.TMongodb
-
-	p *kafka.Producer
 )
 
 func init() {
@@ -110,7 +108,7 @@ func init() {
 
 	grpcLog.Infoln("###############################################################")
 	grpcLog.Infoln("#")
-	grpcLog.Infoln("#   Project   : GoProducer 2.0")
+	grpcLog.Infoln("#   Project   : GoProducer 2.0 - Protobuf based")
 	grpcLog.Infoln("#")
 	grpcLog.Infoln("#   Comment   : MongoCreator Project and lots of Kafka")
 	grpcLog.Infoln("#")
@@ -507,6 +505,8 @@ func CreateTopic(props types.TKafka) {
 
 }
 
+// Some Helper Functions
+
 // Pretty Print JSON string
 func prettyJSON(ms string) {
 
@@ -524,6 +524,7 @@ func prettyJSON(ms string) {
 
 }
 
+// Pretty format JSON String
 func xprettyJSON(ms string) string {
 
 	var obj map[string]interface{}
@@ -540,16 +541,7 @@ func xprettyJSON(ms string) string {
 	return string(result)
 }
 
-// Helper Functions
-// https://stackoverflow.com/questions/18390266/how-can-we-truncate-float64-type-to-a-particular-precision
-func round(num float64) int {
-	return int(num + math.Copysign(0.5, num))
-}
-func toFixed(num float64, precision int) float64 {
-	output := math.Pow(10, float64(precision))
-	return float64(round(num*output)) / output
-}
-
+// Transform JSON to BSON for Mongo usage
 func JsonToBson(message []byte) ([]byte, error) {
 	reader, err := bsonrw.NewExtJSONValueReader(bytes.NewReader(message), true)
 	if err != nil {
@@ -563,6 +555,15 @@ func JsonToBson(message []byte) ([]byte, error) {
 	}
 	marshaled := buf.Bytes()
 	return marshaled, nil
+}
+
+// https://stackoverflow.com/questions/18390266/how-can-we-truncate-float64-type-to-a-particular-precision
+func round(num float64) int {
+	return int(num + math.Copysign(0.5, num))
+}
+func toFixed(num float64, precision int) float64 {
+	output := math.Pow(10, float64(precision))
+	return float64(round(num*output)) / output
 }
 
 func constructFakeBasket() (pb_Basket types.Pb_Basket, eventTimestamp time.Time, storeName string, err error) {
@@ -655,7 +656,7 @@ func constructFakeBasket() (pb_Basket types.Pb_Basket, eventTimestamp time.Time,
 	return pb_Basket, eventTimestamp, store.Name, nil
 }
 
-func constructPayments(txnId string, eventTimestamp time.Time, total_amount float64) (pb_Payment types.Pb_Payment) {
+func constructPayments(txnId string, eventTimestamp time.Time, total_amount float64) (pb_Payment types.Pb_Payment, err error) {
 
 	// We're saying payment can be now up to 5min and 59 seconds later
 	payTimestamp := eventTimestamp.Local().Add(time.Minute*time.Duration(gofakeit.Number(0, 5)) + time.Second*time.Duration(gofakeit.Number(0, 59)))
@@ -669,26 +670,7 @@ func constructPayments(txnId string, eventTimestamp time.Time, total_amount floa
 		FinTransactionID: uuid.New().String(),
 	}
 
-	return pb_Payment
-}
-
-func KafkaPost(valueBytes []byte, storeName string) {
-
-	kafkaMsg := kafka.Message{
-		TopicPartition: kafka.TopicPartition{
-			Topic:     &vKafka.PaymentTopicname,
-			Partition: kafka.PartitionAny,
-		},
-		Value: valueBytes,        // This is the payload/body thats being posted
-		Key:   []byte(storeName), // We us this to group the same transactions together in order, IE submitting/Debtor Bank.
-	}
-
-	// This is where we publish message onto the topic... on the Confluent cluster for now,
-	if err := p.Produce(&kafkaMsg, nil); err != nil {
-		grpcLog.Error(fmt.Sprintf("😢 Darn, there's an error producing the message! %s", err.Error()))
-
-	}
-
+	return pb_Payment, nil
 }
 
 // Big worker... This is where all the magic is called from, ha ha.
@@ -701,6 +683,7 @@ func runLoader(arg string) {
 	var paymentcol *mongo.Collection
 	var client schemaregistry.Client
 	var serializer *protobuf.Serializer
+	var p *kafka.Producer
 
 	// Initialize the vGeneral struct variable - This holds our configuration settings.
 	vGeneral = loadConfig(arg)
@@ -807,15 +790,6 @@ func runLoader(arg string) {
 		}
 	}
 
-	//
-	// For signalling termination from main to go-routine
-	termChan := make(chan bool, 1)
-	// For signalling that termination is done from go-routine to main
-	doneChan := make(chan bool)
-
-	// We will use this to remember when we last flushed the kafka queues.
-	vFlush := 0
-
 	if vGeneral.MongoAtlasEnabled == 1 {
 
 		vMongodb = loadMongoProps(arg)
@@ -918,9 +892,21 @@ func runLoader(arg string) {
 
 	}
 
+	//
+	// For signalling termination from main to go-routine
+	termChan := make(chan bool, 1)
+	// For signalling that termination is done from go-routine to main
+	doneChan := make(chan bool)
+
+	// We will use this to remember when we last flushed the kafka queues.
+	vFlush := 0
+
+	msg_mongo_count := 0
 	basketdocs := make([]interface{}, vMongodb.Batch_size)
 	paymentdocs := make([]interface{}, vMongodb.Batch_size)
-	msg_mongo_count := 0
+
+	var json_SalesBasket []byte
+	var json_Payment []byte
 
 	// this is to keep record of the total batch run time
 	vStart := time.Now()
@@ -945,19 +931,19 @@ func runLoader(arg string) {
 		}
 
 		// Build an payment record for created sales basket
-		pb_Payment := constructPayments(pb_Basket.InvoiceNumber, eventTimestamp, pb_Basket.Total)
+		pb_Payment, err := constructPayments(pb_Basket.InvoiceNumber, eventTimestamp, pb_Basket.Total)
 		if err != nil {
 			os.Exit(1)
 
 		}
 
-		json_SalesBasket, err := json.Marshal(pb_Basket)
+		json_SalesBasket, err = json.Marshal(pb_Basket)
 		if err != nil {
 			os.Exit(1)
 
 		}
 
-		json_Payment, err := json.Marshal(pb_Payment)
+		json_Payment, err = json.Marshal(pb_Payment)
 		if err != nil {
 			os.Exit(1)
 
@@ -977,7 +963,7 @@ func runLoader(arg string) {
 				grpcLog.Info("Post to Confluent Kafka topics")
 			}
 
-			// SalesBasket
+			// Proto serialize SalesBasket
 			valueBytes, err := serializer.Serialize(vKafka.BasketTopicname, &pb_Basket)
 
 			if err != nil {
@@ -1003,12 +989,13 @@ func runLoader(arg string) {
 
 			}
 
-			// Payment
+			// Lets sleep a bit before creating SalesPayment
 			if vGeneral.Sleep > 0 {
 				n := rand.Intn(vGeneral.Sleep)
 				time.Sleep(time.Duration(n) * time.Millisecond)
 			}
 
+			// Proto serialize SalesPayment
 			valueBytes, err = serializer.Serialize(vKafka.PaymentTopicname, &pb_Payment)
 			if err != nil {
 				log.Fatalf("Payment: Failed to serialize record: %s", err)
@@ -1102,27 +1089,13 @@ func runLoader(arg string) {
 			// https://stackoverflow.com/questions/39785289/how-to-marshal-json-string-to-bson-document-for-writing-to-mongodb
 			// this way we don't need to care what the source structure is, it is all cast and inserted into the defined collection.
 
-			// Sales Basket Doc
-			basketBytes, err := json.Marshal(pb_Basket)
-			if err != nil {
-				grpcLog.Error(fmt.Sprintf("Marchalling error: %s", err))
-
-			}
-
-			basketdoc, err := JsonToBson(basketBytes)
+			basketdoc, err := JsonToBson(json_SalesBasket)
 			if err != nil {
 				grpcLog.Errorln("Oops, we had a problem JsonToBson converting the payload, ", err)
 
 			}
 
-			// Payment Doc
-			paymentBytes, err := json.Marshal(pb_Payment)
-			if err != nil {
-				grpcLog.Error(fmt.Sprintf("Marchalling error: %s", err))
-
-			}
-
-			paymentdoc, err := JsonToBson(paymentBytes)
+			paymentdoc, err := JsonToBson(json_Payment)
 			if err != nil {
 				grpcLog.Errorln("Oops, we had a problem JsonToBson converting the payload, ", err)
 
