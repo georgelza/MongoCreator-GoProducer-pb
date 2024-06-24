@@ -3,7 +3,7 @@
 "Port": "27017",   
 "Root": "mongodb",
 "Datastore": "MongoCom0",            
-"Basketcollection": "salesbaskets",
-"Paymentcollection": "salespayments",
+"Basketcollection": "loc_salesbaskets",
+"Paymentcollection": "loc_salespayments",
 "Batch_size": 2                                                 # Must be a factor of the test size from *_app.json
 }        

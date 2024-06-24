@@ -59,7 +59,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"math"
 	"math/rand"
 	"os"
@@ -610,9 +609,8 @@ func constructFakeBasket() (pb_Basket types.Pb_Basket, eventTimestamp time.Time,
 	// now pick from array a random products to add to basket, by using 1 as a start point we ensure we always have at least 1 item.
 	nBasketItems := gofakeit.Number(1, vGeneral.Max_items_basket)
 
-	nett_amount := 0.0
-
 	var BasketItems []*types.BasketItem
+	nett_amount := 0.0
 
 	for count := 0; count < nBasketItems; count++ {
 
@@ -697,11 +695,6 @@ func runLoader(arg string) {
 
 		vKafka = loadKafka(arg)
 
-		fmt.Println("Mechanism", vKafka.Sasl_mechanisms)
-		fmt.Println("Username", vKafka.Sasl_username)
-		fmt.Println("Password", vKafka.Sasl_password)
-		fmt.Println("Broker", vKafka.Bootstrapservers)
-
 		// Lets make sure the topic/s exist
 		CreateTopic(vKafka)
 
@@ -739,6 +732,10 @@ func runLoader(arg string) {
 				grpcLog.Info("* Security Authentifaction configured in ConfigMap")
 
 			}
+			fmt.Println("Mechanism", vKafka.Sasl_mechanisms)
+			fmt.Println("Username", vKafka.Sasl_username)
+			fmt.Println("Password", vKafka.Sasl_password)
+			fmt.Println("Broker", vKafka.Bootstrapservers)
 		}
 
 		// Variable p holds the new Producer instance.
@@ -777,16 +774,21 @@ func runLoader(arg string) {
 
 		}
 
+		serdeConfig := protobuf.NewSerializerConfig()
+		//serdeConfig.AutoRegisterSchemas = false
+		//serdeConfig.UseLatestVersion = true
+		//serdeConfig.EnableValidation = true
+
 		// Create a Protobuf serializer
-		serializer, err = protobuf.NewSerializer(client, 2, protobuf.NewSerializerConfig())
+		serializer, err = protobuf.NewSerializer(client, 2, serdeConfig)
 		if err != nil {
-			grpcLog.Error(fmt.Sprintf("Failed to create Protobuf serializer: %s", err))
+			grpcLog.Errorln(fmt.Sprintf("Failed to create Protobuf serializer: %s", err))
 
 		}
 
 		if vGeneral.Debuglevel > 0 {
-			grpcLog.Info("* Created Kafka Producer instance :")
-			grpcLog.Info("")
+			grpcLog.Infoln("* Created Kafka Producer instance :")
+			grpcLog.Infoln("")
 		}
 	}
 
@@ -881,35 +883,35 @@ func runLoader(arg string) {
 		defer f_pmnt.Close()
 	}
 
-	// if set to 0 then we want it to simply just run and run and run. so lets give it a pretty big number
-	if vGeneral.Testsize == 0 {
-		vGeneral.Testsize = 10000000000000
-	}
-
 	if vGeneral.Debuglevel > 0 {
 		grpcLog.Info("**** LETS GO Processing ****")
 		grpcLog.Infoln("")
 
 	}
 
+	// if set to 0 then we want it to simply just run and run and run. so lets give it a pretty big number
+	if vGeneral.Testsize == 0 {
+		vGeneral.Testsize = 10000000000000
+	}
+
 	//
 	// For signalling termination from main to go-routine
-	termChan := make(chan bool, 1)
+	var termChan = make(chan bool, 1)
 	// For signalling that termination is done from go-routine to main
-	doneChan := make(chan bool)
+	var doneChan = make(chan bool)
 
-	// We will use this to remember when we last flushed the kafka queues.
-	vFlush := 0
-
-	msg_mongo_count := 0
-	basketdocs := make([]interface{}, vMongodb.Batch_size)
-	paymentdocs := make([]interface{}, vMongodb.Batch_size)
+	var basketdocs = make([]interface{}, vMongodb.Batch_size)
+	var paymentdocs = make([]interface{}, vMongodb.Batch_size)
 
 	var json_SalesBasket []byte
 	var json_Payment []byte
 
+	// We will use this to remember when we last flushed the kafka queues and mongo collection.
+	var vFlush = 0
+	var msg_mongo_count = 0
+
 	// this is to keep record of the total batch run time
-	vStart := time.Now()
+	var vStart = time.Now()
 	for count := 0; count < vGeneral.Testsize; count++ {
 
 		reccount := fmt.Sprintf("%v", count+1)
@@ -926,25 +928,35 @@ func runLoader(arg string) {
 		// Build an sales basket
 		pb_Basket, eventTimestamp, storeName, err := constructFakeBasket()
 		if err != nil {
+			grpcLog.Fatalln("Fatal constructFakeBasket: %s", err)
 			os.Exit(1)
 
+		}
+
+		// Lets sleep a bit before creating SalesPayment
+		if vGeneral.Sleep > 0 {
+			n := rand.Intn(vGeneral.Sleep)
+			time.Sleep(time.Duration(n) * time.Millisecond)
 		}
 
 		// Build an payment record for created sales basket
 		pb_Payment, err := constructPayments(pb_Basket.InvoiceNumber, eventTimestamp, pb_Basket.Total)
 		if err != nil {
+			grpcLog.Fatalln("Fatal constructPayments: %s", err)
 			os.Exit(1)
 
 		}
 
 		json_SalesBasket, err = json.Marshal(pb_Basket)
 		if err != nil {
+			grpcLog.Fatalln("json_SalesBasket Marshal: %s", err)
 			os.Exit(1)
 
 		}
 
 		json_Payment, err = json.Marshal(pb_Payment)
 		if err != nil {
+			grpcLog.Fatalln("json_Payment Marshal: %s", err)
 			os.Exit(1)
 
 		}
@@ -965,13 +977,8 @@ func runLoader(arg string) {
 
 			// Proto serialize SalesBasket
 			valueBytes, err := serializer.Serialize(vKafka.BasketTopicname, &pb_Basket)
-
 			if err != nil {
-				log.Fatalf("Basket: Failed to serialize record: %s", err)
-			}
-
-			if err != nil {
-				log.Fatalf("Failed to produce message: %s", err)
+				grpcLog.Fatalf("Basket: Failed to serialize record: %s", err)
 			}
 
 			kafkaMsg := kafka.Message{
@@ -989,16 +996,10 @@ func runLoader(arg string) {
 
 			}
 
-			// Lets sleep a bit before creating SalesPayment
-			if vGeneral.Sleep > 0 {
-				n := rand.Intn(vGeneral.Sleep)
-				time.Sleep(time.Duration(n) * time.Millisecond)
-			}
-
 			// Proto serialize SalesPayment
 			valueBytes, err = serializer.Serialize(vKafka.PaymentTopicname, &pb_Payment)
 			if err != nil {
-				log.Fatalf("Payment: Failed to serialize record: %s", err)
+				grpcLog.Fatalf("Payment: Failed to serialize record: %s", err)
 			}
 
 			kafkaMsg = kafka.Message{
@@ -1012,7 +1013,7 @@ func runLoader(arg string) {
 
 			// This is where we publish message onto the topic... on the Confluent cluster for now,
 			if err := p.Produce(&kafkaMsg, nil); err != nil {
-				grpcLog.Error(fmt.Sprintf("😢 Darn, there's an error producing the message! %s", err.Error()))
+				grpcLog.Errorf("😢 Darn, there's an error producing the message! %s", err.Error())
 
 			}
 
@@ -1109,7 +1110,7 @@ func runLoader(arg string) {
 				// Time to get this into the MondoDB Collection
 				result, err := basketcol.InsertOne(context.TODO(), basketdoc)
 				if err != nil {
-					grpcLog.Errorln("Oops, we had a problem inserting (I1) the document, ", err)
+					grpcLog.Errorln(fmt.Sprintf("Oops, we had a problem inserting (I1) the document, %s", err))
 
 				}
 
@@ -1130,7 +1131,7 @@ func runLoader(arg string) {
 				// Time to get this into the MondoDB Collection
 				result, err = paymentcol.InsertOne(context.TODO(), paymentdoc)
 				if err != nil {
-					grpcLog.Errorln("Oops, we had a problem inserting (I1) the document, ", err)
+					grpcLog.Errorln(fmt.Sprintf("Oops, we had a problem inserting (I1) the document, %s", err))
 
 				}
 
@@ -1159,7 +1160,7 @@ func runLoader(arg string) {
 					// Sales Basket
 					_, err = basketcol.InsertMany(context.TODO(), basketdocs)
 					if err != nil {
-						grpcLog.Errorln("Oops, we had a problem inserting (IM) the document, ", err)
+						grpcLog.Errorln(fmt.Sprintf("Oops, we had a problem inserting (IM) the document, %s", err))
 
 					}
 					if vGeneral.Debuglevel >= 2 {
@@ -1170,7 +1171,7 @@ func runLoader(arg string) {
 					// Payment
 					_, err = paymentcol.InsertMany(context.TODO(), paymentdocs)
 					if err != nil {
-						grpcLog.Errorln("Oops, we had a problem inserting (IM) the document, ", err)
+						grpcLog.Errorln(fmt.Sprintf("Oops, we had a problem inserting (IM) the document, %s", err))
 
 					}
 					if vGeneral.Debuglevel >= 2 {
@@ -1198,24 +1199,24 @@ func runLoader(arg string) {
 			// Basket
 			pretty_basket, err := json.MarshalIndent(pb_Basket, "", " ")
 			if err != nil {
-				grpcLog.Errorln("MarshalIndent error", err)
+				grpcLog.Errorln(fmt.Sprintf("pretty_basket MarshalIndent error %s", err))
 
 			}
 
 			if _, err = f_basket.WriteString(string(pretty_basket) + ",\n"); err != nil {
-				grpcLog.Errorln("os.WriteString error ", err)
+				grpcLog.Errorln(fmt.Sprintf("os.WriteString error %s", err))
 
 			}
 
 			// Payment
 			pretty_pmnt, err := json.MarshalIndent(pb_Payment, "", " ")
 			if err != nil {
-				grpcLog.Errorln("MarshalIndent error", err)
+				grpcLog.Errorln(fmt.Sprintf("pretty_pmnt MarshalIndent error %s", err))
 
 			}
 
 			if _, err = f_pmnt.WriteString(string(pretty_pmnt) + ",\n"); err != nil {
-				grpcLog.Errorln("os.WriteString error ", err)
+				grpcLog.Errorln(fmt.Sprintf("pretty_pmnt os.WriteString error %s", err))
 
 			}
 

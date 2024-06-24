@@ -43,7 +43,7 @@ services:
 
   connect:
     # image: cnfldemos/cp-server-connect-datagen:0.6.4-7.6.0
-    image: kafka-connect-custom:1.0
+    image: kafka-connect-custom:1.1
     hostname: connect
     container_name: connect
     depends_on:
@@ -191,8 +191,6 @@ services:
         jobmanager.rpc.address: flink-jobmanager
         rest.bind-port: 9081
 
-# Flink console http://localhost:9081/#/overview
-        
   flink-taskmanager:
     image: cnfldemos/flink-kafka:1.16.0-scala_2.12-java11
     hostname: flink-taskmanager
@@ -206,7 +204,7 @@ services:
         FLINK_PROPERTIES=
         jobmanager.rpc.address: flink-jobmanager
         taskmanager.numberOfTaskSlots: 10
-
+        
   kafkacat-cli:
     image: confluentinc/cp-kcat:latest
     hostname: kafkacat-cli
@@ -217,3 +215,29 @@ services:
       - connect
     entrypoint: /bin/bash -i
     tty: true
+
+  mysql:
+    image: mysql:8.0
+    hostname: mysql
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: abfr24
+
+  postgresql:
+    image: postgres:14
+    hostname: postgresql
+    container_name: postgresql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: abfr24
+  
+  mongo:
+    image: mongodb/mongodb-atlas-local:latest
+    hostname: mongodb
+    container_name: mongodb
+    ports:
+      - "27017:27017" 

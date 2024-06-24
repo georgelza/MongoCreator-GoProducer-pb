@@ -3,7 +3,7 @@
 "Root": "mongodb",
 "Port"    : "27017",   
 "Datastore": "MongoCom0",         
-"Basketcollection": "salesbaskets",
-"Paymentcollection": "salespayments",
+"Basketcollection": "cc_salesbaskets",
+"Paymentcollection": "cc_salespayments",
 "Batch_size": 5
 }        

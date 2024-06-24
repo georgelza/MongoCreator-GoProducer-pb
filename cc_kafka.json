@@ -2,13 +2,14 @@
 {
     "EchoConfig": 1,                                                           # Note EchoConfig from General setup must == 0  for this to be considered
     "Bootstrapservers": "server-q283m.af-south-1.aws.confluent.cloud:9092",    # This points to my previous confluent cluster, no more...
+    "SchemaRegistryURL": "http://localhost:8081",
     "Security_protocol": "SASL_SSL",
     "Sasl_mechanisms": "PLAIN",
-    "BasketTopicname": "salesbaskets",
-    "PaymentTopicname": "salespayments",
+    "BasketTopicname": "cc_salesbaskets",
+    "PaymentTopicname": "cc_salespayments",
     "Numpartitions": 3,
     "Replicationfactor": 3,
-    "Retension": 3600,
+    "Retension": 3600,                                                          # hour
     "Parseduration": "60s",    
     "Flush_interval": 10,
     "Sasl_password":"", 

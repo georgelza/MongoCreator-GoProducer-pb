@@ -45,7 +45,8 @@ CREATE STREAM pb_salesbaskets (
      	Clerk STRUCT<
      		Id VARCHAR,
           	Name VARCHAR>,
-    	BasketItems ARRAY< STRUCT<id VARCHAR,
+    	BasketItems ARRAY< STRUCT<
+			id VARCHAR,
         	Name VARCHAR,
           	Brand VARCHAR,
           	Category VARCHAR,
@@ -180,7 +181,9 @@ docker exec -t kafkacat \
 docker exec -t kafkacat \
   kcat \
   -b broker:29092 \
-  -t pb_salescompleted \
-  -C 
-
+  -t pb_salescompleted1 \
+  -C -J
+  -s value=json \
+  -r http://schema-registry:8081 \
+  | jq '.payload'
 

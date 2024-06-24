@@ -6,7 +6,7 @@ type Tp_general struct {
 	Hostname          string
 	Debuglevel        int
 	Testsize          int     // Used to limit number of records posted, over rided when reading test cases from input_source,
-	Sleep             int     // sleep time between Basket Create and Payment post
+	Sleep             int     // sleep time between Basket payload Create and Payment payload create
 	SeedFile          string  // Which seed file to read in
 	EchoSeed          int     // 0/1 Echo the seed data to terminal
 	CurrentPath       string  // current

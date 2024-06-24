@@ -110,7 +110,7 @@ curl -X POST \
      { "name": "mongo-atlas-salescompleted-sink-pb",
         "config": {
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
-          "connection.uri": "mongodb+srv://adminuser:BUJuCZnmugQgO85g@cluster0.gqtnee9.mongodb.net",
+          "connection.uri": "mongodb+srv://adminuser:pass@cluster0.gqtneeXX.mongodb.net",
           "key.converter": "org.apache.kafka.connect.storage.StringConverter",
           "value.converter":"io.confluent.connect.protobuf.ProtobufConverter",
           "value.converter.schema.registry.url":"http://schema-registry:8081",
