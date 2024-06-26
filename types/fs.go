@@ -1,7 +1,7 @@
 package types
 
 // Structs - the values we bring in from *app.json configuration file
-type Tp_general struct {
+type TPGeneral struct {
 	EchoConfig        int
 	Hostname          string
 	Debuglevel        int
@@ -13,6 +13,7 @@ type Tp_general struct {
 	OSName            string  // OS name
 	Vatrate           float64 // Amount
 	Store             int     // if <> 0 then store at that position in array is selected.
+	Terminals         int     // Number of possible checkout points/terminals
 	KafkaEnabled      int     // if = 1 then post docs to kafka
 	MongoAtlasEnabled int     // if = 1 then post docs to MongoDB
 	Json_to_file      int     // do we spool the created baskets and payments to a file/s
@@ -24,7 +25,7 @@ type Tp_general struct {
 	MongoConfigFile   string  // Mongo configuration file
 }
 
-type TKafka struct {
+type TPKafka struct {
 	EchoConfig        int
 	Bootstrapservers  string
 	SchemaRegistryURL string
@@ -41,7 +42,7 @@ type TKafka struct {
 	Flush_interval    int
 }
 
-type TMongodb struct {
+type TPMongodb struct {
 	Url               string
 	Uri               string
 	Root              string
@@ -54,42 +55,14 @@ type TMongodb struct {
 	Batch_size        int
 }
 
-type Tp_BasketItem struct {
-	Id       string  `json:"id,omitempty"`
-	Name     string  `json:"name,omitempty"`
-	Brand    string  `json:"brand,omitempty"`
-	Category string  `json:"category,omitempty"`
-	Price    float64 `json:"price,omitempty"`
-	Quantity int     `json:"quantity,omitempty"`
-}
-
-/* type Tp_basket struct {
-	InvoiceNumber string          `json:"invoiceNumber,omitempty"`
-	SaleDateTime  string          `json:"saleDateTime,omitempty"`
-	SaleTimestamp string          `json:"saleTimestamp,omitempty"`
-	Store         TStoreStruct    `json:"store,omitempty"`
-	Clerk         TPClerkStruct   `json:"clerk,omitempty"`
-	TerminalPoint string          `json:"terminalPoint,omitempty"`
-	BasketItems   []Tp_BasketItem `json:"basketItems,omitempty"`
-	Nett          float64         `json:"nett,omitempty"`
-	VAT           float64         `json:"vat,omitempty"`
-	Total         float64         `json:"total,omitempty"`
-} */
-
-/* type Tp_payment struct {
-	InvoiceNumber    string  `json:"invoiceNumber,omitempty"`
-	PayDateTime      string  `json:"payDateTime,omitempty"`
-	PayTimestamp     string  `json:"payTimestamp,omitempty"`
-	Paid             float64 `json:"paid,omitempty"`
-	FinTransactionID string  `json:"finTransactionId,omitempty"`
-} */
-
+// the below is used as structure of the seed file
 type TPClerkStruct struct {
-	Id   string `json:"id,omitempty"`
-	Name string `json:"name,omitempty"`
+	Id      string `json:"id,omitempty"`
+	Name    string `json:"name,omitempty"`
+	StoreId string `json:"storeId,omitempty"`
 }
 
-type TStoreStruct struct {
+type TPStoreStruct struct {
 	Id   string `json:"id,omitempty"`
 	Name string `json:"name,omitempty"`
 }
@@ -104,6 +77,6 @@ type TProductStruct struct {
 
 type TPSeed struct {
 	Clerks   []TPClerkStruct  `json:"clerks,omitempty"`
-	Stores   []TStoreStruct   `json:"stores,omitempty"`
+	Stores   []TPStoreStruct  `json:"stores,omitempty"`
 	Products []TProductStruct `json:"products,omitempty"`
 }
