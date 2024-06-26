@@ -17,7 +17,7 @@ message Idstruct {
     string name = 2;
 }
 
-message Pb_Basket {
+message PBBasket {
   string invoiceNumber = 1; 
   string saleDateTime = 2; 
   string saleTimestamp = 3;  
