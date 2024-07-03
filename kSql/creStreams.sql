@@ -168,9 +168,27 @@ CREATE TABLE avro_sales_per_store_per_hour WITH (KAFKA_TOPIC='avro_sales_per_sto
        as  
 SELECT  
 	store->id as store_id,
+	as_value(store->id) as storeid,
+  	from_unixtime(WINDOWSTART) as Window_Start,
+  	from_unixtime(WINDOWEND) as Window_End,
 	count(1) as sales_per_store
 FROM pb_salescompleted
 WINDOW TUMBLING (SIZE 1 HOUR)
+GROUP BY store->id 
+EMIT FINAL;
+
+CREATE TABLE avro_sales_per_store_per_5min WITH (KAFKA_TOPIC='avro_sales_per_store_per_5min',
+       VALUE_FORMAT='AVRO',
+       PARTITIONS=1)
+       as  
+SELECT  
+	store->id as store_id,
+	as_value(store->id) as storeid,
+  	from_unixtime(WINDOWSTART) as Window_Start,
+  	from_unixtime(WINDOWEND) as Window_End,
+	count(1) as sales_per_store
+FROM pb_salescompleted
+WINDOW TUMBLING (SIZE 5 MINUTE)
 GROUP BY store->id 
 EMIT FINAL;
 

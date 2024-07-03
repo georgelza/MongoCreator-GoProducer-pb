@@ -2,7 +2,7 @@
 
 Hi all… as shared originally on the Discord channel, Veronica asked that I post here also…
 
-<I do need to give this some more thought, will do a diagram of my thoughts, and then see when I I start this… just busy with some AWS training atm>.
+<I do need to give this some more thought, will do a diagram of my thoughts, and then see when I start this… just busy with some AWS training atm>.
 
 If anyone want to potentially also be involved, welcome to ping me. happy to share the lime light, or is that blame… :wink:
 
@@ -10,7 +10,7 @@ G
 
 … hi all…
 
-no immediate schedule/plan for this… as I need to do some urgent AWS studying/work for employer…
+no immediate schedule/plan for this… 
 
 but was thinking of doing a project and then documenting it and sharing the git repo, to the community.
 
@@ -21,7 +21,7 @@ maybe based on data sinked into the MongoDB store, do a trigger… with a do a s
 
 # Using the app.
 
-This application generates fake data (sales baskets), how that is done is controlled by the *_app.json configuration file that configures the run environment. The *_seed.json in which seed data is provided is used to generate the fake basket + basket items and the associated payment document.
+This application generates fake data (salesbaskets), how that is done is controlled by the *_app.json configuration file that configures the run environment. The *_seed.json in which seed data is provided is used to generate the fake basket + basket items and the associated payments (salespayments) documents.
 
 the *_app.json contains comments to explain the impact of the value.
 
@@ -37,6 +37,22 @@ export Sasl_password=Vj8MASendaIs0j4r34rsdfe4Vc8LG6cZ1XWilAJjYS05bZIk7AaGx0Y49xb
 export Sasl_username=3MZ4dfgsdfdfIUUA
 
 This files is executed via the runs_producer.sh file, reading the values into local environment, from where they are injested by a os.Getenv call, if this code is pushed into a docker container then these values can be pushed into a secret included in the environment.
+
+# Overview/plan.
+
+1. Create salesbaskets and salespayments documents (Golang app).
+2. Push salesbaskets and salespayments onto 2 Kafka topics.
+3. Combine 2 topics/streams into a salescompleted topic/document.
+4. Sink Salesbaskets and Salespayments topics onto MongoDB collections using Kafka sink connectors.
+5. Using Kafka Stream processing and kSQL extract sales per store_id per hour into new topic.
+6. Sink sales per store per hour onto MongoDB collection using Kafka sink connector.
+7. Using Apache Flink processing calculate sales per store per terminal per hour into new kafka topic.
+8. Using Kafka Sink connector sink the sales per store per terminal per hour onto MongoDB collection.
+9. On MongoDB Atlas cluster merge the salesbaskets and salespayments collection feeds into a salescompleted collection.
+10. Using Mongo Aggregation calculate sales by brand by hours and sales by product by hour into 2 new collections.
+11. Using Kafka source connector extract 4 Mongo collections onto 4 new Kafka topics.
+12. Using 4 Python applications echo the messages from the 4 toics onto the terminal. 
+
 
 My Version numbering.
 0.2	- 10/01/2024	Pushing/posting basket docs and associated payment docs onto Kafka.

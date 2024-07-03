@@ -120,7 +120,7 @@ curl -X POST \
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
           "connection.uri": "'${MONGO_URL}'",
           "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-          "value.converter":"io.confluent.connect.protobuf.ProtobufConverter",
+          "value.converter":"io.confluent.connect.avro.AvroConverter",
           "value.converter.schema.registry.url":"http://schema-registry:8081",
           "value.converter.schemas.enable": true,
           "database": "MongoCom0",
@@ -132,3 +132,22 @@ curl -X POST \
   http://localhost:8083/connectors -w "\n"
 
       
+  curl -X POST \
+  -H "Content-Type: application/json" \
+  --data '
+     { "name": "mongo-atlas-salesbystoreby5min-sink-pb",
+        "config": {
+          "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+          "connection.uri": "'${MONGO_URL}'",
+          "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+          "value.converter":"io.confluent.connect.avro.AvroConverter",
+          "value.converter.schema.registry.url":"http://schema-registry:8081",
+          "value.converter.schemas.enable": true,
+          "database": "MongoCom0",
+          "collection": "sales_by_store_by_5min",
+          "topics": "avro_sales_per_store_per_5min"
+        }
+      } 
+      ' \
+  http://localhost:8083/connectors -w "\n"
+
