@@ -1,5 +1,7 @@
 # MongoCreator - GoTransactionProducer
 
+https://github.com/georgelza/MongoCreator-GoProducer-pb
+
 Basic idea.
 
 Golang app that generate fake sales (maybe split as a basket onto one kafka topic and then a payment onto another, implying the 2 was out of band), then sinking the topic/s into MongoDB using a sink connectors.
