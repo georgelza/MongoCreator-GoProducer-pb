@@ -1,9 +1,16 @@
 #!/bin/bash
 
+# https://www.confluent.io/blog/kafka-connect-deep-dive-converters-serialization-explained/
 #------------------------------------------------------------------------------
 #-- Post/Sink to Local Mongo container
 
 . ./.pwdmongolocal
+
+# above file contains:
+#
+# LOCAL
+# export MONGO_URL=mongodb://hostname:port/?directConnection=true
+
 
 curl -X POST \
   -H "Content-Type: application/json" \
@@ -68,6 +75,11 @@ curl -X POST \
 #-- Post/Sink to Atlas
 
 . ./.pwdmongoatlas
+
+# above file contains:
+#
+# ATLAS
+# export MONGO_URL=mongodb+srv://username:password@cluster_url
 
 
 curl -X POST \
