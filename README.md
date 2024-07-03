@@ -21,6 +21,7 @@ The User can always start up multiple copies, specify/hard code the store, and c
 
 ## Note: Not included in the repo is a file called .pwd
 
+This file would be located in the project root folder next to the runs_**.sh filesystem
 Example: 
 
 export Sasl_password=Vj8MASendaIs0j4r34rsdfe4Vc8LG6cZ1XWilAJjYS05bZIk7AaGx0Y49xb
