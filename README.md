@@ -19,7 +19,7 @@ a similar bat file can be configured on Windows
 
 The User can always start up multiple copies, specify/hard code the store, and configure one store to have small baskets, low quantity per basket and configure a second run to have larger baskets, more quantity per product, thus higher value baskets.
 
-# Note: Not included in the repo is a file called .pwd
+## Note: Not included in the repo is a file called .pwd
 
 Example: 
 
