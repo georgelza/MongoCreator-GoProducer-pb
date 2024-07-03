@@ -162,20 +162,20 @@ emit changes;
 
 ------------------------------------------------------------------------------
 
-CREATE TABLE json_sales_per_store WITH (KAFKA_TOPIC='json_sales_per_store',
-       VALUE_FORMAT='Json',
+CREATE TABLE avro_sales_per_store_per_hour WITH (KAFKA_TOPIC='avro_sales_per_store_per_hour',
+       VALUE_FORMAT='AVRO',
        PARTITIONS=1)
        as  
 SELECT  
 	store->id as store_id,
 	count(1) as sales_per_store
 FROM pb_salescompleted
-WINDOW TUMBLING (SIZE 5 MINUTE)
+WINDOW TUMBLING (SIZE 1 HOUR)
 GROUP BY store->id 
 EMIT FINAL;
 
 -- limited to one store for POC, output in AVRO format
-CREATE TABLE avro_sales_per_terminal_point WITH (KAFKA_TOPIC='avro_sales_per_terminal_point',
+CREATE TABLE avro_sales_per_store_per_terminal_point_per_5min WITH (KAFKA_TOPIC='avro_sales_per_store_per_terminal_point_per_5min',
        FORMAT='AVRO',
        PARTITIONS=1)
        as  
@@ -189,8 +189,21 @@ WHERE store->Id = '324213441'
 GROUP BY store->id , TerminalPoint	
 EMIT FINAL;
 
+CREATE TABLE avro_sales_per_store_per_terminal_point_per_hour WITH (KAFKA_TOPIC='avro_sales_per_store_per_terminal_point_per_hour',
+       FORMAT='AVRO',
+       PARTITIONS=1)
+       as  
+SELECT 
+	store->id as store_id,
+	TerminalPoint as terminal_point,
+    count(1) as sales_per_terminal
+FROM pb_salescompleted
+WINDOW TUMBLING (SIZE 5 MINUTE)
+GROUP BY store->id , TerminalPoint	
+EMIT FINAL;
+
 -- limited to one store for POC, output in JSON format
-CREATE TABLE json_sales_per_terminal_point WITH (KAFKA_TOPIC='json_sales_per_terminal_point',
+CREATE TABLE avro_sales_per_324213441_per_terminal_point_per_5min WITH (KAFKA_TOPIC='avro_sales_per_324213441_per_terminal_point_per_5min',
        FORMAT='JSON',
        PARTITIONS=1)
        as  

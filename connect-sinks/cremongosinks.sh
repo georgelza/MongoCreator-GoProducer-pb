@@ -8,7 +8,7 @@
 curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-      {"name": "mongo-local-salesbaskets-sink-pb1",
+      {"name": "mongo-local-salesbaskets-sink-pb",
         "config": {
           "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
           "connection.uri": "'${MONGO_URL}'",
@@ -28,7 +28,7 @@ curl -X POST \
 curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-      {"name": "mongo-local-salespayments-sink-pb1",
+      {"name": "mongo-local-salespayments-sink-pb",
         "config": {
           "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
           "connection.uri": "'${MONGO_URL}'",
@@ -47,7 +47,7 @@ curl -X POST \
 curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-     { "name": "mongo-local-salescompleted-sink-pb1",
+     { "name": "mongo-local-salescompleted-sink-pb",
         "config": {
           "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
           "connection.uri": "'${MONGO_URL}'",
@@ -56,8 +56,8 @@ curl -X POST \
           "value.converter.schema.registry.url":"http://schema-registry:8081",
           "value.converter.schemas.enable": true,
           "database":"MongoCom0",
-          "collection":"pb_salescompleted1",
-          "topics":"pb_salescompleted1"
+          "collection":"pb_salescompleted",
+          "topics":"pb_salescompleted"
           }
       }
       ' \
@@ -73,7 +73,7 @@ curl -X POST \
 curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-     { "name": "mongo-atlas-salesbaskets-sink-pb1",
+     { "name": "mongo-atlas-salesbaskets-sink-pb",
         "config": {
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
           "connection.uri": "'${MONGO_URL}'",
@@ -93,7 +93,7 @@ curl -X POST \
   curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-     { "name": "mongo-atlas-salespayments-sink-pb1",
+     { "name": "mongo-atlas-salespayments-sink-pb",
         "config": {
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
           "connection.uri": "'${MONGO_URL}'",
@@ -110,10 +110,12 @@ curl -X POST \
   http://localhost:8083/connectors -w "\n"
 
 
-  curl -X POST \
+# We dont do a salescompleted as thats to be done on Atlas using stream processing there.
+
+ curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-     { "name": "mongo-atlas-salescompleted-sink-pb1",
+     { "name": "mongo-atlas-salesbystorebyhour-sink-pb",
         "config": {
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
           "connection.uri": "'${MONGO_URL}'",
@@ -122,8 +124,8 @@ curl -X POST \
           "value.converter.schema.registry.url":"http://schema-registry:8081",
           "value.converter.schemas.enable": true,
           "database": "MongoCom0",
-          "collection": "pb_salescompleted1",
-          "topics": "pb_salescompleted1"
+          "collection": "sales_by_store_by_hour",
+          "topics": "avro_sales_per_store_per_hour"
         }
       } 
       ' \
