@@ -45,6 +45,7 @@ This files is executed via the runs_*.sh file, reading the values into local env
 11. Using Kafka source connector extract 4 Mongo collections onto 4 new Kafka topics.
 12. Using 4 Python applications echo the messages from the 4 toics onto the terminal. 
 
+Note: all by hour group'ing on Kafka/kSQL is done at the moment using emit final, which means we wait for the window to complete and then emit the aggregated value... Another option would be to emit changes which means as the number increases then a new record is released - point of self research... is this new record key'd in such a way as as to upsert into a target database, other words replace previous record in a ktable.
 
 ## Some Version notes.
 0.2	- 10/01/2024	Pushing/posting basket docs and associated payment docs onto Kafka.
