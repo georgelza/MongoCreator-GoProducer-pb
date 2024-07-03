@@ -1,31 +1,5 @@
 
 
--- ksql
--- Access ksqldb cli
-docker exec -it ksqldb-cli ksql http://mbp.local:8088
-
-
-
--- start kcat pod manually, this has been replaced with a container as part of the docker-compose.yaml
-docker run -d \
-  --network aws-kafka-confluent_default \
-  --name kafkacat \
-  --entrypoint bash -i \
-  confluentinc/cp-kcat:latest
-  
-  
--- now added to docker-compose.yaml file
-docker exec -t kafkacat  kcat \
-  -b broker:29092 \
-  -t orders_spooldir_02 \
-  -C -o-1 -J \
-  -s key=s -s value=avro \
-  -r http://schema-registry:8081 \
-  | jq '.payload'
-
-
-
-
 
 -- Working with time/dates and timestamps in ksqldb
 -- https://www.confluent.io/blog/ksqldb-2-0-introduces-date-and-time-data-types/
@@ -96,7 +70,7 @@ CREATE STREAM pb_salesbaskets2 WITH (KAFKA_TOPIC='pb_salesbaskets2',
 -- salespayments       
 CREATE STREAM pb_salespayments (
 	      	InvoiceNumber VARCHAR,
-	      	FinTransactionID VARCHAR,
+	      	FinTransactionId VARCHAR,
 	      	PayDateTime VARCHAR,
 			PayTimestamp VARCHAR,
 	      	Paid DOUBLE      )
@@ -110,7 +84,7 @@ CREATE STREAM pb_salespayments1 WITH (KAFKA_TOPIC='pb_salespayments1',
        as  
 		select   	
 			InvoiceNumber,
-	      	FinTransactionID,
+	      	FinTransactionId,
 	      	PayDateTime,
 		  	CAST(PayTimestamp AS BIGINT) AS Pay_epoc_bigint,
 	      	Paid  
@@ -124,7 +98,7 @@ CREATE STREAM pb_salespayments2 WITH (KAFKA_TOPIC='pb_salespayments2',
        as  
 		select   	
 			InvoiceNumber,
-	      	FinTransactionID,
+	      	FinTransactionId,
 	      	PayDateTime,
 		  	TIMESTAMPTOSTRING(CAST(PayTimestamp AS BIGINT), 'yyyy-MM-dd''T''HH:mm:ss.SSS') AS PayTimestamp_str,
 	      	Paid  
@@ -133,7 +107,7 @@ CREATE STREAM pb_salespayments2 WITH (KAFKA_TOPIC='pb_salespayments2',
 
 
 
-CREATE STREAM pb_salescompleted1 WITH (KAFKA_TOPIC='pb_salescompleted1',
+CREATE STREAM pb_salescompleted WITH (KAFKA_TOPIC='pb_salescompleted',
        VALUE_FORMAT='ProtoBuf',
        PARTITIONS=1)
        as  
@@ -148,7 +122,33 @@ select
 	b.store,
 	b.clerk,
 	b.BasketItems,
-	p.FinTransactionID,
+	p.FinTransactionId,
+	p.PayDateTime,
+	p.PayTimestamp,
+	p.Paid
+from 
+	pb_salespayments p INNER JOIN
+	pb_salesbaskets b
+WITHIN 7 DAYS 
+on b.InvoiceNumber = p.InvoiceNumber
+emit changes;
+
+CREATE STREAM json_salescompleted WITH (KAFKA_TOPIC='json_salescompleted',
+       VALUE_FORMAT='Json',
+       PARTITIONS=1)
+       as  
+select 
+	b.InvoiceNumber InvNumber, 
+	b.SaleDateTime,
+	b.SaleTimestamp, 
+	b.TerminalPoint,
+	b.Nett,
+	b.Vat,
+	b.Total,
+	b.store,
+	b.clerk,
+	b.BasketItems,
+	p.FinTransactionId,
 	p.PayDateTime,
 	p.PayTimestamp,
 	p.Paid
@@ -160,30 +160,55 @@ on b.InvoiceNumber = p.InvoiceNumber
 emit changes;
 
 
+------------------------------------------------------------------------------
 
-docker exec -t kafkacat \
-  kcat \
-  -b broker:29092 \
-  -t pb_salesbaskets \
-  -C 
-  -s key=s -s value=json \
-  -r http://schema-registry:8081 
+CREATE TABLE json_sales_per_store WITH (KAFKA_TOPIC='json_sales_per_store',
+       VALUE_FORMAT='Json',
+       PARTITIONS=1)
+       as  
+SELECT  
+	store->id as store_id,
+	count(1) as sales_per_store
+FROM pb_salescompleted
+WINDOW TUMBLING (SIZE 5 MINUTE)
+GROUP BY store->id 
+EMIT FINAL;
 
+-- limited to one store for POC, output in AVRO format
+CREATE TABLE avro_sales_per_terminal_point WITH (KAFKA_TOPIC='avro_sales_per_terminal_point',
+       FORMAT='AVRO',
+       PARTITIONS=1)
+       as  
+SELECT 
+	store->id as store_id,
+	TerminalPoint as terminal_point,
+    count(1) as sales_per_terminal
+FROM pb_salescompleted
+WINDOW TUMBLING (SIZE 5 MINUTE)
+WHERE store->Id = '324213441'
+GROUP BY store->id , TerminalPoint	
+EMIT FINAL;
 
-docker exec -t kafkacat \
-  kcat \
-  -b broker:29092 \
-  -t pb_salespayments \
-  -C 
-  -r http://schema-registry:8081 
+-- limited to one store for POC, output in JSON format
+CREATE TABLE json_sales_per_terminal_point WITH (KAFKA_TOPIC='json_sales_per_terminal_point',
+       FORMAT='JSON',
+       PARTITIONS=1)
+       as  
+SELECT 
+	store->id as store_id,
+	TerminalPoint as terminal_point,
+    count(1) as sales_per_terminal
+FROM pb_salescompleted
+WINDOW TUMBLING (SIZE 5 MINUTE)
+WHERE store->Id = '324213441'
+GROUP BY store->id , TerminalPoint	
+EMIT FINAL;
 
-
-docker exec -t kafkacat \
-  kcat \
-  -b broker:29092 \
-  -t pb_salescompleted1 \
-  -C -J
-  -s value=json \
-  -r http://schema-registry:8081 \
-  | jq '.payload'
-
+-- this updates the totals incrementally as it grows, the above emit final only shows/updates at the close of the windows
+select 
+  store_id, 
+  terminal_point,
+  from_unixtime(WINDOWSTART) as Window_Start,
+  from_unixtime(WINDOWEND) as Window_End,
+  SALES_PER_TERMINAL
+from AVRO_SALES_PER_TERMINAL_POINT EMIT CHANGES;

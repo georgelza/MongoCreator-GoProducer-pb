@@ -3,7 +3,7 @@ package types;
 
 option go_package = "./pkg/basket.v1";
 
-message BasketItem {
+message BasketItems {
   string id = 1;
   string name = 2;
   string brand = 3;
@@ -15,14 +15,14 @@ message Idstruct {
   string id = 1;
   string name = 2;
 }
-message Pb_Basket {
+message PBBasket {
   string invoiceNumber = 1;
   string saleDateTime = 2;
   string saleTimestamp = 3;
   Idstruct store = 4;
   Idstruct clerk = 5;
   string terminalPoint = 6;
-  repeated BasketItem basketItems = 7;
+  repeated BasketItems basketItems = 7;
   double nett = 8;
   double vat = 9;
   double total = 10;

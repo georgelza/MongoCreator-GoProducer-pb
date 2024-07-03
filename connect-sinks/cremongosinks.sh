@@ -1,14 +1,17 @@
+#!/bin/bash
 
-------------------------------------------------------------------------------
--- Post/Sink to Local Mongo container
+#------------------------------------------------------------------------------
+#-- Post/Sink to Local Mongo container
 
-  curl -X POST \
+. ./.pwdmongolocal
+
+curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-      {"name": "mongo-local-salesbaskets-sink-pb",
+      {"name": "mongo-local-salesbaskets-sink-pb1",
         "config": {
           "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
-          "connection.uri":"mongodb://mbp.local:27017/?directConnection=true",
+          "connection.uri": "'${MONGO_URL}'",
           "key.converter": "org.apache.kafka.connect.storage.StringConverter",
           "value.converter":"io.confluent.connect.protobuf.ProtobufConverter",
           "value.converter.schema.registry.url":"http://schema-registry:8081",
@@ -22,13 +25,13 @@
   http://localhost:8083/connectors -w "\n"
 
 
-  curl -X POST \
+curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-      {"name": "mongo-local-salespayments-sink-pb",
+      {"name": "mongo-local-salespayments-sink-pb1",
         "config": {
           "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
-          "connection.uri":"mongodb://mbp.local:27017/?directConnection=true",
+          "connection.uri": "'${MONGO_URL}'",
           "key.converter": "org.apache.kafka.connect.storage.StringConverter",
           "value.converter":"io.confluent.connect.protobuf.ProtobufConverter",
           "value.converter.schema.registry.url":"http://schema-registry:8081",
@@ -41,13 +44,13 @@
       ' \
   http://localhost:8083/connectors -w "\n"
 
-  curl -X POST \
+curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-     { "name": "mongo-local-salescompleted-sink-pb",
+     { "name": "mongo-local-salescompleted-sink-pb1",
         "config": {
           "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
-          "connection.uri":"mongodb://mbp.local:27017/?directConnection=true",
+          "connection.uri": "'${MONGO_URL}'",
           "key.converter": "org.apache.kafka.connect.storage.StringConverter",
           "value.converter":"io.confluent.connect.protobuf.ProtobufConverter",
           "value.converter.schema.registry.url":"http://schema-registry:8081",
@@ -60,17 +63,20 @@
       ' \
   http://localhost:8083/connectors -w "\n"
 
-------------------------------------------------------------------------------
 
--- Post/Sink to Atlas
+#------------------------------------------------------------------------------
+#-- Post/Sink to Atlas
+
+. ./.pwdmongoatlas
+
 
 curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-     { "name": "mongo-atlas-salesbaskets-sink-pb",
+     { "name": "mongo-atlas-salesbaskets-sink-pb1",
         "config": {
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
-          "connection.uri": "mongodb+srv://adminuser:pass@cluster0.gqtneeXX.mongodb.net",
+          "connection.uri": "'${MONGO_URL}'",
           "key.converter": "org.apache.kafka.connect.storage.StringConverter",
           "value.converter":"io.confluent.connect.protobuf.ProtobufConverter",
           "value.converter.schema.registry.url":"http://schema-registry:8081",
@@ -83,14 +89,14 @@ curl -X POST \
       ' \
   http://localhost:8083/connectors -w "\n"
 
-  
+
   curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-     { "name": "mongo-atlas-salespayments-sink-pb",
+     { "name": "mongo-atlas-salespayments-sink-pb1",
         "config": {
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
-          "connection.uri": "mongodb+srv://adminuser:pass@cluster0.gqtneeXX.mongodb.net",
+          "connection.uri": "'${MONGO_URL}'",
           "key.converter": "org.apache.kafka.connect.storage.StringConverter",
           "value.converter":"io.confluent.connect.protobuf.ProtobufConverter",
           "value.converter.schema.registry.url":"http://schema-registry:8081",
@@ -107,10 +113,10 @@ curl -X POST \
   curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-     { "name": "mongo-atlas-salescompleted-sink-pb",
+     { "name": "mongo-atlas-salescompleted-sink-pb1",
         "config": {
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
-          "connection.uri": "mongodb+srv://adminuser:pass@cluster0.gqtneeXX.mongodb.net",
+          "connection.uri": "'${MONGO_URL}'",
           "key.converter": "org.apache.kafka.connect.storage.StringConverter",
           "value.converter":"io.confluent.connect.protobuf.ProtobufConverter",
           "value.converter.schema.registry.url":"http://schema-registry:8081",
@@ -123,5 +129,4 @@ curl -X POST \
       ' \
   http://localhost:8083/connectors -w "\n"
 
-
-  
+      

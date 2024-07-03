@@ -40,7 +40,8 @@
 *					: 17 June
 *					: Renaming the main repo => *-pb as the Protobuf version & a second version/repo *-json thats json based
 *
-*
+*					: 25 June 2024
+*					: adding storeid to TPClerkstruct
 *
 *	Git				: https://github.com/georgelza/MongoCreator-GoProducer
 *
@@ -49,6 +50,10 @@
 *	Copyright © 2021: George Leonard georgelza@gmail.com aka georgelza on Discord and Mongo Community Forum
 *
 *	jsonformatter 	: https://jsonformatter.curiousconcept.com/#
+*
+*					: protoc -I=. --go_out=. basket.proto
+*					: protoc -I=. --go_out=. payment.proto
+*					: Now go edit the *.pb.go file created, and update the package ____ with the correct name
 *
 *****************************************************************************/
 
@@ -93,11 +98,11 @@ import (
 var (
 	grpcLog  glog.LoggerV2
 	varSeed  types.TPSeed
-	vGeneral types.Tp_general
+	vGeneral types.TPGeneral
 	pathSep  = string(os.PathSeparator)
 	runId    string
-	vKafka   types.TKafka
-	vMongodb types.TMongodb
+	vKafka   types.TPKafka
+	vMongodb types.TPMongodb
 )
 
 func init() {
@@ -121,11 +126,11 @@ func init() {
 
 }
 
-func loadConfig(params ...string) types.Tp_general {
+func loadConfig(params ...string) types.TPGeneral {
 
 	var err error
 
-	vGeneral := types.Tp_general{}
+	vGeneral := types.TPGeneral{}
 	env := "dev"
 	if len(params) > 0 { // Input environment was specified, so lets use it
 		env = params[0]
@@ -180,9 +185,9 @@ func loadConfig(params ...string) types.Tp_general {
 
 // Load Kafka specific configuration Parameters, this is so that we can gitignore this dev_kafka.json file/seperate
 // from the dev_app.json file
-func loadKafka(params ...string) types.TKafka {
+func loadKafka(params ...string) types.TPKafka {
 
-	vKafka := types.TKafka{}
+	vKafka := types.TPKafka{}
 	env := "dev"
 	if len(params) > 0 {
 		env = params[0]
@@ -226,9 +231,9 @@ func loadKafka(params ...string) types.TKafka {
 	return vKafka
 }
 
-func loadMongoProps(params ...string) types.TMongodb {
+func loadMongoProps(params ...string) types.TPMongodb {
 
-	vMongodb := types.TMongodb{}
+	vMongodb := types.TPMongodb{}
 	env := "dev"
 	if len(params) > 0 {
 		env = params[0]
@@ -313,7 +318,7 @@ func loadSeed(fileName string) types.TPSeed {
 	return vSeed
 }
 
-func printConfig(vGeneral types.Tp_general) {
+func printConfig(vGeneral types.TPGeneral) {
 
 	grpcLog.Info("****** General Parameters *****")
 	grpcLog.Info("*")
@@ -341,7 +346,7 @@ func printConfig(vGeneral types.Tp_general) {
 }
 
 // print some more configurations
-func printKafkaConfig(vKafka types.TKafka) {
+func printKafkaConfig(vKafka types.TPKafka) {
 
 	fmt.Printf("xxxxxxxxxxxxxxxxxxx")
 
@@ -369,7 +374,7 @@ func printKafkaConfig(vKafka types.TKafka) {
 }
 
 // print some more configurations
-func printMongoConfig(vMongodb types.TMongodb) {
+func printMongoConfig(vMongodb types.TPMongodb) {
 
 	grpcLog.Info("*")
 	grpcLog.Info("****** MongoDB Connection Parameters *****")
@@ -391,7 +396,7 @@ func printMongoConfig(vMongodb types.TMongodb) {
 }
 
 // Create Kafka topic if not exist, using admin client
-func CreateTopic(props types.TKafka) {
+func CreateTopic(props types.TPKafka) {
 
 	cm := kafka.ConfigMap{
 		"bootstrap.servers":       props.Bootstrapservers,
@@ -565,7 +570,7 @@ func toFixed(num float64, precision int) float64 {
 	return float64(round(num*output)) / output
 }
 
-func constructFakeBasket() (pb_Basket types.Pb_Basket, eventTimestamp time.Time, storeName string, err error) {
+func constructFakeBasket() (pb_Basket types.PBBasket, eventTimestamp time.Time, storeName string, err error) {
 
 	// Fake Data etc, not used much here though
 	// https://github.com/brianvoe/gofakeit
@@ -609,7 +614,7 @@ func constructFakeBasket() (pb_Basket types.Pb_Basket, eventTimestamp time.Time,
 	// now pick from array a random products to add to basket, by using 1 as a start point we ensure we always have at least 1 item.
 	nBasketItems := gofakeit.Number(1, vGeneral.Max_items_basket)
 
-	var BasketItems []*types.BasketItem
+	var BasketItems []*types.BasketItems
 	nett_amount := 0.0
 
 	for count := 0; count < nBasketItems; count++ {
@@ -619,7 +624,7 @@ func constructFakeBasket() (pb_Basket types.Pb_Basket, eventTimestamp time.Time,
 		quantity := gofakeit.Number(1, vGeneral.Max_quantity)
 		price := varSeed.Products[productId].Price
 
-		BasketItem := &types.BasketItem{
+		BasketItem := &types.BasketItems{
 			Id:       varSeed.Products[productId].Id,
 			Name:     varSeed.Products[productId].Name,
 			Brand:    varSeed.Products[productId].Brand,
@@ -636,9 +641,9 @@ func constructFakeBasket() (pb_Basket types.Pb_Basket, eventTimestamp time.Time,
 	nett_amount = toFixed(nett_amount, 2)
 	vat_amount := toFixed(nett_amount*vGeneral.Vatrate, 2) // sales tax
 	total_amount := toFixed(nett_amount+vat_amount, 2)
-	terminalPoint := gofakeit.Number(0, 20)
+	terminalPoint := gofakeit.Number(1, vGeneral.Terminals)
 
-	pb_Basket = types.Pb_Basket{
+	pb_Basket = types.PBBasket{
 		InvoiceNumber: txnId,
 		SaleDateTime:  eventTime,
 		SaleTimestamp: fmt.Sprint(eventTimestamp.UnixMilli()),
@@ -654,13 +659,13 @@ func constructFakeBasket() (pb_Basket types.Pb_Basket, eventTimestamp time.Time,
 	return pb_Basket, eventTimestamp, store.Name, nil
 }
 
-func constructPayments(txnId string, eventTimestamp time.Time, total_amount float64) (pb_Payment types.Pb_Payment, err error) {
+func constructPayments(txnId string, eventTimestamp time.Time, total_amount float64) (pb_Payment types.PBPayment, err error) {
 
 	// We're saying payment can be now up to 5min and 59 seconds later
 	payTimestamp := eventTimestamp.Local().Add(time.Minute*time.Duration(gofakeit.Number(0, 5)) + time.Second*time.Duration(gofakeit.Number(0, 59)))
 	payTime := payTimestamp.Format("2006-01-02T15:04:05.000") + vGeneral.TimeOffset
 
-	pb_Payment = types.Pb_Payment{
+	pb_Payment = types.PBPayment{
 		InvoiceNumber:    txnId,
 		PayDateTime:      payTime,
 		PayTimestamp:     fmt.Sprint(payTimestamp.UnixMilli()),
@@ -1199,24 +1204,24 @@ func runLoader(arg string) {
 			// Basket
 			pretty_basket, err := json.MarshalIndent(pb_Basket, "", " ")
 			if err != nil {
-				grpcLog.Errorln(fmt.Sprintf("pretty_basket MarshalIndent error %s", err))
+				grpcLog.Errorln(fmt.Sprintf("Basket MarshalIndent error %s", err))
 
 			}
 
 			if _, err = f_basket.WriteString(string(pretty_basket) + ",\n"); err != nil {
-				grpcLog.Errorln(fmt.Sprintf("os.WriteString error %s", err))
+				grpcLog.Errorln(fmt.Sprintf("Basket os.WriteString error %s", err))
 
 			}
 
 			// Payment
 			pretty_pmnt, err := json.MarshalIndent(pb_Payment, "", " ")
 			if err != nil {
-				grpcLog.Errorln(fmt.Sprintf("pretty_pmnt MarshalIndent error %s", err))
+				grpcLog.Errorln(fmt.Sprintf("Payment MarshalIndent error %s", err))
 
 			}
 
 			if _, err = f_pmnt.WriteString(string(pretty_pmnt) + ",\n"); err != nil {
-				grpcLog.Errorln(fmt.Sprintf("pretty_pmnt os.WriteString error %s", err))
+				grpcLog.Errorln(fmt.Sprintf("Payment os.WriteString error %s", err))
 
 			}
 
@@ -1228,11 +1233,18 @@ func runLoader(arg string) {
 		}
 
 		// used to slow the data production/posting to kafka and safe to file system down.
+		// This mimics the speed with which baskets are presented at terminalpoint.
+		// if vGeneral.sleep = 1000, then n will be random value of 0 -> 1000  aka 0 and 1 second
+		// the value is seconds based. so to imply every 5 min a new basket is to be presented then it's 5 x 60 x 1000 = 300000
 		if vGeneral.Sleep > 0 {
-			n := rand.Intn(vGeneral.Sleep) // if vGeneral.sleep = 1000, then n will be random value of 0 -> 1000  aka 0 and 1 second
+			n := rand.Intn(vGeneral.Sleep)
 			if vGeneral.Debuglevel >= 2 {
-				grpcLog.Infof("Going to sleep for            : %d Milliseconds\n", n)
+				if n > 60000 { // 1000 = 1 sec, 6000 = 6 sec, 60000 = 1min
+					grpcLog.Infof("Going to sleep for            : %d Seconds\n", n/1000)
 
+				} else {
+					grpcLog.Infof("Going to sleep for            : %d Milliseconds\n", n)
+				}
 			}
 			time.Sleep(time.Duration(n) * time.Millisecond)
 		}
