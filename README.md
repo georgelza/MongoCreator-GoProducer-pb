@@ -49,6 +49,4 @@ This files is executed via the runs_*.sh file, reading the values into local env
 ## Some Version notes.
 0.2	- 10/01/2024	Pushing/posting basket docs and associated payment docs onto Kafka.
 
-0.3	- 24/01/2024	To "circumvent" Confluent Kafka cluster "unavailability" at this time I'm modifying the code here to insert directly into
-
-Mongo Atlas into 2 collections. This will allow the Creator community to interface with the inbound docs on the Atlas environment irrespective how they got there.
+0.3	- 24/01/2024	To "circumvent" Confluent Kafka cluster "unavailability" at this time I'm modifying the code here to insert directly into Mongo Atlas into 2 collections. This will allow the Creator community to interface with the inbound docs on the Atlas environment irrespective how they got there.
