@@ -3,6 +3,9 @@
 -- key is based the invnumber (as it was used t join salesbaskets and salespayments)
 -- Flink UI : http://localhost:9081/#/overview
 
+-- The below builds avro_salescompleted locally as a output of a join, inserting into avro_salescompleted.
+-- After this we then do the per store per terminal per hour aggregation/calculations.
+-- this is done here this way to "lighten" the load/dependency on Kafka stream processing.
 CREATE TABLE avro_salesbaskets (
     INVOICENUMBER STRING,
     SALEDATETIME STRING,

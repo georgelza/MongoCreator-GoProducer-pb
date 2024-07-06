@@ -49,6 +49,8 @@ See example/MongoCreatorProject *.jpg for a visual diagram if the thinking.
 
 Note: all by hour group'ing on Kafka/kSQL is done at the moment using emit final, which means we wait for the window to complete and then emit the aggregated value... Another option would be to emit changes which means as the number increases then a new record is released - point of self research... is this new record key'd in such a way as as to upsert into a target database, other words replace previous record in a ktable.
 
+Note: all/most subdirectories have local README.md files with some more local topic specific comments.
+
 ## Credits... due.
 
 Without these ques and their willingness to entertain allot of questions and some times siply dumb ideas and helping me slowly onto the right path all of this would simply not have been possible.

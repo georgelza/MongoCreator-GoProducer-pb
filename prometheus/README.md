@@ -1,5 +1,8 @@
 
 ## Push Gateway method...
+
+NOT USED in project yet.
+
 Metrics specified as part of a struct
 
 - Start Prometheus Push Gateway process
