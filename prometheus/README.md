@@ -3,6 +3,9 @@
 
 NOT USED in project yet.
 
+This is my test environment to explore Prometheus and Grafana.
+When I choose.. I instrument my project to see the impact, what can be done, these metrics are then scraped using the below stack and displayed.
+
 Metrics specified as part of a struct
 
 - Start Prometheus Push Gateway process

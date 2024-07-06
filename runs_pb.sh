@@ -13,7 +13,6 @@
 #
 #export mongo_username=    # Same as Atlas / Google auth georgelza@gmail.com
 #export mongo_password=
-
 . ./.pwdloc
 
 
