@@ -1,4 +1,18 @@
+# the Below file contains the following variables.
+# This is done as such to not include these values into the git repo sync.
+# The files themself are added/listed in the .gitignore file.
+# 
+# Mongo and Kafka credentials as local env variables
+# Kafka Creds
+#
+#export Sasl_username=               
+#export Sasl_password=
 
+# MongoDB ATLAS Creds
+# https://medium.com/mongoaudit/how-to-enable-authentication-on-mongodb-b9e8a924efac
+#
+#export mongo_username=    # Same as Atlas / Google auth georgelza@gmail.com
+#export mongo_password=
 . ./.pwdloc
 
 
