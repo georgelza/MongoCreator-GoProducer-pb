@@ -56,7 +56,7 @@ Without these ques and their willingness to entertain allot of questions and som
         (Developer support on Confluent Forum @dtroiano),
 
     Barry Evans, 
-        Someone that I consider a friend, jsut stepped in and as he happily calls it community service,
+        Someone that I consider a friend, just stepped in, starting helping me and as he happily calls it community service,
         Helping others figure problems out that they have, whatever the nature.
         https://confluentcommunity.slack.com/team/U04UNKMRL4U
 
