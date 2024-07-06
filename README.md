@@ -45,7 +45,7 @@ See example/MongoCreatorProject *.jpg for a visual diagram if the thinking.
 9. On MongoDB Atlas cluster merge the salesbaskets and salespayments collection feeds into a salescompleted collection.
 10. Using Mongo Aggregation calculate sales by brand by hours and sales by product by hour into 2 new collections.
 11. Using Kafka source connector extract 4 Mongo collections onto 4 new Kafka topics.
-12. Using 4 Python applications echo the messages from the 4 toics onto the terminal. 
+12. Using 4 Python applications echo the messages from the 4 topics onto the terminal. 
 
 Note: all by hour group'ing on Kafka/kSQL is done at the moment using emit final, which means we wait for the window to complete and then emit the aggregated value... Another option would be to emit changes which means as the number increases then a new record is released - point of self research... is this new record key'd in such a way as as to upsert into a target database, other words replace previous record in a ktable.
 
@@ -53,15 +53,14 @@ Note: all/most subdirectories have local README.md files with some more local to
 
 ## Credits... due.
 
-Without these ques and their willingness to entertain allot of questions and some times siply dumb ideas and helping me slowly onto the right path all of this would simply not have been possible.
+Without these guys and their willingness to entertain allot of questions and some times siply dumb ideas and helping me slowly onto the right path all of this would simply not have been possible.
 
     Apache Kafka or Confluent Kafka :
         Dave Troiano,
         (Developer support on Confluent Forum @dtroiano),
 
     Barry Evans, 
-        Someone that I consider a friend, just stepped in, starting helping me and as he happily calls it community service,
-        Helping others figure problems out that they have, whatever the nature.
+        Someone that I consider a friend, just stepped in, starting helping me and as he happily calls it his community service. Helping others figure problems out that they have, whatever the nature, and another always curious mind himself.
         https://confluentcommunity.slack.com/team/U04UNKMRL4U
 
     Apache Flink:
