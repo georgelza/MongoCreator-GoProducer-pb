@@ -32,6 +32,8 @@ This files is executed via the runs_*.sh file, reading the values into local env
 
 ## Overview/plan.
 
+See example/MongoCreatorProject *.jpg for a visual diagram if the thinking.
+
 1. Create salesbaskets and salespayments documents (Golang app).
 2. Push salesbaskets and salespayments onto 2 Kafka topics.
 3. Combine 2 topics/streams into a salescompleted topic/document.
