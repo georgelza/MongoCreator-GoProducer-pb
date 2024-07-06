@@ -3,7 +3,7 @@
 -- key is based the invnumber (as it was used t join salesbaskets and salespayments)
 -- Flink UI : http://localhost:9081/#/overview
 
--- The below builds on avro_salescompleted having been build on the Kafka platform as a kStream job/output
+-- The below builds on avro_salescompleted table, having been build (backed by) on the Kafka platform as a kStream job/output
 CREATE TABLE avro_salescompleted (
     INVNUMBER STRING,
     SALEDATETIME STRING,
