@@ -51,8 +51,8 @@ Note: all by hour group'ing on Kafka/kSQL is done at the moment using emit final
 
 Without these ques and their willingness to entertain allot of questions and some times siply dumb ideas and helping me slowly onto the right path all of this would simply not have been possible.
 
-Apache Kafka or Confluent Kafka :
-    Dave Troiano,
+    Apache Kafka or Confluent Kafka :
+        Dave Troiano,
         (Developer support on Confluent Forum @dtroiano),
 
     Barry Evans, 
@@ -60,9 +60,9 @@ Apache Kafka or Confluent Kafka :
         Helping others figure problems out that they have, whatever the nature.
         https://confluentcommunity.slack.com/team/U04UNKMRL4U
 
-Apache Flink:
-    Martijn Visser, https://apache-flink.slack.com/team/U03GADV9USX
-    (PMC and Committer for Apache Flink, Product Manager at Confluent)
+    Apache Flink:
+        Martijn Visser, https://apache-flink.slack.com/team/U03GADV9USX
+        (PMC and Committer for Apache Flink, Product Manager at Confluent)
 
 
 ## Some Version notes.
