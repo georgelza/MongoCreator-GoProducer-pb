@@ -1,8 +1,9 @@
 
+-- Flink UI : http://localhost:9081/#/overview
 
-# https://aiven.io/blog/preview-JSON-SQL-functions-apache-flink-1.15.0
+-- https://aiven.io/blog/preview-JSON-SQL-functions-apache-flink-1.15.0
 
-# Example
+-- Example
 
 {
     "id": "message-1",
@@ -87,3 +88,16 @@ SELECT
   JSON_OBJECTAGG(KEY loc VALUE max_value) AS json_object_value
 FROM sensors_with_max_metric
 GROUP BY timestamp_value, metric;
+
+
+SELECT 
+  window_start, 
+  window_end, 
+  user_id, 
+  sum(total_price) as total_total
+FROM TABLE ( TUMBLE orders, DESCRIPTION(order_time), INTERVAL `1` MINUTES))
+GROUP BY user_id, window_start, window_end
+
+
+-- convert epoc string to timestamp
+SELECT TO_TIMESTAMP(FROM_UNIXTIME(CAST(SALETIMESTAMP AS BIGINT) / 1000)) AS timestamp_value from avro_salescompleted;

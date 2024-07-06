@@ -127,7 +127,7 @@ curl -X POST \
  curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-     { "name": "mongo-atlas-salesbystorebyhour-sink-pb",
+     { "name": "mongo-atlas-salesbystorebyhour-sink-avro",
         "config": {
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
           "connection.uri": "'${MONGO_URL}'",
@@ -147,7 +147,7 @@ curl -X POST \
   curl -X POST \
   -H "Content-Type: application/json" \
   --data '
-     { "name": "mongo-atlas-salesbystoreby5min-sink-pb",
+     { "name": "mongo-atlas-salesbystoreby5min-sink-avro",
         "config": {
           "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
           "connection.uri": "'${MONGO_URL}'",

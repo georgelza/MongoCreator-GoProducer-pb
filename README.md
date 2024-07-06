@@ -47,7 +47,27 @@ This files is executed via the runs_*.sh file, reading the values into local env
 
 Note: all by hour group'ing on Kafka/kSQL is done at the moment using emit final, which means we wait for the window to complete and then emit the aggregated value... Another option would be to emit changes which means as the number increases then a new record is released - point of self research... is this new record key'd in such a way as as to upsert into a target database, other words replace previous record in a ktable.
 
+## Credits... due.
+
+Without these ques and their willingness to entertain allot of questions and some times siply dumb ideas and helping me slowly onto the right path all of this would simply not have been possible.
+
+Apache Kafka or Confluent Kafka :
+    Dave Troiano,
+        (Developer support on Confluent Forum @dtroiano),
+
+    Barry Evans, 
+        Someone that I consider a friend, jsut stepped in and as he happily calls it community service,
+        Helping others figure problems out that they have, whatever the nature.
+        https://confluentcommunity.slack.com/team/U04UNKMRL4U
+
+Apache Flink:
+    Martijn Visser, https://apache-flink.slack.com/team/U03GADV9USX
+    (PMC and Committer for Apache Flink, Product Manager at Confluent)
+
+
 ## Some Version notes.
 0.2	- 10/01/2024	Pushing/posting basket docs and associated payment docs onto Kafka.
 
 0.3	- 24/01/2024	To "circumvent" Confluent Kafka cluster "unavailability" at this time I'm modifying the code here to insert directly into Mongo Atlas into 2 collections. This will allow the Creator community to interface with the inbound docs on the Atlas environment irrespective how they got there.
+
+... Just look at the top of main.go... 

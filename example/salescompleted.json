@@ -24,30 +24,6 @@
         "QUANTITY": 4
       },
       {
-        "ID": "000000018",
-        "NAME": "McD Big Mac",
-        "BRAND": "McD",
-        "CATEGORY": "Food Cupboard",
-        "PRICE": 5.49,
-        "QUANTITY": 1
-      },
-      {
-        "ID": "000000005",
-        "NAME": "Jacobs Kronung Instant",
-        "BRAND": "Jabobs",
-        "CATEGORY": "Food Cupboard",
-        "PRICE": 94,
-        "QUANTITY": 2
-      },
-      {
-        "ID": "000000009",
-        "NAME": "Nescafe Salted Caramel 180g 10 Sachets",
-        "BRAND": "Nescafe",
-        "CATEGORY": "Food Cupboard",
-        "PRICE": 74,
-        "QUANTITY": 2
-      },
-      {
         "ID": "000000013",
         "NAME": "Sunlight Dishwashing Liquid",
         "BRAND": "Sunlight",
