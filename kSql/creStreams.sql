@@ -74,6 +74,7 @@ CREATE STREAM pb_salescompleted WITH (
 		on b.InvoiceNumber = p.InvoiceNumber
 	emit changes;
 
+
 -- Create 2 Avro based topics from our PB posted, to simplify the entire consumption side on Flink... it does not like
 -- native include Pb deserializer
 CREATE STREAM avro_salesbaskets WITH (
@@ -114,7 +115,7 @@ CREATE STREAM avro_salespayments WITH (
 	emit changes;
 
 -- Build directly from avro_salespayments and avro_salesbaskets
-CREATE OR REPLACE STREAM avro_salescompleted WITH (
+CREATE STREAM avro_salescompleted WITH (
 		KAFKA_TOPIC='avro_salescompleted',
        	VALUE_FORMAT='avro',
        	PARTITIONS=1)
