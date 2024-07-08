@@ -145,6 +145,7 @@ CREATE STREAM avro_salescompleted WITH (
 
 
 ------------------------------------------------------------------------------
+-- Some aggregations calculated via kSQL
 -- Sales per store 
 CREATE TABLE avro_sales_per_store_per_hour WITH (
 		KAFKA_TOPIC='avro_sales_per_store_per_hour',
@@ -218,8 +219,11 @@ CREATE TABLE avro_sales_per_store_per_terminal_point_per_hour WITH (
 		GROUP BY store->id , TerminalPoint	
 	EMIT FINAL;
 
+------------------------------------------------------------------------------
 
--- OLD / IGNORE from here
+
+
+-- OLD / IGNORE from here onwards
 -- this updates the totals incrementally as it grows, the above emit final only shows/updates at the close of the windows
 select 
   store_id, 
