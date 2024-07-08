@@ -55,9 +55,6 @@ CREATE TABLE avro_salespayments (
 );
 
 
---    'key.format' = 'raw',
---    'key.fields' = 'INVOICENUMBER',
-
 -- https://nightlies.apache.org/flink/flink-docs-release-1.13/docs/connectors/table/formats/avro-confluent/
 -- Our avro_salescompleted output table which will push values to the Kafka topic.
 CREATE TABLE avro_salescompleted_x (
