@@ -54,9 +54,8 @@ CREATE TABLE avro_salespayments (
     'value.fields-include' = 'ALL'
 );
 
-
--- https://nightlies.apache.org/flink/flink-docs-release-1.13/docs/connectors/table/formats/avro-confluent/
 -- Our avro_salescompleted output table which will push values to the Kafka topic.
+-- https://nightlies.apache.org/flink/flink-docs-release-1.13/docs/connectors/table/formats/avro-confluent/
 CREATE TABLE avro_salescompleted_x (
     INVOICENUMBER STRING,
     SALEDATETIME STRING,
@@ -109,6 +108,7 @@ Insert into avro_salescompleted_x
         avro_salesbaskets a LEFT JOIN 
         avro_salespayments b
     ON a.INVOICENUMBER = b.INVOICENUMBER;
+
 
 -- Create sales per store per terminal per hour output table
 
