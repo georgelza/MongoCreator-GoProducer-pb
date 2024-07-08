@@ -30,46 +30,6 @@ CREATE STREAM pb_salesbaskets (
 WITH (KAFKA_TOPIC='pb_salesbaskets',
 		    VALUE_FORMAT='ProtoBuf',
         	PARTITIONS=1);
-       
--- change SaleTimsestam to BIGINT
-CREATE STREAM pb_salesbaskets1 WITH (
-		KAFKA_TOPIC='pb_salesbaskets1',
-       	VALUE_FORMAT='ProtoBuf',
-       	PARTITIONS=1)
-       	as  
-		select
-			InvoiceNumber,
-	 		SaleDateTime,
-		  	CAST(SaleTimestamp AS BIGINT) AS Sale_epoc_bigint,
-	  		TerminalPoint,
-	   		Nett,
-	  		Vat,
-	 		Total,
-       		Store,
-     		Clerk,
-    		BasketItems 
-		from pb_salesbaskets
-			emit changes;
-
--- change SaleTimsestam to TIMESTAMPTOSTRING, with a format
-CREATE STREAM pb_salesbaskets2 WITH (
-		KAFKA_TOPIC='pb_salesbaskets2',
-       	VALUE_FORMAT='ProtoBuf',
-       	PARTITIONS=1)
-       	as  
-		select
-			InvoiceNumber,
-	 		SaleDateTime,
-			TIMESTAMPTOSTRING(CAST(SaleTimestamp AS BIGINT), 'yyyy-MM-dd''T''HH:mm:ss.SSS') AS SaleTimestamp_str,
-	  		TerminalPoint,
-	   		Nett,
-	  		Vat,
-	 		Total,
-       		Store,
-     		Clerk,
-    		BasketItems 
-		from pb_salesbaskets
-			emit changes;
 
 
 -- salespayments       
@@ -83,35 +43,6 @@ CREATE STREAM pb_salespayments (
 		KAFKA_TOPIC='pb_salespayments',
        	VALUE_FORMAT='ProtoBuf',
        	PARTITIONS=1);
-
-CREATE STREAM pb_salespayments1 WITH (
-		KAFKA_TOPIC='pb_salespayments1',
-       	VALUE_FORMAT='ProtoBuf',
-       	PARTITIONS=1)
-       	as  
-		select   	
-			InvoiceNumber,
-	      	FinTransactionId,
-	      	PayDateTime,
-		  	CAST(PayTimestamp AS BIGINT) AS Pay_epoc_bigint,
-	      	Paid  
-		from pb_salespayments
-	emit changes;
-
-
-CREATE STREAM pb_salespayments2 WITH (
-		KAFKA_TOPIC='pb_salespayments2',
-       	VALUE_FORMAT='ProtoBuf',
-       	PARTITIONS=1)
-       	as  
-		select   	
-			InvoiceNumber,
-	      	FinTransactionId,
-	      	PayDateTime,
-		  	TIMESTAMPTOSTRING(CAST(PayTimestamp AS BIGINT), 'yyyy-MM-dd''T''HH:mm:ss.SSS') AS PayTimestamp_str,
-	      	Paid  
-		from pb_salespayments
-	emit changes;
 
 
 -- salescompleted
@@ -246,6 +177,8 @@ CREATE TABLE avro_sales_per_store_per_5min WITH (
 		GROUP BY store->id 
 	EMIT FINAL;
 
+
+
 -- WE GONNA DO (accomplish) THE BELOW IN FLINK...
 -- showing the diffferent, more scalable solution, once the values are aggregated back into a topic we will use
 -- Connect config to sink to back end data store.
@@ -285,7 +218,7 @@ CREATE TABLE avro_sales_per_store_per_terminal_point_per_hour WITH (
 	EMIT FINAL;
 
 
-
+-- OLD / IGNORE from here
 -- this updates the totals incrementally as it grows, the above emit final only shows/updates at the close of the windows
 select 
   store_id, 
@@ -294,3 +227,73 @@ select
   from_unixtime(WINDOWEND) as Window_End,
   SALES_PER_TERMINAL
 from AVRO_SALES_PER_TERMINAL_POINT EMIT CHANGES;
+
+-- change SaleTimsestam to BIGINT
+CREATE STREAM pb_salesbaskets1 WITH (
+		KAFKA_TOPIC='pb_salesbaskets1',
+       	VALUE_FORMAT='ProtoBuf',
+       	PARTITIONS=1)
+       	as  
+		select
+			InvoiceNumber,
+	 		SaleDateTime,
+		  	CAST(SaleTimestamp AS BIGINT) AS Sale_epoc_bigint,
+	  		TerminalPoint,
+	   		Nett,
+	  		Vat,
+	 		Total,
+       		Store,
+     		Clerk,
+    		BasketItems 
+		from pb_salesbaskets
+			emit changes;
+
+-- change SaleTimsestam to TIMESTAMPTOSTRING, with a format
+CREATE STREAM pb_salesbaskets2 WITH (
+		KAFKA_TOPIC='pb_salesbaskets2',
+       	VALUE_FORMAT='ProtoBuf',
+       	PARTITIONS=1)
+       	as  
+		select
+			InvoiceNumber,
+	 		SaleDateTime,
+			TIMESTAMPTOSTRING(CAST(SaleTimestamp AS BIGINT), 'yyyy-MM-dd''T''HH:mm:ss.SSS') AS SaleTimestamp_str,
+	  		TerminalPoint,
+	   		Nett,
+	  		Vat,
+	 		Total,
+       		Store,
+     		Clerk,
+    		BasketItems 
+		from pb_salesbaskets
+			emit changes;
+
+
+CREATE STREAM pb_salespayments1 WITH (
+		KAFKA_TOPIC='pb_salespayments1',
+       	VALUE_FORMAT='ProtoBuf',
+       	PARTITIONS=1)
+       	as  
+		select   	
+			InvoiceNumber,
+	      	FinTransactionId,
+	      	PayDateTime,
+		  	CAST(PayTimestamp AS BIGINT) AS Pay_epoc_bigint,
+	      	Paid  
+		from pb_salespayments
+	emit changes;
+
+
+CREATE STREAM pb_salespayments2 WITH (
+		KAFKA_TOPIC='pb_salespayments2',
+       	VALUE_FORMAT='ProtoBuf',
+       	PARTITIONS=1)
+       	as  
+		select   	
+			InvoiceNumber,
+	      	FinTransactionId,
+	      	PayDateTime,
+		  	TIMESTAMPTOSTRING(CAST(PayTimestamp AS BIGINT), 'yyyy-MM-dd''T''HH:mm:ss.SSS') AS PayTimestamp_str,
+	      	Paid  
+		from pb_salespayments
+	emit changes;
