@@ -8,29 +8,30 @@
 -- this is done here this way to "lighten" the load/dependency on Kafka stream processing, and well, as another method/arrow in quiver.
 
 -- pull the avro_salesbaskets topic into Flink
-CREATE TABLE avro_salesbaskets (
-    INVOICENUMBER STRING,
-    SALEDATETIME STRING,
-    SALETIMESTAMP STRING,
-    TERMINALPOINT STRING,
-    NETT DOUBLE,
-    VAT DOUBLE,
-    TOTAL DOUBLE,
-    STORE row<ID STRING, NAME STRING>,
-    CLERK row<ID STRING, NAME STRING>,
-    BASKETITEMS array<row<ID STRING, NAME STRING, BRAND STRING, CATEGORY STRING, PRICE DOUBLE, QUANTITY INT>>,
-    SALESTIMESTAMP_WM AS TO_TIMESTAMP(FROM_UNIXTIME(CAST(SALETIMESTAMP AS BIGINT) / 1000)),
-    WATERMARK FOR SALESTIMESTAMP_WM AS SALESTIMESTAMP_WM
-) WITH (
-    'connector' = 'kafka',
-    'topic' = 'avro_salesbaskets',
-    'properties.bootstrap.servers' = 'broker:29092',
-    'scan.startup.mode' = 'earliest-offset',
-    'properties.group.id' = 'testGroup',
-    'value.format' = 'avro-confluent',
-    'value.avro-confluent.schema-registry.url' = 'http://schema-registry:8081',
-    'value.fields-include' = 'EXCEPT_KEY'
-);
+    CREATE TABLE avro_salesbaskets (
+        INVOICENUMBER STRING,
+        SALEDATETIME STRING,
+        SALETIMESTAMP STRING,
+        TERMINALPOINT STRING,
+        NETT DOUBLE,
+        VAT DOUBLE,
+        TOTAL DOUBLE,
+        STORE row<ID STRING, NAME STRING>,
+        CLERK row<ID STRING, NAME STRING>,
+        BASKETITEMS array<row<ID STRING, NAME STRING, BRAND STRING, CATEGORY STRING, PRICE DOUBLE, QUANTITY INT>>,
+        SALESTIMESTAMP_WM AS TO_TIMESTAMP(FROM_UNIXTIME(CAST(SALETIMESTAMP AS BIGINT) / 1000)),
+        WATERMARK FOR SALESTIMESTAMP_WM AS SALESTIMESTAMP_WM,
+        PRIMARY KEY (INVOICENUMBER) NOT ENFORCED
+    ) WITH (
+        'connector' = 'upsert-kafka',
+        'topic' = 'avro_salesbaskets',
+        'properties.bootstrap.servers' = 'broker:29092',
+        'key.format' = 'raw',
+        'properties.group.id' = 'testGroup',
+        'value.format' = 'avro-confluent',
+        'value.avro-confluent.url' = 'http://schema-registry:8081',
+        'value.fields-include' = 'ALL'
+    );
 
 -- pull the avro_salespayments topic into Flink
 CREATE TABLE avro_salespayments (
@@ -40,16 +41,17 @@ CREATE TABLE avro_salespayments (
     PAYTIMESTAMP STRING,
     PAID DOUBLE,
     PAYTIMESTAMP_WM AS TO_TIMESTAMP(FROM_UNIXTIME(CAST(PAYTIMESTAMP AS BIGINT) / 1000)),
-    WATERMARK FOR PAYTIMESTAMP_WM AS PAYTIMESTAMP_WM
+    WATERMARK FOR PAYTIMESTAMP_WM AS PAYTIMESTAMP_WM,
+    PRIMARY KEY (INVOICENUMBER) NOT ENFORCED
 ) WITH (
-    'connector' = 'kafka',
-    'topic' = 'avro_salespayments',
-    'properties.bootstrap.servers' = 'broker:29092',
-    'scan.startup.mode' = 'earliest-offset',
-    'properties.group.id' = 'testGroup',
-    'value.format' = 'avro-confluent',
-    'value.avro-confluent.schema-registry.url' = 'http://schema-registry:8081',
-    'value.fields-include' = 'EXCEPT_KEY'
+        'connector' = 'upsert-kafka',
+        'topic' = 'avro_salespayments',
+        'properties.bootstrap.servers' = 'broker:29092',
+        'key.format' = 'raw',
+        'properties.group.id' = 'testGroup',
+        'value.format' = 'avro-confluent',
+        'value.avro-confluent.url' = 'http://schema-registry:8081',
+        'value.fields-include' = 'ALL'
 );
 
 
@@ -79,18 +81,18 @@ CREATE TABLE avro_salescompleted_x (
     PAID DOUBLE,
     SALESTIMESTAMP_WM AS TO_TIMESTAMP(FROM_UNIXTIME(CAST(SALETIMESTAMP AS BIGINT) / 1000)),
     PAYTIMESTAMP_WM AS TO_TIMESTAMP(FROM_UNIXTIME(CAST(PAYTIMESTAMP AS BIGINT) / 1000)),
-    WATERMARK FOR SALESTIMESTAMP_WM AS SALESTIMESTAMP_WM
+    WATERMARK FOR SALESTIMESTAMP_WM AS SALESTIMESTAMP_WM,
+    PRIMARY KEY (INVOICENUMBER) NOT ENFORCED
 ) WITH (
-    'connector' = 'upsert-kafka',
-    'topic' = 'avro_salescompleted_x',
-    'properties.bootstrap.servers' = 'broker:29092',
-    'key.format' = 'raw',
-    'key.fields' = 'the_kafka_key',
-    'value.format' = 'avro-confluent',
-    'value.avro-confluent.url' = 'http://schema-registry:8081',
-    'value.fields-include' = 'EXCEPT_KEY'
+        'connector' = 'upsert-kafka',
+        'topic' = 'avro_salescompleted_x',
+        'properties.bootstrap.servers' = 'broker:29092',
+        'key.format' = 'raw',
+        'properties.group.id' = 'testGroup',
+        'value.format' = 'avro-confluent',
+        'value.avro-confluent.url' = 'http://schema-registry:8081',
+        'value.fields-include' = 'ALL'
 );
-
 
 -- Aggregate query/worker
 -- Join 2 tables into avro_salescompleted_x - completed sales.
