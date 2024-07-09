@@ -8,7 +8,7 @@
 -- this is done here this way to "lighten" the load/dependency on Kafka stream processing, and well, as another method/arrow in quiver.
 
 -- pull the avro_salesbaskets topic into Flink
-CREATE TABLE avro_salesbaskets (
+CREATE TABLE avro_salesbaskets_x (
     INVOICENUMBER STRING,
     SALEDATETIME STRING,
     SALETIMESTAMP STRING,
@@ -30,12 +30,11 @@ CREATE TABLE avro_salesbaskets (
     'properties.group.id' = 'testGroup',
     'value.format' = 'avro-confluent',
     'value.avro-confluent.url' = 'http://schema-registry:8081',
-    'value.fields-include' = 'ALL',
-    'table.exec.state.ttl' = '5400'
+    'value.fields-include' = 'ALL'
 );
 
 -- pull the avro_salespayments topic into Flink
-CREATE TABLE avro_salespayments (
+CREATE TABLE avro_salespayments_x (
     INVOICENUMBER STRING,
     FINTRANSACTIONID STRING,
     PAYDATETIME STRING,
@@ -52,8 +51,7 @@ CREATE TABLE avro_salespayments (
     'properties.group.id' = 'testGroup',
     'value.format' = 'avro-confluent',
     'value.avro-confluent.url' = 'http://schema-registry:8081',
-    'value.fields-include' = 'ALL',
-    'table.exec.state.ttl' = '5400'
+    'value.fields-include' = 'ALL'
 );
 
 -- Our avro_salescompleted output table which will push values to the Kafka topic.
@@ -107,8 +105,8 @@ Insert into avro_salescompleted_x
         b.PAYTIMESTAMP,
         b.PAID
     FROM 
-        avro_salespayments b LEFT JOIN
-        avro_salesbaskets a
+        avro_salespayments_x b LEFT JOIN
+        avro_salesbaskets_x a
     ON b.INVOICENUMBER = a.INVOICENUMBER;
 
 -- See https://lazypro.medium.com/flink-sql-performance-tuning-part-2-c102177b1ce1 to optimize this query, above is version 1.
@@ -156,8 +154,8 @@ Insert into avro_salescompleted_x
         a.PAYTIMESTAMP,
         a.PAID
     FROM 
-        avro_salespayments a,
-        avro_salesbaskets b
+        avro_salespayments_x a,
+        avro_salesbaskets_x b
     WHERE a.INVOICENUMBER = b.INVOICENUMBER
     AND PAYTIMESTAMP_WM > SALESTIMESTAMP_WM 
     AND SALESTIMESTAMP_WM > (SALESTIMESTAMP_WM - INTERVAL '1' HOUR);

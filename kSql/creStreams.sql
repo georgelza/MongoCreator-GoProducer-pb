@@ -302,3 +302,12 @@ CREATE STREAM pb_salespayments2 WITH (
 	      	Paid  
 		from pb_salespayments
 	emit changes;
+
+-- SALETIMESTAMP is a string representing epoc based date/time, we need to convert to BIGINT
+SELECT INVOICENUMBER, 
+	TIMESTAMPTOSTRING(CAST(SALETIMESTAMP AS BIGINT), 'YYYY-MM-dd HH:mm:ss.SSS') AS PAYTIMESTAMP_str,
+	STORE->Name,
+	STORE->ID,
+	CLERK->Name,
+	CLERK->ID
+FROM pb_salesbaskets;
