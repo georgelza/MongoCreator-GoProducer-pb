@@ -30,7 +30,8 @@ CREATE TABLE avro_salesbaskets (
     'properties.group.id' = 'testGroup',
     'value.format' = 'avro-confluent',
     'value.avro-confluent.url' = 'http://schema-registry:8081',
-    'value.fields-include' = 'ALL'
+    'value.fields-include' = 'ALL',
+    'table.exec.state.ttl' = '5400'
 );
 
 -- pull the avro_salespayments topic into Flink
@@ -51,7 +52,8 @@ CREATE TABLE avro_salespayments (
     'properties.group.id' = 'testGroup',
     'value.format' = 'avro-confluent',
     'value.avro-confluent.url' = 'http://schema-registry:8081',
-    'value.fields-include' = 'ALL'
+    'value.fields-include' = 'ALL',
+    'table.exec.state.ttl' = '5400'
 );
 
 -- Our avro_salescompleted output table which will push values to the Kafka topic.
@@ -108,7 +110,9 @@ Insert into avro_salescompleted_x
         avro_salespayments b LEFT JOIN
         avro_salesbaskets a
     ON b.INVOICENUMBER = a.INVOICENUMBER;
--- See https://lazypro.medium.com/flink-sql-performance-tuning-part-2-c102177b1ce1to optimize this query, above is version 1.
+
+-- See https://lazypro.medium.com/flink-sql-performance-tuning-part-2-c102177b1ce1 to optimize this query, above is version 1.
+-- See https://nightlies.apache.org/flink/flink-docs-master/docs/dev/table/sql/queries/joins/ Interval joins, to reduce data scope kept.
 -- Here is a improved/less impactfull option.
 -- this only brings into scope the data from either table that is less than 1 hour old.
 Insert into avro_salescompleted_x
@@ -159,74 +163,42 @@ Insert into avro_salescompleted_x
     AND SALESTIMESTAMP_WM > (SALESTIMESTAMP_WM - INTERVAL '1' HOUR);
 
 
+-- Create sales per store per terminal per 5 min output table - dev purposes
+CREATE TABLE avro_sales_per_store_per_terminal_per_5min_x (
+    store_id STRING,
+    terminalpoint STRING,
+    window_start  TIMESTAMP(3),
+    window_end TIMESTAMP(3),
+    salesperterminal BIGINT,
+    totalperterminal DOUBLE,
+    PRIMARY KEY (store_id, terminalpoint, window_start, window_end) NOT ENFORCED
+) WITH (
+    'connector' = 'upsert-kafka',
+    'topic' = 'avro_sales_per_store_per_terminal_per_5min_x',
+    'properties.bootstrap.servers' = 'broker:29092',
+    'key.format' = 'avro-confluent',
+    'key.avro-confluent.url' = 'http://schema-registry:8081',
+    'value.format' = 'avro-confluent',
+    'value.avro-confluent.url' = 'http://schema-registry:8081',
+    'value.fields-include' = 'ALL'
+);
+
+-- Calculate sales per store per terminal per 5 min - dev purposes
+-- Aggregate query/worker
+Insert into avro_sales_per_store_per_terminal_per_5min_x
+SELECT 
+    `STORE`.`ID` as STORE_ID,
+    TERMINALPOINT,
+    window_start,
+    window_end,
+    COUNT(*) as salesperterminal,
+    SUM(TOTAL) as totalperterminal
+  FROM TABLE(
+    TUMBLE(TABLE avro_salescompleted_x, DESCRIPTOR(SALESTIMESTAMP_WM), INTERVAL '5' MINUTES))
+  GROUP BY `STORE`.`ID`, TERMINALPOINT, window_start, window_end;
+
+
 -- Create sales per store per terminal per hour output table
 
 
 -- Calculate sales per store per terminal per hour
-
-
--- Create sales per store per terminal per 5 min output table - dev purposes
-
-
--- Calculate sales per store per terminal per 5 min - dev purposes
-
-
-
-
-
--- OLD
-CREATE TABLE avro_salescompleted_x (
-    -- one column mapped to the Kafka raw UTF-8 key
-    the_kafka_key STRING,
-
-      -- a few columns mapped to the Avro fields of the Kafka value
-    INVOICENUMBER STRING,
-    SALEDATETIME STRING,
-    SALETIMESTAMP STRING,
-    TERMINALPOINT STRING,
-    NETT DOUBLE,
-    VAT DOUBLE,
-    TOTAL DOUBLE,
-    STORE row<ID STRING, NAME STRING>,
-    CLERK row<ID STRING, NAME STRING>,
-    BASKETITEMS array<row<ID STRING, NAME STRING, BRAND STRING, CATEGORY STRING, PRICE DOUBLE, QUANTITY INT>>,
-    FINTRANSACTIONID STRING,
-    PAYDATETIME STRING,
-    PAYTIMESTAMP STRING,
-    PAID DOUBLE,
-    SALESTIMESTAMP_WM AS TO_TIMESTAMP(FROM_UNIXTIME(CAST(SALETIMESTAMP AS BIGINT) / 1000)),
-    PAYTIMESTAMP_WM AS TO_TIMESTAMP(FROM_UNIXTIME(CAST(PAYTIMESTAMP AS BIGINT) / 1000)),
-    WATERMARK FOR SALESTIMESTAMP_WM AS SALESTIMESTAMP_WM,
-    PRIMARY KEY (INVOICENUMBER) NOT ENFORCED
-) WITH (
-        'connector' = 'upsert-kafka',
-        'topic' = 'avro_salescompleted_x',
-        'properties.bootstrap.servers' = 'broker:29092',
-        'key.format' = 'raw',
-        'properties.group.id' = 'testGroup',
-        'value.format' = 'avro-confluent',
-        'value.avro-confluent.url' = 'http://schema-registry:8081',
-        'value.fields-include' = 'ALL'
-);
-
-Insert into avro_salescompleted_x
-    SELECT 
-        b.INVOICENUMBER as the_kafka_key,
-        b.INVOICENUMBER,
-        a.SALEDATETIME,
-        a.SALETIMESTAMP,
-        a.TERMINALPOINT,
-        a.NETT,
-        a.VAT,
-        a.TOTAL,
-        a.STORE,
-        a.CLERK,
-        a.BASKETITEMS,        
-        b.FINTRANSACTIONID,
-        b.PAYDATETIME,
-        b.PAYTIMESTAMP,
-        b.PAID
-    FROM 
-        avro_salesbaskets a LEFT JOIN 
-        avro_salespayments b
-    ON a.INVOICENUMBER = b.INVOICENUMBER;

@@ -29,7 +29,7 @@ CREATE TABLE avro_salescompleted (
     'properties.group.id' = 'testGroup',
     'value.format' = 'avro-confluent',
     'value.avro-confluent.schema-registry.url' = 'http://schema-registry:8081',
-    'value.fields-include' = 'EXCEPT_KEY'
+    'value.fields-include' = 'ALL'
 );
 
 -- https://nightlies.apache.org/flink/flink-docs-master/docs/dev/table/sql/queries/window-agg/
@@ -50,7 +50,7 @@ CREATE TABLE avro_sales_per_store_per_terminal_per_5min (
     'key.avro-confluent.url' = 'http://schema-registry:8081',
     'value.format' = 'avro-confluent',
     'value.avro-confluent.url' = 'http://schema-registry:8081',
-    'value.fields-include' = 'EXCEPT_KEY'
+    'value.fields-include' = 'ALL'
 );
 
 
@@ -65,4 +65,37 @@ SELECT
     SUM(TOTAL) as totalperterminal
   FROM TABLE(
     TUMBLE(TABLE avro_salescompleted, DESCRIPTOR(SALESTIMESTAMP_WM), INTERVAL '5' MINUTES))
+  GROUP BY `STORE`.`ID`, TERMINALPOINT, window_start, window_end;
+
+CREATE TABLE avro_sales_per_store_per_terminal_per_hour (
+    store_id STRING,
+    terminalpoint STRING,
+    window_start  TIMESTAMP(3),
+    window_end TIMESTAMP(3),
+    salesperterminal BIGINT,
+    totalperterminal DOUBLE,
+    PRIMARY KEY (store_id, terminalpoint, window_start, window_end) NOT ENFORCED
+) WITH (
+    'connector' = 'upsert-kafka',
+    'topic' = 'avro_sales_per_store_per_terminal_per_hour',
+    'properties.bootstrap.servers' = 'broker:29092',
+    'key.format' = 'avro-confluent',
+    'key.avro-confluent.url' = 'http://schema-registry:8081',
+    'value.format' = 'avro-confluent',
+    'value.avro-confluent.url' = 'http://schema-registry:8081',
+    'value.fields-include' = 'ALL'
+);
+
+
+-- Aggregate query/worker
+Insert into avro_sales_per_store_per_terminal_per_hour
+SELECT 
+    `STORE`.`ID` as STORE_ID,
+    TERMINALPOINT,
+    window_start,
+    window_end,
+    COUNT(*) as salesperterminal,
+    SUM(TOTAL) as totalperterminal
+  FROM TABLE(
+    TUMBLE(TABLE avro_salescompleted, DESCRIPTOR(SALESTIMESTAMP_WM), INTERVAL '1' HOUR))
   GROUP BY `STORE`.`ID`, TERMINALPOINT, window_start, window_end;
