@@ -58,14 +58,16 @@ Without these guys and their willingness to entertain allot of questions and som
     Apache Kafka or Confluent Kafka :
         Dave Troiano,
         (Developer support on Confluent Forum @dtroiano),
+        https://www.linkedin.com/in/dave-troiano-49a8932/
 
     Barry Evans, 
         Someone that I consider a friend, just stepped in, starting helping me and as he happily calls it his community service. Helping others figure problems out that they have, whatever the nature, and another always curious mind himself.
         https://confluentcommunity.slack.com/team/U04UNKMRL4U
 
     Apache Flink:
-        Martijn Visser, https://apache-flink.slack.com/team/U03GADV9USX
+        Martijn Visser, 
         (PMC and Committer for Apache Flink, Product Manager at Confluent)
+        https://apache-flink.slack.com/team/U03GADV9USX
 
 
 ## Some Version notes.

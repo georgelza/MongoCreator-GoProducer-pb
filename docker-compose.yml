@@ -196,11 +196,10 @@ services:
   flink-taskmanager:
     image: cnfldemos/flink-kafka:1.16.0-scala_2.12-java11
     hostname: flink-taskmanager
-    container_name: flink-taskmanager
     depends_on:
       - flink-jobmanager
     command: taskmanager
-    scale: 1
+    scale: 2
     environment:
       - |
         FLINK_PROPERTIES=

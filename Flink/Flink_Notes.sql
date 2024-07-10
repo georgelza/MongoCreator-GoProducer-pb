@@ -99,5 +99,60 @@ FROM TABLE ( TUMBLE orders, DESCRIPTION(order_time), INTERVAL `1` MINUTES))
 GROUP BY user_id, window_start, window_end
 
 
+-- Aggregate query/worker
+-- Join 2 tables into avro_salescompleted_x - completed sales.
+Insert into avro_salescompleted_x
+    SELECT 
+        b.INVOICENUMBER,
+        a.SALEDATETIME,
+        a.SALETIMESTAMP,
+        a.TERMINALPOINT,
+        a.NETT,
+        a.VAT,
+        a.TOTAL,
+        a.STORE,
+        a.CLERK,
+        a.BASKETITEMS,        
+        b.FINTRANSACTIONID,
+        b.PAYDATETIME,
+        b.PAYTIMESTAMP,
+        b.PAID
+    FROM 
+        avro_salespayments_x b LEFT JOIN
+        avro_salesbaskets_x a
+    ON b.INVOICENUMBER = a.INVOICENUMBER;
+
+-- See https://lazypro.medium.com/flink-sql-performance-tuning-part-2-c102177b1ce1 to optimize this query, above is version 1.
+-- See https://nightlies.apache.org/flink/flink-docs-master/docs/dev/table/sql/queries/joins/ Interval joins, to reduce data scope kept.
+-- Here is a improved/less impactfull option.
+-- this only brings into scope the data from either table that is less than 1 hour old.
+Insert into avro_salescompleted_x
+    SELECT 
+        b.INVOICENUMBER,
+        b.SALEDATETIME,
+        b.SALETIMESTAMP,
+        b.TERMINALPOINT,
+        b.NETT,
+        b.VAT,
+        b.TOTAL,
+        b.STORE,
+        b.CLERK,
+        b.BASKETITEMS,        
+        a.FINTRANSACTIONID,
+        a.PAYDATETIME,
+        a.PAYTIMESTAMP,
+        a.PAID
+    FROM 
+        avro_salespayments a,
+        avro_salesbaskets b
+    WHERE a.INVOICENUMBER = b.INVOICENUMBER
+    AND CAST(a.PAYTIMESTAMP AS BIGINT) > CAST(b.SALETIMESTAMP AS BIGINT) 
+    AND TO_TIMESTAMP(FROM_UNIXTIME(CAST(SALETIMESTAMP AS BIGINT) / 1000)) > (TO_TIMESTAMP(FROM_UNIXTIME(CAST(SALETIMESTAMP AS BIGINT) / 1000)) - INTERVAL '1' HOUR);
+
+
 -- convert epoc string to timestamp
 SELECT TO_TIMESTAMP(FROM_UNIXTIME(CAST(SALETIMESTAMP AS BIGINT) / 1000)) AS timestamp_value from avro_salescompleted;
+
+
+- enabling Hive : https://www.decodable.co/blog/catalogs-in-flink-sql-hands-on
+docker exec -it flink-jobmanager /bin/bash

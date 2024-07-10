@@ -86,56 +86,6 @@ CREATE TABLE avro_salescompleted_x (
     'value.fields-include' = 'ALL'
 );
 
--- Aggregate query/worker
--- Join 2 tables into avro_salescompleted_x - completed sales.
-Insert into avro_salescompleted_x
-    SELECT 
-        b.INVOICENUMBER,
-        a.SALEDATETIME,
-        a.SALETIMESTAMP,
-        a.TERMINALPOINT,
-        a.NETT,
-        a.VAT,
-        a.TOTAL,
-        a.STORE,
-        a.CLERK,
-        a.BASKETITEMS,        
-        b.FINTRANSACTIONID,
-        b.PAYDATETIME,
-        b.PAYTIMESTAMP,
-        b.PAID
-    FROM 
-        avro_salespayments_x b LEFT JOIN
-        avro_salesbaskets_x a
-    ON b.INVOICENUMBER = a.INVOICENUMBER;
-
--- See https://lazypro.medium.com/flink-sql-performance-tuning-part-2-c102177b1ce1 to optimize this query, above is version 1.
--- See https://nightlies.apache.org/flink/flink-docs-master/docs/dev/table/sql/queries/joins/ Interval joins, to reduce data scope kept.
--- Here is a improved/less impactfull option.
--- this only brings into scope the data from either table that is less than 1 hour old.
-Insert into avro_salescompleted_x
-    SELECT 
-        b.INVOICENUMBER,
-        b.SALEDATETIME,
-        b.SALETIMESTAMP,
-        b.TERMINALPOINT,
-        b.NETT,
-        b.VAT,
-        b.TOTAL,
-        b.STORE,
-        b.CLERK,
-        b.BASKETITEMS,        
-        a.FINTRANSACTIONID,
-        a.PAYDATETIME,
-        a.PAYTIMESTAMP,
-        a.PAID
-    FROM 
-        avro_salespayments a,
-        avro_salesbaskets b
-    WHERE a.INVOICENUMBER = b.INVOICENUMBER
-    AND CAST(a.PAYTIMESTAMP AS BIGINT) > CAST(b.SALETIMESTAMP AS BIGINT) 
-    AND TO_TIMESTAMP(FROM_UNIXTIME(CAST(SALETIMESTAMP AS BIGINT) / 1000)) > (TO_TIMESTAMP(FROM_UNIXTIME(CAST(SALETIMESTAMP AS BIGINT) / 1000)) - INTERVAL '1' HOUR);
-
 -- Improve further by using *_WM values that was pre casted to date/time fields n the 2 source tables.
 Insert into avro_salescompleted_x
     SELECT 
@@ -174,8 +124,8 @@ CREATE TABLE avro_sales_per_store_per_terminal_per_5min_x (
     'connector' = 'upsert-kafka',
     'topic' = 'avro_sales_per_store_per_terminal_per_5min_x',
     'properties.bootstrap.servers' = 'broker:29092',
-    'key.format' = 'avro-confluent',
-    'key.avro-confluent.url' = 'http://schema-registry:8081',
+    'key.format' = 'raw',
+    'properties.group.id' = 'testGroup',
     'value.format' = 'avro-confluent',
     'value.avro-confluent.url' = 'http://schema-registry:8081',
     'value.fields-include' = 'ALL'
@@ -200,3 +150,4 @@ SELECT
 
 
 -- Calculate sales per store per terminal per hour
+ 
