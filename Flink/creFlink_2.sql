@@ -23,13 +23,13 @@ CREATE TABLE avro_salesbaskets_x (
     WATERMARK FOR SALESTIMESTAMP_WM AS SALESTIMESTAMP_WM,
     PRIMARY KEY (INVOICENUMBER) NOT ENFORCED
 ) WITH (
-    'connector' = 'upsert-kafka',
-    'topic' = 'avro_salesbaskets',
+    'connector' = 'kafka',
+    'topic' = 'avro_salesbaskets_x',
     'properties.bootstrap.servers' = 'broker:29092',
-    'key.format' = 'raw',
+    'scan.startup.mode' = 'earliest-offset',
     'properties.group.id' = 'testGroup',
     'value.format' = 'avro-confluent',
-    'value.avro-confluent.url' = 'http://schema-registry:8081',
+    'value.avro-confluent.schema-registry.url' = 'http://schema-registry:8081',
     'value.fields-include' = 'ALL'
 );
 

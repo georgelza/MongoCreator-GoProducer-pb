@@ -114,6 +114,7 @@ CREATE STREAM avro_salespayments WITH (
 		from pb_salespayments
 	emit changes;
 
+
 -- Build directly from avro_salespayments and avro_salesbaskets
 CREATE STREAM avro_salescompleted WITH (
 		KAFKA_TOPIC='avro_salescompleted',
@@ -143,7 +144,6 @@ CREATE STREAM avro_salescompleted WITH (
 		on b.InvoiceNumber = p.InvoiceNumber
 	emit changes;
 
-
 ------------------------------------------------------------------------------
 -- Some aggregations calculated via kSQL
 -- Sales per store 
@@ -158,7 +158,7 @@ CREATE TABLE avro_sales_per_store_per_hour WITH (
 			from_unixtime(WINDOWSTART) as Window_Start,
 			from_unixtime(WINDOWEND) as Window_End,
 			count(1) as sales_per_store
-		FROM avro_salescompleted
+		FROM pb_salescompleted
 		WINDOW TUMBLING (SIZE 1 HOUR)
 		GROUP BY store->id 
 	EMIT FINAL;

@@ -14,8 +14,8 @@
 # Password/Credentials
 .pwd
 .pwdloc
-.pwdmongoatlas
-.pwdmongolocal
+connect/.pwdmongolocal
+connect/.pwdmongoatlas
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
