@@ -7,7 +7,7 @@
 -- After this we then do the per store per terminal per hour aggregation/calculations.
 -- this is done here this way to "lighten" the load/dependency on Kafka stream processing, and well, as another method/arrow in quiver.
 
--- pull the avro_salesbaskets topic into Flink
+-- pull (INPUT) the avro_salesbaskets topic into Flink
 CREATE TABLE avro_salesbaskets_x (
     INVOICENUMBER STRING,
     SALEDATETIME STRING,
@@ -33,7 +33,7 @@ CREATE TABLE avro_salesbaskets_x (
     'value.fields-include' = 'ALL'
 );
 
--- pull the avro_salespayments topic into Flink
+-- pull (INPUT) the avro_salespayments topic into Flink
 CREATE TABLE avro_salespayments_x (
     INVOICENUMBER STRING,
     FINTRANSACTIONID STRING,
@@ -54,7 +54,7 @@ CREATE TABLE avro_salespayments_x (
     'value.fields-include' = 'ALL'
 );
 
--- Our avro_salescompleted output table which will push values to the Kafka topic.
+-- Our avro_salescompleted (OUTPUT) table which will push values to the CP Kafka topic.
 -- https://nightlies.apache.org/flink/flink-docs-release-1.13/docs/connectors/table/formats/avro-confluent/
 CREATE TABLE avro_salescompleted_x (
     INVOICENUMBER STRING,
