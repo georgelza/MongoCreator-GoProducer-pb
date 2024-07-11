@@ -16,3 +16,7 @@ docker-compose exec broker kafka-topics \
 docker-compose exec broker kafka-topics \
  --bootstrap-server localhost:9092 \
  --list | grep -v '_confluent' |grep -v '__' |grep -v '_schemas'
+
+ ./reg_salespayments.sh
+
+ ./reg_salesbaskets.sh

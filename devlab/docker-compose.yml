@@ -220,4 +220,4 @@ services:
 # https://github.com/TrivadisPF/platys-modern-data-platform/issues/231
 networks:
   default:
-     name: devlab_kavfka_default
+     name: devlab_default
