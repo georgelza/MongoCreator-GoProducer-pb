@@ -43,6 +43,10 @@
 *					: 25 June 2024
 *					: adding storeid to TPClerkstruct
 *
+*					: 12 July 2024
+*					: renamed the fields: *DateTime -> *DateTime_Ltz
+*					: renamed the fields: *Timestamp -> *Timestamp_Epoc
+*
 *	Git				: https://github.com/georgelza/MongoCreator-GoProducer
 *
 *	Author			: George Leonard
