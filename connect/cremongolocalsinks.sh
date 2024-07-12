@@ -71,6 +71,7 @@ curl -X POST \
   http://localhost:8083/connectors -w "\n"
 
 
+# Originate from kSQL processing
 curl -X POST \
   -H "Content-Type: application/json" \
   --data '
@@ -105,6 +106,45 @@ curl -X POST \
           "database":"MongoCom0",
           "collection":"avro_sales_by_store_by_hour",
           "topics":"avro_sales_per_store_per_hour"
+          }
+      }
+      ' \
+  http://localhost:8083/connectors -w "\n"
+
+# Originates out of Flink Processing
+  curl -X POST \
+  -H "Content-Type: application/json" \
+  --data '
+     { "name": "mongo-local-sales-by-store-by-terminal-5min-x-sink-avro",
+        "config": {
+          "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
+          "connection.uri": "'${MONGO_URL}'",
+          "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+          "value.converter":"io.confluent.connect.avro.AvroConverter",
+          "value.converter.schema.registry.url":"http://schema-registry:8081",
+          "value.converter.schemas.enable": true,
+          "database":"MongoCom0",
+          "collection":"avro_sales_by_store_by_terminal_5min_x",
+          "topics":"avro_sales_per_store_per_terminal_per_5min_x"
+          }
+      }
+      ' \
+  http://localhost:8083/connectors -w "\n"
+
+  curl -X POST \
+  -H "Content-Type: application/json" \
+  --data '
+     { "name": "mongo-local-sales-by-store-by-terminal-hour-x-sink-avro",
+        "config": {
+          "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
+          "connection.uri": "'${MONGO_URL}'",
+          "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+          "value.converter":"io.confluent.connect.avro.AvroConverter",
+          "value.converter.schema.registry.url":"http://schema-registry:8081",
+          "value.converter.schemas.enable": true,
+          "database":"MongoCom0",
+          "collection":"avro_sales_by_store_by_terminal_hour_x",
+          "topics":"avro_sales_per_store_per_terminal_per_hour_x"
           }
       }
       ' \
