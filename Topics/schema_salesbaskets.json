@@ -17,8 +17,8 @@ message Idstruct {
 }
 message PBBasket {
   string invoiceNumber = 1;
-  string saleDateTime = 2;
-  string saleTimestamp = 3;
+  string saleDateTimeLtz = 2;
+  string saleTimestampEpoc = 3;
   Idstruct store = 4;
   Idstruct clerk = 5;
   string terminalPoint = 6;

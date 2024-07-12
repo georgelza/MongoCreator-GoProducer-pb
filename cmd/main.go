@@ -644,16 +644,16 @@ func constructFakeBasket() (pb_Basket types.PBBasket, eventTimestamp time.Time, 
 	terminalPoint := gofakeit.Number(1, vGeneral.Terminals)
 
 	pb_Basket = types.PBBasket{
-		InvoiceNumber: txnId,
-		SaleDateTime:  eventTime,
-		SaleTimestamp: fmt.Sprint(eventTimestamp.UnixMilli()),
-		Store:         &store,
-		Clerk:         &clerk,
-		TerminalPoint: strconv.Itoa(terminalPoint),
-		BasketItems:   BasketItems,
-		Nett:          nett_amount,
-		Vat:           vat_amount,
-		Total:         total_amount,
+		InvoiceNumber:     txnId,
+		SaleDateTimeLtz:   eventTime,
+		SaleTimestampEpoc: fmt.Sprint(eventTimestamp.UnixMilli()),
+		Store:             &store,
+		Clerk:             &clerk,
+		TerminalPoint:     strconv.Itoa(terminalPoint),
+		BasketItems:       BasketItems,
+		Nett:              nett_amount,
+		Vat:               vat_amount,
+		Total:             total_amount,
 	}
 
 	return pb_Basket, eventTimestamp, store.Name, nil
@@ -667,8 +667,8 @@ func constructPayments(txnId string, eventTimestamp time.Time, total_amount floa
 
 	pb_Payment = types.PBPayment{
 		InvoiceNumber:    txnId,
-		PayDateTime:      payTime,
-		PayTimestamp:     fmt.Sprint(payTimestamp.UnixMilli()),
+		PayDateTimeLtz:   payTime,
+		PayTimestampEpoc: fmt.Sprint(payTimestamp.UnixMilli()),
 		Paid:             total_amount,
 		FinTransactionID: uuid.New().String(),
 	}
