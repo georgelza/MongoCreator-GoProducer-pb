@@ -71,14 +71,12 @@ CREATE TABLE avro_salescompleted_x (
     PAID DOUBLE,
     SALESTIMESTAMP_WM AS TO_TIMESTAMP(FROM_UNIXTIME(CAST(SALETIMESTAMP AS BIGINT) / 1000)),
     PAYTIMESTAMP_WM AS TO_TIMESTAMP(FROM_UNIXTIME(CAST(PAYTIMESTAMP AS BIGINT) / 1000)),
-    WATERMARK FOR SALESTIMESTAMP_WM AS SALESTIMESTAMP_WM,
-    PRIMARY KEY (INVOICENUMBER) NOT ENFORCED
+    WATERMARK FOR SALESTIMESTAMP_WM AS SALESTIMESTAMP_WM
 ) WITH (
-    'connector' = 'upsert-kafka',
+    'connector' = 'kafka',
     'topic' = 'avro_salescompleted_x',
     'properties.bootstrap.servers' = 'broker:29092',
     'properties.group.id' = 'testGroup',
-    'key.format' = 'raw',
     'value.format' = 'avro-confluent',
     'value.avro-confluent.url' = 'http://schema-registry:8081',
     'value.fields-include' = 'ALL'
@@ -118,14 +116,12 @@ CREATE TABLE avro_sales_per_store_per_terminal_per_5min_x (
     window_start  TIMESTAMP(3),
     window_end TIMESTAMP(3),
     salesperterminal BIGINT,
-    totalperterminal DOUBLE,
-    PRIMARY KEY (store_id, terminalpoint, window_start, window_end) NOT ENFORCED
+    totalperterminal DOUBLE
 ) WITH (
-    'connector' = 'upsert-kafka',
+    'connector' = 'kafka',
     'topic' = 'avro_sales_per_store_per_terminal_per_5min_x',
     'properties.bootstrap.servers' = 'broker:29092',
     'properties.group.id' = 'testGroup',
-    'key.format' = 'raw',
     'value.format' = 'avro-confluent',
     'value.avro-confluent.url' = 'http://schema-registry:8081',
     'value.fields-include' = 'ALL'
@@ -147,7 +143,32 @@ SELECT
 
 
 -- Create sales per store per terminal per hour output table
-
+CREATE TABLE avro_sales_per_store_per_terminal_per_hour_x (
+    store_id STRING,
+    terminalpoint STRING,
+    window_start  TIMESTAMP(3),
+    window_end TIMESTAMP(3),
+    salesperterminal BIGINT,
+    totalperterminal DOUBLE
+) WITH (
+    'connector' = 'kafka',
+    'topic' = 'avro_sales_per_store_per_terminal_per_hour_x',
+    'properties.bootstrap.servers' = 'broker:29092',
+    'properties.group.id' = 'testGroup',
+    'value.format' = 'avro-confluent',
+    'value.avro-confluent.url' = 'http://schema-registry:8081',
+    'value.fields-include' = 'ALL'
+);
 
 -- Calculate sales per store per terminal per hour
- 
+Insert into avro_sales_per_store_per_terminal_per_hour_x
+SELECT 
+    `STORE`.`ID` as STORE_ID,
+    TERMINALPOINT,
+    window_start,
+    window_end,
+    COUNT(*) as salesperterminal,
+    SUM(TOTAL) as totalperterminal
+  FROM TABLE(
+    TUMBLE(TABLE avro_salescompleted_x, DESCRIPTOR(SALESTIMESTAMP_WM), INTERVAL '1' HOUR))
+  GROUP BY `STORE`.`ID`, TERMINALPOINT, window_start, window_end;
