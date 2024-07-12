@@ -65,7 +65,7 @@ Without these guys and their willingness to entertain allot of questions and som
         https://confluentcommunity.slack.com/team/U04UNKMRL4U
 
     Martijn Visser,
-        Apache Flink Community
+        Apache Flink Slack Community
         (PMC and Committer for Apache Flink, Product Manager at Confluent)
         https://apache-flink.slack.com/team/U03GADV9USX
 
@@ -73,6 +73,7 @@ Without these guys and their willingness to entertain allot of questions and som
         Apache Kafka, Apache Flink, streaming and stuff (as he calls it)
         A good friend, thats always great to chat to... and we seldom stick to original topic.
         https://confluentcommunity.slack.com/team/U03R0RG6CHZ
+
 
 ## Some Version notes.
 0.2	- 10/01/2024	Pushing/posting basket docs and associated payment docs onto Kafka.
