@@ -8,8 +8,8 @@
 -- salesbaskets
 CREATE STREAM pb_salesbaskets (
 	   	InvoiceNumber VARCHAR,
-	 	SaleDateTimeLtz VARCHAR,
-	 	SaleTimestampEpoc VARCHAR,
+	 	SaleDateTime_Ltz VARCHAR,
+	 	SaleTimestamp_Epoc VARCHAR,
 	  	TerminalPoint VARCHAR,
 	   	Nett DOUBLE,
 	  	Vat DOUBLE,
@@ -36,8 +36,8 @@ WITH (KAFKA_TOPIC='pb_salesbaskets',
 CREATE STREAM pb_salespayments (
 	      	InvoiceNumber VARCHAR,
 	      	FinTransactionId VARCHAR,
-	      	PayDateTimeLtz VARCHAR,
-			PayTimestampEpoc VARCHAR,
+	      	PayDateTime_Ltz VARCHAR,
+			PayTimestamp_Epoc VARCHAR,
 	      	Paid DOUBLE      )
 	WITH (
 		KAFKA_TOPIC='pb_salespayments',
@@ -54,8 +54,8 @@ CREATE STREAM pb_salescompleted WITH (
 		select 
 			b.InvoiceNumber,
 			as_value(p.InvoiceNumber) as InvNumber,			
-			b.SaleDateTimeLtz,
-			b.SaleTimestampEpoc, 
+			b.SaleDateTime_Ltz,
+			b.SaleTimestamp_Epoc, 
 			b.TerminalPoint,
 			b.Nett,
 			b.Vat,
@@ -64,8 +64,8 @@ CREATE STREAM pb_salescompleted WITH (
 			b.clerk,
 			b.BasketItems,
 			p.FinTransactionId,
-			p.PayDateTimeLtz,
-			p.PayTimestampEpoc,
+			p.PayDateTime_Ltz,
+			p.PayTimestamp_Epoc,
 			p.Paid
 		from 
 			pb_salespayments p INNER JOIN
@@ -84,9 +84,9 @@ CREATE STREAM avro_salesbaskets WITH (
        	as  
 		select 
 			InvoiceNumber, 
-			SaleDateTimeLtz,
-			SaleTimestampEpoc,
-			CAST(SaleTimestampEpoc AS BIGINT) AS Sales_epoc_bigint,
+			SaleDateTime_Ltz,
+			SaleTimestamp_Epoc,
+			CAST(SaleTimestamp_Epoc AS BIGINT) AS Sales_epoc_bigint,
 			TerminalPoint,
 			Nett,
 			Vat,
@@ -107,9 +107,9 @@ CREATE STREAM avro_salespayments WITH (
 		select   	
 			InvoiceNumber,
 	      	FinTransactionId,
-	      	PayDateTimeLtz,
-			PayTimestampEpoc,
-		  	CAST(PayTimestampEpoc AS BIGINT) AS Pay_epoc_bigint,
+	      	PayDateTime_Ltz,
+			PayTimestamp_Epoc,
+		  	CAST(PayTimestamp_Epoc AS BIGINT) AS Pay_epoc_bigint,
 	      	Paid  
 		from pb_salespayments
 	emit changes;
@@ -124,8 +124,8 @@ CREATE STREAM avro_salescompleted WITH (
 		select 
 			p.InvoiceNumber,
 			as_value(p.InvoiceNumber) as InvNumber,
-			b.SaleDateTimeLtz,
-			b.SaleTimestampEpoc, 
+			b.SaleDateTime_Ltz,
+			b.SaleTimestamp_Epoc, 
 			b.TerminalPoint,
 			b.Nett,
 			b.Vat,
@@ -134,8 +134,8 @@ CREATE STREAM avro_salescompleted WITH (
 			b.clerk,
 			b.BasketItems,
 			p.FinTransactionId,
-			p.PayDateTimeLtz,
-			p.PayTimestampEpoc,
+			p.PayDateTime_Ltz,
+			p.PayTimestamp_Epoc,
 			p.Paid  
 		from 
 			pb_salespayments p INNER JOIN
@@ -241,8 +241,8 @@ CREATE STREAM pb_salesbaskets1 WITH (
        	as  
 		select
 			InvoiceNumber,
-	 		SaleDateTimeLtz,
-		  	CAST(SaleTimestampEpoc AS BIGINT) AS Sale_epoc_bigint,
+	 		SaleDateTime_Ltz,
+		  	CAST(SaleTimestamp_Epoc AS BIGINT) AS Sale_epoc_bigint,
 	  		TerminalPoint,
 	   		Nett,
 	  		Vat,
@@ -261,8 +261,8 @@ CREATE STREAM pb_salesbaskets2 WITH (
        	as  
 		select
 			InvoiceNumber,
-	 		SaleDateTimeLtz,
-			TIMESTAMPTOSTRING(CAST(SaleTimestampEpoc AS BIGINT), 'yyyy-MM-dd''T''HH:mm:ss.SSS') AS SaleTimestamp_str,
+	 		SaleDateTime_Ltz,
+			TIMESTAMPTOSTRING(CAST(SaleTimestamp_Epoc AS BIGINT), 'yyyy-MM-dd''T''HH:mm:ss.SSS') AS SaleTimestamp_str,
 	  		TerminalPoint,
 	   		Nett,
 	  		Vat,
@@ -282,8 +282,8 @@ CREATE STREAM pb_salespayments1 WITH (
 		select   	
 			InvoiceNumber,
 	      	FinTransactionId,
-	      	PayDateTimeLtz,
-		  	CAST(PayTimestampEpoc AS BIGINT) AS Pay_epoc_bigint,
+	      	PayDateTime_Ltz,
+		  	CAST(PayTimestamp_Epoc AS BIGINT) AS Pay_epoc_bigint,
 	      	Paid  
 		from pb_salespayments
 	emit changes;
@@ -297,15 +297,15 @@ CREATE STREAM pb_salespayments2 WITH (
 		select   	
 			InvoiceNumber,
 	      	FinTransactionId,
-	      	PayDateTimeLtz,
-		  	TIMESTAMPTOSTRING(CAST(PayTimestampEpoc AS BIGINT), 'yyyy-MM-dd''T''HH:mm:ss.SSS') AS PayTimestamp_str,
+	      	PayDateTime_Ltz,
+		  	TIMESTAMPTOSTRING(CAST(PayTimestamp_Epoc AS BIGINT), 'yyyy-MM-dd''T''HH:mm:ss.SSS') AS PayTimestamp_str,
 	      	Paid  
 		from pb_salespayments
 	emit changes;
 
 -- SALETIMESTAMP is a string representing epoc based date/time, we need to convert to BIGINT
 SELECT INVOICENUMBER, 
-	TIMESTAMPTOSTRING(CAST(SALETIMESTAMP_epoc AS BIGINT), 'YYYY-MM-dd HH:mm:ss.SSS') AS SALETIMESTAMP_str,
+	TIMESTAMPTOSTRING(CAST(SaleTimestamp_Epoc AS BIGINT), 'YYYY-MM-dd HH:mm:ss.SSS') AS SALETIMESTAMP_str,
 	STORE->Name,
 	STORE->ID,
 	CLERK->Name,

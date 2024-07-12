@@ -5,8 +5,8 @@ option go_package = ".";
 
 message PBPayment {
   string invoiceNumber = 1;
-  string payDateTimeLtz = 2;
-  string payTimestampEpoc = 3;
+  string payDateTime_Ltz = 2;
+  string payTimestamp_Epoc = 3;
   double paid = 4;
   string finTransactionID = 5;
 }
