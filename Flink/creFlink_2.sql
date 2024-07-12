@@ -77,6 +77,7 @@ CREATE TABLE avro_salescompleted_x (
     'topic' = 'avro_salescompleted_x',
     'properties.bootstrap.servers' = 'broker:29092',
     'properties.group.id' = 'testGroup',
+    'scan.startup.mode' = 'earliest-offset',
     'value.format' = 'avro-confluent',
     'value.avro-confluent.url' = 'http://schema-registry:8081',
     'value.fields-include' = 'ALL'
@@ -122,6 +123,7 @@ CREATE TABLE avro_sales_per_store_per_terminal_per_5min_x (
     'topic' = 'avro_sales_per_store_per_terminal_per_5min_x',
     'properties.bootstrap.servers' = 'broker:29092',
     'properties.group.id' = 'testGroup',
+    'scan.startup.mode' = 'earliest-offset',
     'value.format' = 'avro-confluent',
     'value.avro-confluent.url' = 'http://schema-registry:8081',
     'value.fields-include' = 'ALL'
@@ -155,6 +157,7 @@ CREATE TABLE avro_sales_per_store_per_terminal_per_hour_x (
     'topic' = 'avro_sales_per_store_per_terminal_per_hour_x',
     'properties.bootstrap.servers' = 'broker:29092',
     'properties.group.id' = 'testGroup',
+    'scan.startup.mode' = 'earliest-offset',
     'value.format' = 'avro-confluent',
     'value.avro-confluent.url' = 'http://schema-registry:8081',
     'value.fields-include' = 'ALL'
