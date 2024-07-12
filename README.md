@@ -55,8 +55,8 @@ Note: all/most subdirectories have local README.md files with some more local to
 
 Without these guys and their willingness to entertain allot of questions and some times siply dumb ideas and helping me slowly onto the right path all of this would simply not have been possible.
 
-    Apache Kafka or Confluent Kafka :
-        Dave Troiano,
+    Dave Troiano,
+        Apache Kafka or Confluent Kafka :
         (Developer support on Confluent Forum @dtroiano),
         https://www.linkedin.com/in/dave-troiano-49a8932/
 
@@ -64,11 +64,15 @@ Without these guys and their willingness to entertain allot of questions and som
         Someone that I consider a friend, just stepped in, starting helping me and as he happily calls it his community service. Helping others figure problems out that they have, whatever the nature, and another always curious mind himself.
         https://confluentcommunity.slack.com/team/U04UNKMRL4U
 
-    Apache Flink:
-        Martijn Visser, 
+    Martijn Visser,
+        Apache Flink Community
         (PMC and Committer for Apache Flink, Product Manager at Confluent)
         https://apache-flink.slack.com/team/U03GADV9USX
 
+    Ben Gamble,
+        Apache Kafka, Apache Flink, streaming and stuff (as he calls it)
+        A good friend, thats always great to chat to... and we seldom stick to original topic.
+        https://confluentcommunity.slack.com/team/U03R0RG6CHZ
 
 ## Some Version notes.
 0.2	- 10/01/2024	Pushing/posting basket docs and associated payment docs onto Kafka.
